@@ -4,8 +4,8 @@ A game-based GCSE revision app for **14 subjects**: Maths, Physics, Chemistry, B
 
 ## What is in the game
 
-- **Learn path**: every subject is a winding path of units (324 units in total) grouped into sections that match the specification, with a boss challenge at the end of each section.
-- **Animated explainers**: 63 step-by-step animations and simulations for the ideas that are hard to picture (number lines, Pythagoras, circle theorems, circuits, half-life, waves, gas pressure, ionic bonding, electrolysis, osmosis, mitosis, the heart, natural selection and many more).
+- **Learn path**: every subject is a winding path of units (567 units in total) grouped into sections that match the specification, with a boss challenge at the end of each section.
+- **Animated explainers**: 88 step-by-step animations and simulations for the ideas that are hard to picture (number lines, Pythagoras, circle theorems, circuits, half-life, waves, gas pressure, ionic bonding, electrolysis, osmosis, mitosis, the heart, natural selection and many more).
 - **Over 2,200 practice questions**, plus generated variants, in seven formats: multiple choice, true/false, calculations, typed answers, matching, sorting and ordering.
 - **Game features**: XP and levels, a study buddy (Nova) with colours and gear to unlock, daily quests, streaks, hearts, combos, boss battles, achievements and confetti.
 - **Exam skills**: timed mock exams with a graded report, coach mode, a speed round, spaced-repetition review of mistakes, a readiness estimate and a topic mastery table.
@@ -16,10 +16,10 @@ A game-based GCSE revision app for **14 subjects**: Maths, Physics, Chemistry, B
 ## Adding a subject
 
 1. Copy any subject page (for example `history.html`), set `data-world` and the data script.
-2. Write `data/<subject>.js`: `GAME.configure({... tiered: false})`, `GAME.sheet`, then `GAME.topic(name, icon, paper, [units])`. Units use the same question formats as the science subjects. Set `tiered: false` for subjects without Foundation and Higher tiers; omit labs if there are none.
+2. Write `data/<subject>.js` (and optionally `<subject>-2.js` for more units, `more-<subject>.js` for extra questions and `anim-<subject>.js` for animations; `GAME.more` accepts `"Topic::Unit"` keys when unit names repeat): `GAME.configure({... tiered: false})`, `GAME.sheet`, then `GAME.topic(name, icon, paper, [units])`. Units use the same question formats as the science subjects. Set `tiered: false` for subjects without Foundation and Higher tiers; omit labs if there are none.
 3. Add a colour theme in `assets/game.css`, an icon in `assets/icons.js`, an entry in `index.html` and `data/counts.js`, and list the files in `sw.js`.
 
-The newer subjects (English, humanities, business, social sciences, computing) are starter courses with fewer units and questions than the science and maths courses, and have no animations or labs yet.
+The non-science subjects now cover most of their AQA specifications (extra units, 5+ questions per unit and a few animations each), but they still have fewer questions, animations and labs than Maths and the sciences. Unit pages also link to Oak National Academy and Save My Exams.
 
 ## Running it
 
