@@ -371,7 +371,7 @@
         var card = $("#qb"); card.classList.remove("flash-ok", "flash-no"); void card.offsetWidth; card.classList.add(ok ? "flash-ok" : "flash-no");
         if (ok) {
           correct++; if (st) st.c++; hits++; combo++; bestCombo = Math.max(bestCombo, combo); S.bestCombo = Math.max(S.bestCombo || 0, combo);
-          var gain = o.pts * Math.min(combo, 5); score += gain; addXP(gain); qtrack("correct", 1); qtrack("combo", combo, true); if (o.gym) qtrack("review", 1); sndGood(combo); popXP("+" + gain + " XP");
+          var gain = Math.round(o.pts * (1 + .25 * (Math.min(combo, 5) - 1))); score += gain; addXP(gain); qtrack("correct", 1); qtrack("combo", combo, true); if (o.gym) qtrack("review", 1); sndGood(combo); popXP("+" + gain + " XP");
           if (combo === 5 || combo === 10) A_.confetti(60);
           if (o.boss) { var bw = $("#bossw"); if (bw) { bw.classList.remove("hit"); void bw.offsetWidth; bw.classList.add("hit"); } var sess = $("#sess"); sess.insertAdjacentHTML("beforeend", '<div class="bolt"></div>'); setTimeout(function () { var b = $(".bolt", sess); if (b) b.remove(); }, 600); }
           if (o.gym && p.missed[q.qid]) { var m = p.missed[q.qid]; m.box++; if (m.box >= 3) delete p.missed[q.qid]; else m.due = Date.now() + [1, 3, 7][m.box] * 864e5; }
@@ -404,6 +404,7 @@
   var TYPE = { m: "Choose the answer", t: "True or false?", n: "Work it out", w: "Type the answer", p: "Match the pairs", s: "Sort into groups", o: "Put in order" };
   function askQuestion(raw, box, done, exam) {
     var q = normal(raw), k = q[0], meta = { prompt: q[1], correct: "" };
+    G._last = q;
     var finish = function (ok, why, extra, correct) {
       detach(); meta.correct = correct || ""; meta.why = why || "";
       if (exam) setTimeout(function () { done(ok, why, function (proc) { proc(); }, meta); }, 220);
@@ -501,7 +502,7 @@
     A_.confetti(st === 3 ? 160 : 90); setTimeout(flushLevelUp, 1500);
   }
   function flushLevelUp() {
-    if (pendingLvl === null) return; var L = pendingLvl, lv = LEVELS[L]; pendingLvl = null; sndLevel(); A_.confetti(200);
+    if (pendingLvl === null || !($(".result") || $(".home")) || $(".modal")) return; var L = pendingLvl, lv = LEVELS[L]; pendingLvl = null; sndLevel(); A_.confetti(200);
     var un = lv.color ? "New colour unlocked: " + MASCOT_COLORS[lv.color][2] : lv.acc ? "New gear unlocked: " + MASCOT_ACCS[lv.acc] : "Keep going to unlock more!";
     var m = document.createElement("div"); m.className = "modal"; m.setAttribute("role", "dialog"); m.setAttribute("aria-label", "Level up");
     m.innerHTML = `<div class="mcard"><div class="eyebrow">Level up!</div><div class="mm">${M("happy", 150)}</div><h2>Level ${L + 1}: ${lv.n}</h2><p class="muted">${un}</p><div class="row" style="justify-content:center"><button class="btn big" id="mok">Awesome</button><a class="btn alt big" href="#/locker" id="mgo">Open my buddy</a></div></div>`;
@@ -546,7 +547,7 @@
       var ok = !!cur.opts[i].ok, p = P(), st = p.stats[cur.tid] = p.stats[cur.tid] || { a: 0, c: 0 }; st.a++;
       $$(".choice", $("#qb")).forEach(function (b, j) { b.disabled = true; if (cur.opts[j].ok) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
       var card = $("#qb"); card.classList.add(ok ? "flash-ok" : "flash-no");
-      if (ok) { right++; st.c++; combo++; S.bestCombo = Math.max(S.bestCombo || 0, combo); qtrack("combo", combo, true); var g = 10 * Math.min(combo, 5); score += g; addXP(Math.ceil(g / 2), true); sndGood(combo); popXP("+" + g); hud(); setTimeout(spawn, 320); }
+      if (ok) { right++; st.c++; combo++; S.bestCombo = Math.max(S.bestCombo || 0, combo); qtrack("combo", combo, true); var g = Math.round(10 * (1 + .25 * (Math.min(combo, 5) - 1))); score += g; addXP(Math.ceil(g / 2), true); sndGood(combo); popXP("+" + g); hud(); setTimeout(spawn, 320); }
       else { combo = 0; lives--; sndBad(); hud(); if (cur.why) card.insertAdjacentHTML("beforeend", `<div class="inlinefb no"><b>${ic("cross")}Not quite</b><p>${cur.why}</p></div>`); if (lives <= 0) setTimeout(end, 1500); else setTimeout(spawn, 1500); }
     }
     function end() {

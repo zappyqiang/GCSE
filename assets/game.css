@@ -475,11 +475,11 @@ textarea{width:100%;height:90px;border:2px solid var(--border2);border-radius:12
   .sidebar nav{order:3;flex-basis:100%;min-width:0;max-width:100%;display:flex;overflow-x:auto;gap:4px;padding-bottom:2px;scrollbar-width:none}
   .navlink{white-space:nowrap;padding:8px 12px;flex:none;font-size:14.5px}.navlink svg{width:20px;height:20px}
   .sidefoot{margin:0 0 0 auto;padding:0}
-  .topbar{top:92px;padding:8px 14px;justify-content:flex-start}
+  .topbar{position:static;padding:8px 14px;justify-content:flex-start;background:transparent;backdrop-filter:none}
   .wrap{padding:8px 16px 90px}
   .hero2,.hero{grid-template-columns:1fr}.hm{display:none}
   .lbar{left:0;padding:12px 16px}
-  .banner{top:130px}
+  .banner{top:150px}
   .nm{display:none}
   .locker{grid-template-columns:1fr}
   .hubhero{grid-template-columns:1fr}.hubmascot{display:none}
