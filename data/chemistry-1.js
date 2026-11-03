@@ -2,7 +2,7 @@
 var ri = GAME.ri, pick = GAME.pick;
 GAME.topic("Atom Attic", "⚛️", "Paper 1", [
 { t: "Atoms, elements and compounds", r: "4.1.1.1", icon: "🧱",
-  c: ["An atom is the smallest bit of an element. An element has just one type of atom, shown by a symbol such as Na.", "A compound has two or more elements chemically joined, in fixed proportions. Separating them needs a chemical reaction!", "Word and symbol equations show reactions. Balance them so that atoms are equal on both sides.", "Higher: ionic and half equations show the charged parts. I'm a big fan."],
+  c: ["An atom is the smallest bit of an element. An element has just one type of atom, shown by a symbol such as Na.", "A compound has two or more elements chemically joined, in fixed proportions. Separating them needs a chemical reaction!", "Word and symbol equations show reactions. Balance them so that atoms are equal on both sides.", "Higher: ionic and half equations show the charged parts."],
   k: "Balance by changing the big numbers in front, never the tiny numbers in the formula.",
   q: [["s", "Sort these substances.", { "Element": ["Oxygen, O₂", "Iron, Fe", "Helium, He"], "Compound": ["Water, H₂O", "Salt, NaCl", "Carbon dioxide, CO₂"], "Mixture": ["Air", "Sea water"] }],
       ["p", "Match each symbol.", [["Na", "Sodium"], ["K", "Potassium"], ["Fe", "Iron"], ["Pb", "Lead"], ["Cu", "Copper"]]],
@@ -86,7 +86,7 @@ GAME.topic("Atom Attic", "⚛️", "Paper 1", [
 
 GAME.topic("Bonding Ballroom", "💃", "Paper 1", [
 { t: "Ionic bonding", r: "4.2.1.1 to 4.2.1.3", icon: "🧲", d: "ionic",
-  c: ["Ionic bonding is between a metal and a non-metal. Metal atoms give their outer electrons to the non-metal.", "So both end up with full outer shells, and form ions! Opposites attract.", "They build a giant lattice: strong electrostatic forces in all directions.", "Draw dot and cross diagrams. Count charges to find the formula: NaCl, MgO, MgCl₂. I'm a keen dancer."],
+  c: ["Ionic bonding is between a metal and a non-metal. Metal atoms give their outer electrons to the non-metal.", "So both end up with full outer shells, and form ions! Opposites attract.", "They build a giant lattice: strong electrostatic forces in all directions.", "Draw dot and cross diagrams. Count charges to find the formula: NaCl, MgO, MgCl₂."],
   k: "Metal gives, non-metal takes: Ionic means I own your electron.",
   q: [["m", "What type of bond forms between sodium and chlorine?", "Ionic", "Covalent", "Metallic", "Hydrogen", "Metal + non-metal."],
       ["m", "What's the formula of magnesium chloride, from Mg²⁺ and Cl⁻?", "MgCl₂", "MgCl", "Mg₂Cl", "Mg₂Cl₃", "One 2+ needs two 1− ions."],
@@ -94,7 +94,7 @@ GAME.topic("Bonding Ballroom", "💃", "Paper 1", [
       ["t", "Ionic compounds form a giant lattice.", true, "Strong forces act in all directions."]] },
 
 { t: "Covalent bonding", r: "4.2.1.4", icon: "🤝", d: "covalent",
-  c: ["Covalent bonds happen between non-metals. They SHARE pairs of electrons.", "Small molecules: H₂, Cl₂, O₂, N₂, HCl, H₂O, NH₃, CH₄. Polymers have long chains, and giant structures such as diamond have billions of atoms!", "Oxygen has a double bond. Nitrogen has a triple.", "Sharing is caring! Except with my snacks."],
+  c: ["Covalent bonds happen between non-metals. They SHARE pairs of electrons.", "Small molecules: H₂, Cl₂, O₂, N₂, HCl, H₂O, NH₃, CH₄. Polymers have long chains, and giant structures such as diamond have billions of atoms!", "Oxygen has a double bond. Nitrogen has a triple.", "Covalent bonds form when atoms share pairs of electrons."],
   k: "Co-valent: co-operate and share. Non-metals only.",
   q: [["m", "How many covalent bonds are in methane, CH₄?", "4", "1", "2", "8", "Carbon shares with four hydrogens."],
       ["m", "What bond joins two oxygen atoms in O₂?", "A double covalent bond", "A single covalent bond", "An ionic bond", "A triple covalent bond", "They share two pairs."],
@@ -158,7 +158,7 @@ GAME.topic("Quantity Quarters", "⚖️", "Paper 1", [
       ["t", "A wider range means greater uncertainty.", true, "More spread, less certainty."]] },
 
 { t: "Moles", r: "4.3.2.1", h: 1, icon: "🐾",
-  c: ["Ah, my favourite. A mole is 6.02 × 10²³ particles: the Avogadro constant.", "Moles = mass ÷ Mr. One mole's mass in grams equals its Mr!", "So 18 g of water is one mole, and has 6.02 × 10²³ molecules.", "A mole is a chemist's dozen. Just slightly larger, and furrier."],
+  c: ["A mole is 6.02 × 10²³ particles: the Avogadro constant.", "Moles = mass ÷ Mr. One mole's mass in grams equals its Mr!", "So 18 g of water is one mole, and has 6.02 × 10²³ molecules.", "A mole is a chemist's dozen. Just slightly larger, and furrier."],
   k: "Triangle: mass on top, moles and Mr below. Mass = Moles × Mr.",
   q: [function () { var m = pick([2, 3, 5, 0.5]); return ["n", "How many moles are in " + m * 44 + " g of CO₂? Mr = 44.", m, "mol", "mass ÷ Mr."]; },
       function () { var n = pick([2, 3, 4, 5]); return ["n", "What's the mass of " + n + " moles of NaOH? Mr = 40.", n * 40, "g", "moles × Mr."]; },
@@ -195,7 +195,7 @@ GAME.topic("Quantity Quarters", "⚖️", "Paper 1", [
       ["m", "Why is a high atom economy good for industry?", "Less waste and it's more sustainable", "It makes the reaction exothermic", "It lowers the boiling point", "It adds colour", "More atoms end up in product."]] },
 
 { t: "Concentration in mol/dm³", r: "4.3.4", s: 1, h: 1, icon: "🧪",
-  c: ["Concentration in mol/dm³ = moles ÷ volume in dm³.", "For titrations: find moles of the known solution, use the ratio, find the concentration of the other.", "To change mol/dm³ to g/dm³, multiply by Mr.", "So many triangles. I like triangles."],
+  c: ["Concentration in mol/dm³ = moles ÷ volume in dm³.", "For titrations: find moles of the known solution, use the ratio, find the concentration of the other.", "To change mol/dm³ to g/dm³, multiply by Mr.", "A formula triangle can help you rearrange these."],
   k: "Moles = concentration × volume (in dm³). C = n ÷ V.",
   q: [function () { var c = pick([.1, .2, .5, 1, 2]), v = pick([.5, .25, 2]); return ["n", "How many moles are in " + v + " dm³ of " + c + " mol/dm³ solution?", Math.round(c * v * 1000) / 1000, "mol", "n = c × V."]; },
       ["n", "25 cm³ of 0.1 mol/dm³ HCl reacts exactly with 12.5 cm³ NaOH (1:1). Find the NaOH concentration.", 0.2, "mol/dm³", "Moles HCl = 0.0025. 0.0025 ÷ 0.0125."],
@@ -242,7 +242,7 @@ GAME.topic("Reaction Rooftop", "🌋", "Paper 1", [
       ["m", "What's the formula of sodium sulfate?", "Na₂SO₄", "NaSO₄", "Na(SO₄)₂", "Na₂S", "Two Na⁺ balance one SO₄²⁻."]] },
 
 { t: "Making soluble salts", r: "4.4.2.3", icon: "🧂", rp: 1,
-  c: ["Required practical! Add an insoluble base, such as copper oxide, to warm acid until no more dissolves.", "Filter out the excess solid. Then gently heat in a water bath to evaporate some, and leave to crystallise!", "Pat the crystals dry.", "Blue copper sulfate crystals are beautiful. I'm almost as shiny."],
+  c: ["Required practical! Add an insoluble base, such as copper oxide, to warm acid until no more dissolves.", "Filter out the excess solid. Then gently heat in a water bath to evaporate some, and leave to crystallise!", "Pat the crystals dry.", "Blue copper sulfate crystals are a classic example."],
   k: "Excess, Filter, Evaporate, Crystallise, Dry. Every Fine Evening Cats Dance.",
   q: [["o", "Order the method for pure copper sulfate crystals.", ["Warm the dilute sulfuric acid", "Add excess copper oxide, stirring", "Filter out the excess solid", "Heat to evaporate some water", "Leave to crystallise", "Pat dry"]],
       ["m", "Why add excess base?", "To make sure all the acid has reacted", "To cool the mixture", "To change its colour", "To make hydrogen", "No acid is left in the salt."],
@@ -270,7 +270,7 @@ GAME.topic("Reaction Rooftop", "🌋", "Paper 1", [
       ["t", "A dilute strong acid still ionises completely.", true, "Strength and concentration are different."]] },
 
 { t: "Electrolysis basics", r: "4.4.3.1, 4.4.3.2", icon: "⚡", d: "electrolysis",
-  c: ["Ionic compounds melted or dissolved have free ions. They're electrolytes. Pass a current through and they split!", "Positive ions go to the cathode (negative), where they gain electrons. Negative ions go to the anode (positive), and lose them.", "Molten lead bromide makes lead at the cathode, and bromine at the anode.", "Opposites attract. I'd know, being an Ion."],
+  c: ["Ionic compounds melted or dissolved have free ions. They're electrolytes. Pass a current through and they split!", "Positive ions go to the cathode (negative), where they gain electrons. Negative ions go to the anode (positive), and lose them.", "Molten lead bromide makes lead at the cathode, and bromine at the anode.", "Opposites attract: positive ions move to the negative electrode."],
   k: "PANIC: Positive Anode, Negative Is Cathode. Cations go to the Cathode.",
   q: [["m", "Which ions move to the cathode?", "Positive", "Negative", "Neither", "Neutrons", "Opposites attract."],
       ["m", "What forms at the anode in molten lead bromide?", "Bromine", "Lead", "Hydrogen", "Oxygen", "Bromide ions lose electrons."],

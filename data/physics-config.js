@@ -1,21 +1,20 @@
 (function () {
 var G = GAME;
 G.configure({
-  key: "physics", subject: "Physics", title: "Mission Newton", unit: "joules",
-  intro: "Newt the astronaut and Volt the robot are crossing the galaxy, and every planet is one topic of AQA Physics. Beat them all to complete the mission.",
-  a: { char: "newt", name: "Newt" }, b: { char: "volt", name: "Volt" },
-  decor: ["🪐", "🌠", "🛰️", "☄️", "👽", "🌙", "🚀"],
-  monsters: ["Friction Fiend", "Static Sprite", "Entropy Blob", "Resistor Rex", "Gamma Gremlin", "Vacuum Vole", "Wave Wraith", "Drag Demon"],
-  monsterColours: ["#ff5da2", "#29e7cd", "#ffd23f", "#ff7a3d", "#7b5cff", "#4fd06b"],
-  bossNames: ["The Black Hole", "Dark Matter Duke", "The Supernova", "Lord Entropy"],
-  pows: ["Zap!", "Pow!", "Blast!", "Kerzap!", "Whoosh!"],
-  cheers: ["Stellar!", "Full power!", "Lift-off!", "Bang on!", "Out of this world!"],
-  wins: ["Mission complete!", "Planet secured!", "Warp drive charged!"],
-  ranks: [["Space Cadet", 0], ["Rocket Tech", 800], ["Flight Engineer", 2500], ["Mission Pilot", 5500], ["Commander", 10000], ["Galactic Admiral", 18000]],
-  arcade: { name: "Asteroid Belt", sprite: "☄️", dir: "left", speed: 70, blurb: "Answers are hurtling in on asteroids. Blast the one that's right before they fly by." },
-  finalName: "Final mission", sheetName: "Equation sheet",
-  sheetNote: "In the summer 2027 exams every Physics paper comes with a full equation sheet, and AQA says clean sheets continue from 2028. You still need to choose and use each equation correctly. Check your board's latest notice.",
-  labsIntro: "Build it, tweak it, break it. Hit each target to win joules."
+  key: "physics", subject: "Physics", spec: "AQA 8463 · Papers 1 and 2", title: "Physics course",
+  intro: "The full AQA GCSE Physics specification in short, focused lessons, with exam-style questions and interactive labs for the ideas that are hard to picture.",
+  finalName: "Final assessment", sheetName: "Equation sheet", sheetNote: "In the summer 2027 exams every Physics paper comes with a full equation sheet, and AQA says clean sheets continue from 2028. You still need to choose and use each equation correctly. Check your board's latest notice.",
+  labsIntro: "Change the variables and watch the system respond. Reach each target to earn XP.",
+  topics: {
+    "Planet Energy": ["Energy", "Stores and transfers, work, power, efficiency, and energy resources."],
+    "Planet Electric": ["Electricity", "Circuits, resistance, series and parallel, mains electricity and power."],
+    "Particle Planet": ["Particle model of matter", "Density, states of matter, specific heat capacity and latent heat, gas pressure."],
+    "Planet Atom": ["Atomic structure", "Models of the atom, radioactive decay, half-life, fission and fusion."],
+    "Forces Planet": ["Forces", "Vectors, Newton's laws, motion graphs, momentum, moments and pressure."],
+    "Wave World": ["Waves", "Wave properties, the electromagnetic spectrum, reflection, refraction, sound and lenses."],
+    "Magnet Moon": ["Magnetism and electromagnetism", "Magnetic fields, motors, generators, transformers and the solenoid."],
+    "Space Station": ["Space physics", "The Solar System, life cycle of stars, orbits and red-shift."]
+  }
 });
 G.sheet = [
   { h: "Energy (Paper 1)", rows: [

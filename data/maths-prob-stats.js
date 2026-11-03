@@ -34,7 +34,7 @@ GAME.topic("Probability Point", "🎲", "All three papers", [
       ["m", "From the same 20 people, what is P(tea ∪ coffee)?", "17/20", "22/20", "5/20", "12/20", "7 + 5 + 5 = 17."]] },
 
 { t: "Tree diagrams", r: "P8", icon: "🌳", d: "tree",
-  c: ["For two events, draw a tree: each branch is a chance, and they add to 1 at each fork.", "Multiply ALONG the branches. Add DOWN the outcomes.", "Without replacement, the numbers change on the second round. Fewer in the bag, so denominators drop!", "Multiply across, add down. That's my favourite shanty."],
+  c: ["For two events, draw a tree: each branch is a chance, and they add to 1 at each fork.", "Multiply ALONG the branches. Add DOWN the outcomes.", "Without replacement, the numbers change on the second round. Fewer in the bag, so denominators drop!", "Multiply across, add down. That's the key rule."],
   k: "Along the branch: AND, multiply. Between the ends: OR, add.",
   q: [["n", "P(rain) = 0.3 each day, independently. What is P(rain on both days)?", 0.09, "", "0.3 × 0.3."],
       ["n", "P(rain) = 0.3 each day, independently. What is P(exactly one rainy day)?", 0.42, "", "0.3 × 0.7 + 0.7 × 0.3."],
@@ -51,7 +51,7 @@ GAME.topic("Probability Point", "🎲", "All three papers", [
 
 GAME.topic("Statistics Strait", "📊", "All three papers", [
 { t: "Sampling", r: "S1", icon: "🐟",
-  c: ["We can't ask every fish in the sea. A sample is a smaller group that stands for the population.", "A random sample gives everyone an equal chance.", "Bias sneaks in if you only ask your mates. Bigger samples are usually more reliable.", "Only asking parrots about crackers is biased. But who am I to judge?"],
+  c: ["We can't ask every fish in the sea. A sample is a smaller group that stands for the population.", "A random sample gives everyone an equal chance.", "Bias sneaks in if you only ask your mates. Bigger samples are usually more reliable.", "Only asking people who already like crackers is biased."],
   k: "Random means everyone has an equal chance. Biased means someone's been left out.",
   q: [["t", "Asking only people at a gym about exercise habits gives a biased sample.", true, "They're not representative of everyone."],
       ["m", "A population is...", "The whole group being studied", "The number of people in a country only", "The sample's size", "The group that answers", "The whole group of interest."],
@@ -105,7 +105,7 @@ GAME.topic("Statistics Strait", "📊", "All three papers", [
       ["m", "What's an outlier on a scatter graph?", "A point far from the general pattern", "The first point", "The average", "A point on the line", "It doesn't fit the trend."]] },
 
 { t: "Comparing and describing data", r: "S4, S5", icon: "⚖️",
-  c: ["To compare two groups, always mention an average AND a spread.", "Say what it means: 'Team A scored higher on average, and were more consistent.'", "Smaller range or IQR means more consistent.", "Numbers plus words. Marks in the treasure chest."],
+  c: ["To compare two groups, always mention an average AND a spread.", "Say what it means: 'Team A scored higher on average, and were more consistent.'", "Smaller range or IQR means more consistent.", "Numbers plus words. Both earn marks."],
   k: "Compare twice: one average, one spread, both in context.",
   q: [["m", "Team A: median 10, IQR 2. Team B: median 8, IQR 5. Which is the best comparison?", "A scored higher on average and more consistently", "B scored higher and more consistently", "A scored higher but less consistently", "They're the same", "Higher median, smaller IQR."],
       ["t", "Comparing only the means is enough for full marks.", false, "You also need to compare spread."],

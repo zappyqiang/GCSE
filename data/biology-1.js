@@ -10,14 +10,14 @@ GAME.topic("Cell City", "🏙️", "Paper 1", [
       ["n", "1 mm is how many micrometres?", 1000, "µm", "1 mm = 1000 µm."]] },
 
 { t: "Animal and plant cells", r: "4.1.1.2", icon: "🔬", d: "plant", rp: 1,
-  c: ["Animal cells have a nucleus, cytoplasm, a cell membrane, mitochondria and ribosomes.", "I'm a mitochondrion! Respiration happens in me. Where the energy's at.", "Plant cells have those too, plus a cellulose cell wall, chloroplasts, and a permanent vacuole.", "Required practical: stain onion cells, focus a microscope from low power up, and draw what you see, with a scale."],
+  c: ["Animal cells have a nucleus, cytoplasm, a cell membrane, mitochondria and ribosomes.", "Mitochondria are where aerobic respiration happens, releasing energy for the cell.", "Plant cells have those too, plus a cellulose cell wall, chloroplasts, and a permanent vacuole.", "Required practical: stain onion cells, focus a microscope from low power up, and draw what you see, with a scale."],
   k: "Plants get 3 extra Cs and Vs: Cell wall, Chloroplasts, Vacuole.",
   q: [["p", "Match each part with its job.", [["Nucleus", "Controls the cell, holds DNA"], ["Mitochondria", "Aerobic respiration"], ["Ribosomes", "Make proteins"], ["Chloroplasts", "Photosynthesis"], ["Cell membrane", "Controls what enters and leaves"]]],
       ["s", "Which cells have it?", { "Both": ["Nucleus", "Ribosomes", "Mitochondria"], "Plant only": ["Cell wall", "Chloroplasts", "Permanent vacuole"] }],
       ["o", "Order the microscope steps.", ["Place the slide on the stage", "Use the lowest power lens", "Focus with the coarse knob", "Switch to a higher power", "Focus with the fine knob"]]] },
 
 { t: "Specialised cells", r: "4.1.1.3", icon: "🏃",
-  c: ["Each cell type is built for its job. A sperm cell has a tail, lots of mitochondria, and enzymes in its head.", "Nerve cells are long with branched ends, to carry impulses. Muscle cells can contract, so lots of me.", "Root hair cells have a big surface area to absorb water and minerals.", "Xylem cells are hollow, for water. Phloem cells move sugars, with sieve plates between them."],
+  c: ["Each cell type is built for its job. A sperm cell has a tail, lots of mitochondria, and enzymes in its head.", "Nerve cells are long with branched ends, to carry impulses. Muscle cells can contract, so they contain lots of mitochondria.", "Root hair cells have a big surface area to absorb water and minerals.", "Xylem cells are hollow, for water. Phloem cells move sugars, with sieve plates between them."],
   k: "Form fits function. Ask: what's its job, and what shape helps?",
   q: [["p", "Match each cell with its adaptation.", [["Sperm", "Tail and many mitochondria"], ["Nerve", "Long, with branches"], ["Muscle", "Fibres that contract"], ["Root hair", "Large surface area"], ["Xylem", "Hollow tubes for water"]]],
       ["m", "Why do muscle cells have many mitochondria?", "To release energy for contraction", "To make food", "To store water", "To detect light", "Contraction needs energy from respiration."],
@@ -78,7 +78,7 @@ GAME.topic("Cell City", "🏙️", "Paper 1", [
       ["t", "Osmosis needs energy from respiration.", false, "It's passive."]] },
 
 { t: "Active transport", r: "4.1.3.3", icon: "🏋️",
-  c: ["Active transport moves stuff against a gradient: from low to high concentration.", "That takes energy from respiration. Me again. I'm exhausted.", "Root hairs use it to absorb mineral ions from dilute soil water.", "The gut uses it to take sugars into the blood, even when there's already plenty there."],
+  c: ["Active transport moves stuff against a gradient: from low to high concentration.", "That takes energy from respiration, which is why cells that actively transport have many mitochondria.", "Root hairs use it to absorb mineral ions from dilute soil water.", "The gut uses it to take sugars into the blood, even when there's already plenty there."],
   k: "Active means Against the flow. Costs ATP. I charge for this.",
   q: [["s", "Sort the transport.", { "Needs energy": ["Active transport"], "No energy": ["Diffusion", "Osmosis"] }],
       ["m", "Why do root hairs have many mitochondria?", "To release energy for active transport of mineral ions", "To photosynthesise", "To store water", "To make cell walls", "Minerals are absorbed against the gradient."],
@@ -87,7 +87,7 @@ GAME.topic("Cell City", "🏙️", "Paper 1", [
 
 GAME.topic("Organ Outback", "🫀", "Paper 1", [
 { t: "Levels of organisation", r: "4.2.1", icon: "🪜",
-  c: ["Cells work in teams. A tissue is similar cells doing one job. An organ is several tissues working together.", "An organ system is several organs teaming up. That makes up an organism!", "So heart muscle's a tissue, the heart's an organ, and the circulatory system is the system.", "I'm just happy to be on the team."],
+  c: ["Cells work in teams. A tissue is similar cells doing one job. An organ is several tissues working together.", "An organ system is several organs teaming up. That makes up an organism!", "So heart muscle's a tissue, the heart's an organ, and the circulatory system is the system.", "Each level depends on the one below it."],
   k: "Cell, Tissue, Organ, System, Organism. Clever Tigers Often Sleep Outdoors.",
   q: [["o", "Order from smallest to largest.", ["Cell", "Tissue", "Organ", "Organ system", "Organism"]],
       ["s", "Sort these.", { "Tissue": ["Muscle tissue", "Xylem"], "Organ": ["Stomach", "Leaf", "Heart"], "Organ system": ["Digestive system", "Circulatory system"] }]] },

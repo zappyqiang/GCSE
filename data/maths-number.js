@@ -2,7 +2,7 @@
 var ri = GAME.ri, pick = GAME.pick, gcd = GAME.gcd;
 GAME.topic("Number Sea", "🔢", "All three papers", [
 { t: "Negative numbers", r: "N1, N2", icon: "➖", d: "numberline",
-  c: ["On this ship, debts be below zero. Owe 3 doubloons and you sit at −3.", "So −7 is smaller than −2? But 7 is bigger than 2!", "Aye. Further left means smaller. Taking away a negative is like a storm stealing your debt: it pushes you up.", "And two minus signs next to each other make a plus. Squawk!"],
+  c: ["Think of debt as being below zero. If you owe £3, your balance is −3.", "So −7 is smaller than −2? But 7 is bigger than 2!", "Yes. Further left means smaller. Taking away a negative is like a storm stealing your debt: it pushes you up.", "And two minus signs next to each other make a plus."],
   k: "Same signs multiply to plus, different signs to minus. A friend of a friend is a friend; an enemy of an enemy is a friend too.",
   q: [function () { var a = ri(-9, -2), b = ri(2, 9); return ["n", "−" + (-a) + " − (−" + b + ") = ?", a + b, "", "Minus a negative means add: −" + (-a) + " + " + b + "."]; },
       function () { var a = ri(-9, -2), b = ri(-9, -2); return ["n", "(−" + (-a) + ") × (−" + (-b) + ") = ?", a * b, "", "Two negatives multiply to a positive."]; },
@@ -26,14 +26,14 @@ GAME.topic("Number Sea", "🔢", "All three papers", [
       ["s", "Sort these numbers.", { "Prime": ["2", "13", "29"], "Not prime": ["1", "9", "27"] }, "27 = 3 × 9, and 1 has only one factor."]] },
 
 { t: "Listing and the product rule", r: "N5", icon: "🎲",
-  c: ["Three hats and four cutlasses. How many outfits can a pirate make?", "Do I have to list them all? My wings are tired.", "Nay. Multiply the choices: 3 × 4 = 12.", "Higher trick: if you can't reuse an item, the choices drop each time, like 5 × 4 × 3."],
+  c: ["Three hats and four jackets. How many different outfits can you make?", "Do I have to list them all?", "No. Multiply the choices: 3 × 4 = 12.", "Higher trick: if you can't reuse an item, the choices drop each time, like 5 × 4 × 3."],
   k: "'And' between choices means times. Hat AND cutlass: 3 × 4.",
   q: [function () { var a = ri(3, 7), b = ri(2, 6), c = ri(2, 4); return ["n", "A menu has " + a + " starters, " + b + " mains and " + c + " puddings. How many different three-course meals are there?", a * b * c, "", "Multiply the choices."]; },
       function () { var n = ri(4, 6); return ["n", n + " pirates line up for a photo. How many different orders are possible?", [1, 1, 2, 6, 24, 120, 720][n], "", n + " × " + (n - 1) + " × ... × 1, as each place used leaves one fewer choice."]; },
       ["m", "A code has 3 digits, each 0 to 9, and digits can repeat. How many codes are there?", "1000", "30", "720", "999", "10 × 10 × 10 = 1000."]] },
 
 { t: "Powers and roots", r: "N6, N7", icon: "🚀",
-  c: ["A power says how many times to multiply a number by itself. 2⁵ means 2 × 2 × 2 × 2 × 2.", "And the root goes backwards?", "Aye. When you multiply powers, add the indices. When you divide, subtract them. Bracket power? Multiply.", "Learn squares up to 15 and cubes of 2, 3, 4, 5 and 10. Squawk them daily!"],
+  c: ["A power says how many times to multiply a number by itself. 2⁵ means 2 × 2 × 2 × 2 × 2.", "And the root goes backwards?", "Yes. When you multiply powers, add the indices. When you divide, subtract them. Bracket power? Multiply.", "Learn squares up to 15 and cubes of 2, 3, 4, 5 and 10. Squawk them daily!"],
   k: "Index laws: Multiply means Add, Divide means Subtract, Bracket means Times. Anything to the power 0 is 1.",
   q: [function () { var a = ri(2, 6), b = ri(2, 6); return ["n", "Write the power: 3<sup>" + a + "</sup> × 3<sup>" + b + "</sup> = 3<sup>?</sup>", a + b, "", "Multiply, so add the indices."]; },
       function () { var a = ri(7, 12), b = ri(2, 5); return ["n", "Write the power: 5<sup>" + a + "</sup> ÷ 5<sup>" + b + "</sup> = 5<sup>?</sup>", a - b, "", "Divide, so subtract."]; },
@@ -50,7 +50,7 @@ GAME.topic("Number Sea", "🔢", "All three papers", [
       function () { var a = pick([4, 9, 16, 25, 36, 49, 100]); return ["n", a + "^(1/2) = ?", Math.sqrt(a), "", "A power of ½ is a square root."]; }] },
 
 { t: "Fractions", r: "N2, N8", icon: "🍕",
-  c: ["To add fractions, find a common denominator first. Then add the tops only.", "To multiply it's tops times tops, bottoms times bottoms. Easy!", "To divide, flip the second fraction and multiply. Turn mixed numbers into top-heavy ones first.", "Keep, Change, Flip! I do it in my sleep."],
+  c: ["To add fractions, find a common denominator first. Then add the tops only.", "To multiply it's tops times tops, bottoms times bottoms. Easy!", "To divide, flip the second fraction and multiply. Turn mixed numbers into top-heavy ones first.", "Keep, Change, Flip."],
   k: "Dividing fractions: Keep, Change, Flip.",
   q: [function () { var d = pick([5, 7, 8, 9, 11]), a = ri(1, 3), b = ri(1, d - a - 1 > 0 ? d - a - 1 : 1); return ["m", "Work out " + a + "/" + d + " + " + b + "/" + d + ".", (a + b) + "/" + d, (a + b) + "/" + (2 * d), (a * b) + "/" + d, (a + b + 1) + "/" + d, "Same denominators, so add the tops."]; },
       ["m", "Work out 2/3 + 1/4.", "11/12", "3/7", "3/12", "2/12", "2/3 = 8/12 and 1/4 = 3/12, so 11/12."],
@@ -59,7 +59,7 @@ GAME.topic("Number Sea", "🔢", "All three papers", [
       function () { var d = pick([4, 5, 8, 10]), n = ri(1, d - 1), a = d * ri(3, 12); return ["n", "Find " + n + "/" + d + " of " + a + ".", a / d * n, "", "Divide by the bottom, times by the top."]; }] },
 
 { t: "Fractions, decimals and percentages", r: "N10", icon: "🔁",
-  c: ["These three are the same treasure in different chests. ½ = 0.5 = 50%.", "How do I switch?", "Percent to decimal: divide by 100. Fraction to decimal: top divided by bottom.", "Remember ⅛ = 0.125 and ⅓ = 0.333... and you'll look like a genius."],
+  c: ["These three are the same value written in different forms. ½ = 0.5 = 50%.", "How do I switch?", "Percent to decimal: divide by 100. Fraction to decimal: top divided by bottom.", "Remember ⅛ = 0.125 and ⅓ = 0.333... and you'll look like a genius."],
   k: "Percent means 'out of 100'. Per cent = per hundred, like a century.",
   q: [["p", "Match the same values.", [["1/4", "0.25"], ["3/5", "60%"], ["1/8", "0.125"], ["7/10", "0.7"]]],
       function () { var p = ri(1, 99); return ["n", "Write " + p + "% as a decimal.", p / 100, "", "Divide by 100."]; },
@@ -67,7 +67,7 @@ GAME.topic("Number Sea", "🔢", "All three papers", [
       ["t", "2/5 = 40%", true, "2 ÷ 5 = 0.4, which is 40%."]] },
 
 { t: "Recurring decimals", r: "N10", h: 1, icon: "♾️",
-  c: ["A dot over a digit means it repeats forever. To make a fraction, let x be the decimal.", "Then I multiply so the repeating parts line up?", "Aye! If x = 0.777..., then 10x = 7.777.... Subtract: 9x = 7, so x = 7/9.", "One digit repeats, times 10. Two digits, times 100. Two-digit recipe: put it over 99!"],
+  c: ["A dot over a digit means it repeats forever. To make a fraction, let x be the decimal.", "Then I multiply so the repeating parts line up?", "Yes! If x = 0.777..., then 10x = 7.777.... Subtract: 9x = 7, so x = 7/9.", "One digit repeats, times 10. Two digits, times 100. Two-digit recipe: put it over 99!"],
   k: "One repeating digit goes over 9, two over 99, three over 999. 0.1212... = 12/99.",
   q: [["m", "Write 0.444... as a fraction.", "4/9", "4/10", "44/100", "1/4", "4 over 9."],
       ["m", "Write 0.272727... as a fraction in its simplest form.", "3/11", "27/100", "27/90", "2/7", "27/99 simplifies to 3/11."],
@@ -84,7 +84,7 @@ GAME.topic("Number Sea", "🔢", "All three papers", [
       ["m", "What do you multiply top and bottom of 4/(3 + √2) by?", "3 − √2", "3 + √2", "√2", "4", "Change the sign to clear the root."]] },
 
 { t: "Standard form", r: "N9", icon: "🌌",
-  c: ["Standard form be A × 10ⁿ, with A from 1 up to, but not including, 10.", "So 45 × 10³ is a fake!", "Aye, it should be 4.5 × 10⁴. Big numbers get positive powers, tiny ones get negative.", "Multiplying? Multiply the fronts and add the powers, then tidy up."],
+  c: ["Standard form be A × 10ⁿ, with A from 1 up to, but not including, 10.", "So 45 × 10³ is a fake!", "Yes, it should be 4.5 × 10⁴. Big numbers get positive powers, tiny ones get negative.", "Multiplying? Multiply the fronts and add the powers, then tidy up."],
   k: "The power counts how many places the digits hop. Small number, negative hop.",
   q: [function () { var a = ri(11, 99), n = ri(3, 6); return ["n", "Write " + (a * Math.pow(10, n - 1)).toLocaleString("en-GB") + " in standard form as " + (a / 10) + " × 10<sup>?</sup>. Enter the power.", n, "", "Count the place hops."]; },
       ["m", "Write 0.00052 in standard form.", "5.2 × 10⁻⁴", "5.2 × 10⁴", "52 × 10⁻⁵", "0.52 × 10⁻³", "Hop 4 places, and it's a small number so the power is negative."],
@@ -93,7 +93,7 @@ GAME.topic("Number Sea", "🔢", "All three papers", [
       ["m", "Which is largest?", "4 × 10⁵", "9 × 10⁴", "3.9 × 10⁵", "9.9 × 10³", "Compare powers first, then the front numbers."]] },
 
 { t: "Rounding and estimating", r: "N14, N15", icon: "🎯",
-  c: ["Decimal places count after the point. Significant figures start at the first non-zero digit.", "So 0.00302 to 2 sig figs is 0.0030?", "Well squawked! To estimate, round everything to 1 sig fig, then calculate.", "Look at the next digit. 5 or more: round up!"],
+  c: ["Decimal places count after the point. Significant figures start at the first non-zero digit.", "So 0.00302 to 2 sig figs is 0.0030?", "Correct. To estimate, round everything to 1 sig fig, then calculate.", "Look at the next digit. 5 or more: round up!"],
   k: "Sig figs start at the first digit that isn't zero. Leading zeros are just passengers.",
   q: [["m", "Round 3.1468 to 2 decimal places.", "3.15", "3.14", "3.1", "3.147", "The third decimal is 6, so round up."],
       ["m", "Round 48 372 to 2 significant figures.", "48 000", "48", "50 000", "48 400", "Keep the zeros to hold the place value."],

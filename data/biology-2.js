@@ -78,7 +78,7 @@ GAME.topic("Control Canyon", "🎛️", "Paper 2", [
       ["p", "Match the eye problem.", [["Myopia", "Short-sight, concave lens"], ["Hyperopia", "Long-sight, convex lens"]]]] },
 
 { t: "Control of body temperature", r: "4.5.2.4", s: 1, icon: "🥵",
-  c: ["The thermoregulatory centre in the brain monitors blood temperature, and receptors in skin send info too.", "Too hot: blood vessels dilate, so more blood's at the surface. Sweat evaporates, cooling you.", "Too cold: blood vessels constrict, sweating stops and skeletal muscles shiver!", "That's me, the respiration warm-up. You're welcome."],
+  c: ["The thermoregulatory centre in the brain monitors blood temperature, and receptors in skin send info too.", "Too hot: blood vessels dilate, so more blood's at the surface. Sweat evaporates, cooling you.", "Too cold: blood vessels constrict, sweating stops and skeletal muscles shiver!", "Respiration releases heat, which helps keep the body warm."],
   k: "Hot: DILATE, sweat. Cold: Constrict, shiver.",
   q: [["s", "Sort the responses.", { "Too hot": ["Vasodilation", "Sweating"], "Too cold": ["Vasoconstriction", "Shivering"] }],
       ["m", "How does shivering warm you?", "Muscle contraction needs respiration, which releases heat", "It rubs skin", "It stops sweat", "It adds water", "Thermal energy from respiration."],
