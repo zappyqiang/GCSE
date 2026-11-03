@@ -35,7 +35,7 @@ GAME.topic("Geometry Gulf", "📐", "All three papers", [
       ["n", "How many lines of symmetry does a regular hexagon have?", 6, "", "A regular polygon has as many as its sides."]] },
 
 { t: "Constructions and loci", r: "G2", icon: "🧭",
-  c: ["With ruler and compass you can bisect a line or an angle. Leave your arcs showing: they earn marks!", "Loci means all the points that follow a rule.", "Fixed distance from a point: a circle. Same distance from two points: the perpendicular bisector. Same distance from two lines: the angle bisector.", "Treasure is less than 5 m from the rock and closer to the tree. Shade the region!"],
+  c: ["With ruler and compass you can bisect a line or an angle. Leave your arcs showing: they earn marks!", "Loci means all the points that follow a rule.", "Fixed distance from a point: a circle. Same distance from two points: the perpendicular bisector. Same distance from two lines: the angle bisector.", "The target is less than 5 m from the rock and closer to the tree. Shade the region!"],
   k: "Point makes a circle. Two points make a perpendicular bisector. Two lines make an angle bisector. Keep your arcs!",
   q: [["p", "Match the rule to the locus.", [["Fixed distance from a point", "A circle"], ["Equal distance from two points", "Perpendicular bisector"], ["Equal distance from two lines", "Angle bisector"], ["Fixed distance from a line", "Parallel lines with round ends"]]],
       ["t", "You should rub out construction arcs when finished.", false, "Leave them: they prove your method."],
@@ -90,14 +90,14 @@ GAME.topic("Geometry Gulf", "📐", "All three papers", [
       ["m", "A cone has radius 3 cm and height 4 cm. Find its volume in terms of π.", "12π cm³", "36π cm³", "4π cm³", "16π cm³", "⅓ × π × 9 × 4."]] },
 
 { t: "Plans and elevations", r: "G13", icon: "🏠",
-  c: ["A plan is the view from above. A front elevation is from the front. A side elevation is from the side.", "Like a seagull's view of the deck!", "Isometric paper helps you draw 3D shapes.", "A cylinder's plan is a circle, and its front is a rectangle."],
+  c: ["A plan is the view from above. A front elevation is from the front. A side elevation is from the side.", "Imagine looking straight down from above.", "Isometric paper helps you draw 3D shapes.", "A cylinder's plan is a circle, and its front is a rectangle."],
   k: "Plan is from the Plane above. Elevations are what you see standing on the ground.",
   q: [["m", "What is the plan view of a cylinder standing upright?", "Circle", "Rectangle", "Triangle", "Square", "Looking down, you see the circular top."],
       ["m", "What is the front elevation of a cone standing on its base?", "Triangle", "Circle", "Square", "Rectangle", "From the side it looks triangular."],
       ["t", "The plan of a square-based pyramid is a square with diagonals.", true, "From above, you see the base and the slanted edges."]] },
 
 { t: "Bearings", r: "G15", icon: "🧭",
-  c: ["Bearings be sailor talk! Three rules: measure from North, go clockwise, use three digits.", "So East is 090°, South is 180° and West is 270°.", "For a back bearing, add 180° (or subtract if over 360°).", "Bearing 'from A' means put your pencil on A. That's the bit I forget."],
+  c: ["Bearings describe direction. Three rules: measure from North, go clockwise, use three digits.", "So East is 090°, South is 180° and West is 270°.", "For a back bearing, add 180° (or subtract if over 360°).", "Bearing 'from A' means put your pencil on A. That's the bit people often forget."],
   k: "North, Clockwise, Three figures. Back bearing: plus or minus 180.",
   q: [["n", "What is the bearing of due West?", 270, "°", "A three-quarter turn clockwise from North."],
       function () { var b = ri(10, 170); return ["n", "The bearing of B from A is " + b + "°. Find the bearing of A from B.", b + 180, "°", "Add 180°."]; },
@@ -106,7 +106,7 @@ GAME.topic("Geometry Gulf", "📐", "All three papers", [
 
 { t: "Pythagoras' theorem", r: "G6, G11, G20", icon: "📏", d: "pyth",
   c: ["In a right-angled triangle, a² + b² = c². c is the hypotenuse, the longest side opposite the right angle.", "Finding the long side: square, add, square root.", "Finding a short side: square, subtract, square root.", "Learn 3-4-5 and 5-12-13 triangles and earn free marks!"],
-  k: "Long side: Add. Short side: Subtract. 3-4-5 is the sailor's triangle.",
+  k: "Long side: Add. Short side: Subtract. 3-4-5 is the classic Pythagorean triple.",
   q: [function () { var t = pick(trip); return ["n", "A right-angled triangle has short sides " + t[0] + " and " + t[1] + ". Find the hypotenuse.", t[2], "", "√(" + t[0] * t[0] + " + " + t[1] * t[1] + ")."]; },
       function () { var t = pick(trip); return ["n", "A right-angled triangle has hypotenuse " + t[2] + " and one side " + t[0] + ". Find the other.", t[1], "", "√(" + t[2] * t[2] + " − " + t[0] * t[0] + ")."]; },
       ["m", "Find the distance between (1, 2) and (4, 6).", "5", "7", "25", "3", "Across 3, up 4, so 5."],

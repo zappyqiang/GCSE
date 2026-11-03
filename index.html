@@ -3,47 +3,59 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GCSE Quest</title>
+<meta name="color-scheme" content="dark light">
+<title>GCSE Quest | Revision for Maths, Physics, Chemistry and Biology</title>
 <link rel="stylesheet" href="assets/game.css">
 </head>
 <body class="hub">
-<header class="hubhead">
-  <div>
-    <h1>GCSE Quest</h1>
-    <p>Four cartoon worlds. Every knowledge point on the course, told as a comic, then fought as a game.</p>
+<div class="hubwrap">
+  <div class="hubnav">
+    <div class="logo"><i>GQ</i>GCSE Quest</div>
+    <div class="hubstats" id="hubstats"></div>
   </div>
-  <div id="streak" style="font-family:var(--display);font-size:22px;color:#fff"></div>
-</header>
-<main class="spread" id="spread"></main>
-<footer class="hubfoot">
-  <h2>How to play</h2>
-  <ul>
-    <li>Pick a world and follow the trail. Each stop is a short comic, a memory trick and a monster to beat with the right answers.</li>
-    <li>Wrong answers go to the Mistake gym and come back on later days until they stick.</li>
-    <li>Set your tier and science course in each world's Settings. Progress saves automatically in this browser.</li>
-  </ul>
-  <p>Content follows the AQA specifications: Mathematics 8300, Physics 8463, Chemistry 8462 and Biology 8461. Other exam boards overlap heavily, but check your own board's list too. These games are revision practice, and are not made or endorsed by AQA.</p>
-</footer>
-<script src="assets/characters.js"></script>
+  <section class="hubhero">
+    <h1>Revise smarter. <em>Score higher.</em></h1>
+    <p>Short lessons, memory hooks and exam-style questions for GCSE Maths, Physics, Chemistry and Biology. Practise daily, find your weak topics, and sit timed mock exams before the real thing.</p>
+  </section>
+  <main class="subjects" id="spread"></main>
+  <footer class="hubfoot">
+    <h2>How it works</h2>
+    <ul>
+      <li>Work through each topic: read a short lesson with a memory hook, then answer questions to master the unit.</li>
+      <li>Questions you get wrong return on later days through spaced repetition, until they stick.</li>
+      <li>Use mock exams and the progress page to see which topics need work. Set your tier, science course and exam date in Settings.</li>
+    </ul>
+    <p>Content follows the AQA specifications: Mathematics 8300, Physics 8463, Chemistry 8462 and Biology 8461. Other exam boards overlap heavily, but check your own board's list too. These games are revision practice, and are not made or endorsed by AQA.</p>
+  </footer>
+</div>
+<script src="assets/icons.js"></script>
 <script src="data/counts.js"></script>
 <script>
 (function(){
   var worlds=[
-    {key:'maths',file:'maths.html',name:'Maths',sub:'The Pi-rate Voyage. Sail six seas of number and algebra.',a:'pi',b:'polly',unit:'doubloons'},
-    {key:'physics',file:'physics.html',name:'Physics',sub:'Mission Newton. Cross eight planets of energy and force.',a:'newt',b:'volt',unit:'joules'},
-    {key:'chemistry',file:'chemistry.html',name:'Chemistry',sub:'Potion Academy. Master ten classrooms of atoms and reactions.',a:'mole',b:'ion',unit:'crystals'},
-    {key:'biology',file:'biology.html',name:'Biology',sub:'Cell City Safari. Explore seven wilds from cell to ecosystem.',a:'mitch',b:'finch',unit:'ATP'}
+    {key:'maths',file:'maths.html',name:'Maths',spec:'AQA 8300 · 3 papers',sub:'Number, algebra, ratio, geometry, probability and statistics, with Higher-tier extensions.'},
+    {key:'physics',file:'physics.html',name:'Physics',spec:'AQA 8463 · 2 papers',sub:'Energy, electricity, particles, atoms, forces, waves, magnetism and space.'},
+    {key:'chemistry',file:'chemistry.html',name:'Chemistry',spec:'AQA 8462 · 2 papers',sub:'Atomic structure, bonding, quantitative chemistry, rates, organic chemistry and the Earth.'},
+    {key:'biology',file:'biology.html',name:'Biology',spec:'AQA 8461 · 2 papers',sub:'Cells, organisation, infection, bioenergetics, homeostasis, inheritance and ecology.'}
   ];
   var st={subj:{},streak:{}};
   try{var s=localStorage.getItem('gcsequest.v1');if(s)st=JSON.parse(s)}catch(e){}
   var set=st.settings||{tier:'H',course:'S'};
+  if(set.theme==='light'||set.theme==='dark')document.documentElement.setAttribute('data-theme',set.theme);
+  function dkey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+  var now=new Date(),stk=st.streak||{},days=(stk.last===dkey(now)||stk.last===dkey(new Date(now-864e5)))?(stk.days||0):0;
+  var today=st.daily&&st.daily.d===dkey(now)?st.daily.xp:0,goal=set.goal||100,chips='';
+  chips+='<span class="chip accent">'+ICON.flame+days+(days===1?' day':' days')+' streak</span>';
+  chips+='<span class="chip">'+ICON.target+Math.min(today,goal)+' / '+goal+' XP today</span>';
+  if(set.examDate){var d=new Date(set.examDate+'T09:00:00'),n=Math.ceil((d-now)/864e5);if(!isNaN(n)&&n>=0)chips+='<span class="chip">'+ICON.clock+n+(n===1?' day':' days')+' to exams</span>';}
+  document.getElementById('hubstats').innerHTML=chips;
+  function level(xp){var i=0;for(var k=0;k<RANKS.length;k++)if(xp>=RANKS[k][1])i=k;return RANKS[i][0]}
   document.getElementById('spread').innerHTML=worlds.map(function(w){
-    var c=(window.COUNTS||{})[w.key];
-    if(!c)return '<div class="world soon"><div><h2>'+w.name+'</h2><p class="sub">'+w.sub+'</p></div><div class="pair" aria-hidden="true">'+CAST[w.a]+CAST[w.b]+'</div><div class="wstat"><span>Being built next</span></div></div>';
-    var p=(st.subj||{})[w.key]||{},tot=c[set.tier+(w.key==='maths'?'S':set.course)],done=Math.min(tot,Object.keys(p.stars||{}).length),pct=done/tot*100;
-    return '<a class="world" href="'+w.file+'"><div><h2>'+w.name+'</h2><p class="sub">'+w.sub+'</p></div><div class="pair" aria-hidden="true">'+CAST[w.a]+CAST[w.b]+'</div><div class="wstat"><span>'+(p.xp||0).toLocaleString()+' '+w.unit+'</span><span class="wbar"><i style="width:'+pct+'%"></i></span><span>'+done+'/'+tot+' knowledge points</span></div></a>';
+    var c=(window.COUNTS||{})[w.key],p=(st.subj||{})[w.key]||{};
+    var tot=c?c[set.tier+(w.key==='maths'?'S':set.course)]:0,done=Math.min(tot,Object.keys(p.stars||{}).length),pc=tot?done/tot*100:0;
+    return '<a class="subj w-'+w.key+'" href="'+w.file+'"><div class="mark">'+SUBJECT_ICON[w.key]+'</div><div><div class="spec">'+w.spec+'</div><h2>'+w.name+'</h2></div><p>'+w.sub+'</p>'+
+      '<div class="foot"><div class="track"><i style="width:'+pc+'%"></i></div><span>'+done+'/'+tot+' units</span></div><div class="foot"><span>'+level(p.xp||0)+'</span><span style="margin-left:auto">'+(p.xp||0).toLocaleString()+' XP</span></div></a>';
   }).join('');
-  if(st.streak&&st.streak.days)document.getElementById('streak').textContent=st.streak.days+(st.streak.days===1?' day':' days')+' in a row';
 })();
 </script>
 </body>

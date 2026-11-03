@@ -2,7 +2,7 @@
 var ri = GAME.ri, pick = GAME.pick;
 GAME.topic("Planet Energy", "⚡", "Paper 1", [
 { t: "Energy stores and transfers", r: "4.1.1.1", icon: "🔋",
-  c: ["Energy lives in stores: kinetic, thermal, chemical, gravitational, elastic, magnetic, electrostatic and nuclear.", "It moves between them by forces, electricity, heating or waves. I run on the electric route.", "A ball thrown up: kinetic falls and gravitational rises. A kettle: electricity heats the water's thermal store.", "A system is just the objects you're looking at. Total energy never changes!"],
+  c: ["Energy lives in stores: kinetic, thermal, chemical, gravitational, elastic, magnetic, electrostatic and nuclear.", "It moves between them by forces, electricity, heating or waves.", "A ball thrown up: kinetic falls and gravitational rises. A kettle: electricity heats the water's thermal store.", "A system is just the objects you're looking at. Total energy never changes!"],
   k: "Stores: Kind Teachers Can't Give Every Monkey Extra Nuts. Kinetic, Thermal, Chemical, Gravitational, Elastic, Magnetic, Electrostatic, Nuclear.",
   q: [["p", "Match the object to its main store.", [["A moving car", "Kinetic"], ["Food or batteries", "Chemical"], ["A stretched spring", "Elastic"], ["A book on a high shelf", "Gravitational"]]],
       ["m", "A car brakes to a stop. Where does its kinetic energy mainly go?", "Thermal store of the brakes and surroundings", "Chemical store of the fuel", "Nuclear store", "It's destroyed", "Friction does work, heating the brakes."],
@@ -10,7 +10,7 @@ GAME.topic("Planet Energy", "⚡", "Paper 1", [
       ["t", "Energy can be created in a really good battery.", false, "Energy can only be transferred, never created or destroyed."]] },
 
 { t: "Calculating energy changes", r: "4.1.1.2", icon: "🧮",
-  c: ["Three key equations. Kinetic: Eₖ = ½mv². Gravitational: Eₚ = mgh. Elastic: Eₑ = ½ke².", "Careful: for kinetic, only the v is squared. Don't square the mass, Newt!", "On Earth, g is about 9.8 N/kg, but exams often give it. A dropped object's lost Eₚ turns into Eₖ.", "The elastic equation only works up to the limit of proportionality."],
+  c: ["Three key equations. Kinetic: Eₖ = ½mv². Gravitational: Eₚ = mgh. Elastic: Eₑ = ½ke².", "Careful: for kinetic, only the v is squared. Don't square the mass.", "On Earth, g is about 9.8 N/kg, but exams often give it. A dropped object's lost Eₚ turns into Eₖ.", "The elastic equation only works up to the limit of proportionality."],
   k: "Square the speed, not the mass. Double the speed gives FOUR times the kinetic energy: that's why speeding is dangerous.",
   q: [function () { var m = ri(2, 10), v = pick([2, 4, 6, 8, 10]); return ["n", "Find the kinetic energy of a " + m + " kg object moving at " + v + " m/s.", .5 * m * v * v, "J", "½ × " + m + " × " + v + "²."]; },
       function () { var m = ri(2, 10), h = ri(2, 20); return ["n", "Find the gravitational potential energy gained lifting " + m + " kg up " + h + " m. Use g = 10 N/kg.", m * 10 * h, "J", "m × g × h."]; },
@@ -26,14 +26,14 @@ GAME.topic("Planet Energy", "⚡", "Paper 1", [
       ["t", "Materials with high specific heat capacity heat up quickly.", false, "They need more energy, so they warm slowly."]] },
 
 { t: "Power", r: "4.1.1.4", icon: "💪",
-  c: ["Power is how fast energy is transferred. P = E ÷ t, or P = W ÷ t.", "1 watt means 1 joule every second. I'm a 500 W robot.", "A more powerful motor does the same job in less time. Two people climbing stairs do the same work, but the faster one has more power.", "Remember to use seconds, and change kilowatts to watts."],
+  c: ["Power is how fast energy is transferred. P = E ÷ t, or P = W ÷ t.", "1 watt means 1 joule every second. A 500 W motor transfers 500 J every second.", "A more powerful motor does the same job in less time. Two people climbing stairs do the same work, but the faster one has more power.", "Remember to use seconds, and change kilowatts to watts."],
   k: "Power is energy Per second. P for Per.",
   q: [function () { var e = ri(2, 9) * 100, t = pick([2, 4, 5, 10]); return ["n", "A motor transfers " + e + " J in " + t + " s. Find its power.", e / t, "W", "E ÷ t."]; },
       function () { var p = ri(2, 12) * 100, t = ri(2, 5); return ["n", "A " + p + " W heater runs for " + t + " minutes. How much energy does it transfer?", p * t * 60, "J", "Turn minutes to seconds, then E = Pt."]; },
       ["t", "Two motors lift the same load to the same height. The faster one is more powerful.", true, "Same work, less time."]] },
 
 { t: "Conservation and wasted energy", r: "4.1.2.1", icon: "🌡️",
-  c: ["Energy is never lost, but some spreads out as useless thermal energy. That's called dissipation.", "Lubricate moving parts to reduce friction. Insulate buildings to reduce heating losses!", "Thicker walls and low thermal conductivity slow the cooling of a house.", "My oil keeps my joints from wasting joules."],
+  c: ["Energy is never lost, but some spreads out as useless thermal energy. That's called dissipation.", "Lubricate moving parts to reduce friction. Insulate buildings to reduce heating losses!", "Thicker walls and low thermal conductivity slow the cooling of a house.", "Lubricating a machine reduces friction, so less energy is wasted as heat."],
   k: "Energy doesn't vanish, it dissipates. Oil cuts friction; insulation cuts heat flow.",
   q: [["m", "How does lubrication help?", "Reduces friction so less energy is wasted", "Adds energy to the system", "Increases the mass", "Stops gravity", "Less friction means less heating."],
       ["m", "Which change slows the cooling of a house?", "Thicker walls with low thermal conductivity", "Thinner walls", "Walls with high thermal conductivity", "Metal window frames", "Lower conductivity means slower conduction."],
@@ -64,7 +64,7 @@ GAME.topic("Planet Energy", "⚡", "Paper 1", [
 
 GAME.topic("Planet Electric", "💡", "Paper 1", [
 { t: "Circuit symbols", r: "4.2.1.1", icon: "🔌", d: "circuit",
-  c: ["Circuit diagrams use a universal language. Learn the symbols for a cell, battery, switch, bulb, resistor, ammeter and voltmeter.", "Ammeters go in series. Voltmeters go in parallel, across the part!", "A thermistor has a little hockey stick line. An LDR has arrows pointing in. A diode is a triangle with a bar.", "A fuse is a rectangle with a line through it. Blowing up makes me sad."],
+  c: ["Circuit diagrams use a universal language. Learn the symbols for a cell, battery, switch, bulb, resistor, ammeter and voltmeter.", "Ammeters go in series. Voltmeters go in parallel, across the part!", "A thermistor has a little hockey stick line. An LDR has arrows pointing in. A diode is a triangle with a bar.", "A fuse is a rectangle with a line through it. When the current is too high, the fuse wire melts and breaks the circuit."],
   k: "Ammeter: in the loop. Voltmeter: on a side branch, like a V-shaped bypass.",
   q: [["p", "Match the component with its job.", [["Ammeter", "Measures current in series"], ["Voltmeter", "Measures pd in parallel"], ["Diode", "Lets current flow one way"], ["Fuse", "Breaks the circuit if overloaded"]]],
       ["t", "A voltmeter is connected in series.", false, "It goes in parallel, across the component."],

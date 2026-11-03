@@ -91,7 +91,7 @@ GAME.topic("Sky Tower", "🌤️", "Paper 2", [
 
 GAME.topic("Resource Rooftop", "♻️", "Paper 2", [
 { t: "Sustainable development", r: "4.10.1.1", icon: "🌳",
-  c: ["We use Earth's resources for food, warmth, shelter and transport. Some are natural, some synthetic.", "Sustainable development meets our needs without stopping future generations meeting theirs.", "Chemistry helps with better processes, and less waste.", "Be kind to the future me. I'll still be positive."],
+  c: ["We use Earth's resources for food, warmth, shelter and transport. Some are natural, some synthetic.", "Sustainable development meets our needs without stopping future generations meeting theirs.", "Chemistry helps with better processes, and less waste.", "Choices made now affect future generations."],
   k: "Sustainable: now and later. Don't borrow from the kids.",
   q: [["t", "Sustainable development meets today's needs without harming future generations.", true, "Definition worth learning."],
       ["s", "Natural or synthetic?", { "Natural": ["Cotton", "Wool", "Timber"], "Synthetic": ["Polyester", "Poly(ethene)"] }]] },

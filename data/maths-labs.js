@@ -25,7 +25,7 @@ GAME.lab({ id: "quad", name: "Quadratic curve shaper", icon: "🎢", desc: "See 
     if (a !== 0) { if (D > 0) { var r1 = (-b - Math.sqrt(D)) / (2 * a), r2 = (-b + Math.sqrt(D)) / (2 * a); roots = "roots at x = " + A.fmt(Math.round(Math.min(r1, r2) * 100) / 100) + " and " + A.fmt(Math.round(Math.max(r1, r2) * 100) / 100); } else if (D === 0) roots = "one repeated root at x = " + A.fmt(-b / (2 * a)); }
     document.getElementById("v").innerHTML = '<defs><clipPath id="cq"><rect x="50" y="20" width="300" height="300"/></clipPath></defs>' + grid() + '<path clip-path="url(#cq)" d="' + path + '" fill="none" stroke="#21b6a8" stroke-width="5"/>';
     document.getElementById("o").textContent = "y = " + a + "x² + " + b + "x + " + c + ": " + roots;
-    if (a === 1 && b === -4 && c === 3 && !won) { won = true; A.award(30, "x² − 4x + 3 = (x − 1)(x − 3). Treasure!"); }
+    if (a === 1 && b === -4 && c === 3 && !won) { won = true; A.award(30, "x² − 4x + 3 = (x − 1)(x − 3). Correct!"); }
   }
   A.slider(document.getElementById("c"), "a", -2, 2, 1, 1, "", function (v) { a = v; draw(); });
   A.slider(document.getElementById("c"), "b", -6, 6, 1, 0, "", function (v) { b = v; draw(); });

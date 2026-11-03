@@ -2,7 +2,7 @@
 var ri = GAME.ri, pick = GAME.pick, gcd = GAME.gcd;
 GAME.topic("Ratio Reef", "🐠", "All three papers", [
 { t: "Simplifying and sharing ratios", r: "R4, R5, R6, R8, N11", icon: "⚖️",
-  c: ["Share treasure 2:3 and you get 5 equal parts: 2 for you, 3 for me. I'm the captain, after all.", "So find one part first!", "Aye. Total ÷ parts, then multiply. Simplify ratios by dividing both sides by the HCF, using the same units.", "And 2:3 means I've got ⅖ of the loot, not ⅔!"],
+  c: ["Share £50 in the ratio 2:3 and you get 5 equal parts: 2 for one person, 3 for the other.", "So find one part first!", "Yes. Total ÷ parts, then multiply. Simplify ratios by dividing both sides by the HCF, using the same units.", "And the 2 share is ⅖ of the total, not ⅔!"],
   k: "Add the parts, find one part, multiply back. Ratios as fractions go over the TOTAL.",
   q: [function () { var a = ri(2, 5), b = ri(2, 7), k = ri(3, 12); return ["n", "Share £" + (a + b) * k + " in the ratio " + a + ":" + b + ". How much is the larger share?", Math.max(a, b) * k, "£", "One part is £" + k + "."]; },
       function () { var a = ri(2, 6), b = ri(7, 9), k = ri(2, 9), g = gcd(a, b); return ["m", "Simplify " + a * k + ":" + b * k + ".", a / g + ":" + b / g, (a / g + 1) + ":" + b / g, b / g + ":" + a / g, a * k + ":" + b, "Divide both sides by " + (k * g) + "."]; },
@@ -27,7 +27,7 @@ GAME.topic("Ratio Reef", "🐠", "All three papers", [
       ["n", "Convert 36 km/h to m/s.", 10, "m/s", "36 000 m ÷ 3600 s."]] },
 
 { t: "Scales and maps", r: "R2", icon: "🗺️",
-  c: ["A map scale of 1:50 000 means 1 cm on the map is 50 000 cm in real life.", "That's 500 m! Divide by 100 to get metres.", "Scale factors make shapes bigger or smaller. Enlarging by 3 makes all lengths 3 times as long.", "Keep the map dry. It's all we've got."],
+  c: ["A map scale of 1:50 000 means 1 cm on the map is 50 000 cm in real life.", "That's 500 m! Divide by 100 to get metres.", "Scale factors make shapes bigger or smaller. Enlarging by 3 makes all lengths 3 times as long.", "Keep the units the same on both sides before you convert."],
   k: "Scale 1:n means multiply by n, then convert the units.",
   q: [function () { var d = ri(2, 9); return ["n", "On a 1:50 000 map, a path is " + d + " cm. How long is it in real life?", d * .5, "km", "1 cm is 0.5 km."]; },
       ["m", "A model boat is 1:20 and is 30 cm long. How long is the real boat?", "6 m", "60 m", "1.5 m", "600 m", "30 × 20 = 600 cm = 6 m."],
@@ -75,16 +75,16 @@ GAME.topic("Ratio Reef", "🐠", "All three papers", [
       ["n", "Areas of similar shapes are 9 cm² and 25 cm². The smaller has length 6 cm. Find the larger length.", 10, "cm", "√(25/9) = 5/3."]] },
 
 { t: "Rates of change", r: "R14, R15", h: 1, icon: "📉",
-  c: ["The gradient of a graph is a rate: how fast something's changing.", "On a curve, draw a tangent and find its gradient to get the instantaneous rate.", "The gradient between two points gives the average rate.", "A straight line at the exact spot. I've steady wings for this."],
+  c: ["The gradient of a graph is a rate: how fast something's changing.", "On a curve, draw a tangent and find its gradient to get the instantaneous rate.", "The gradient between two points gives the average rate.", "A straight line at the exact spot. The tangent gives the gradient at one exact point."],
   k: "Instantaneous = tangent at a point. Average = chord between two points.",
   q: [["m", "How do you estimate the rate of change at a point on a curve?", "Draw a tangent and find its gradient", "Read the y-value", "Find the area under the curve", "Join it to the origin", "A tangent touches at that point."],
       ["n", "A tank's volume rises from 20 litres to 50 litres in 5 minutes. What is the average rate?", 6, "litres/min", "30 ÷ 5."],
       ["t", "A steeper graph means a faster rate of change.", true, "Bigger gradient, faster change."]] },
 
 { t: "One quantity as a fraction of another", r: "R3", icon: "🧺",
-  c: ["What fraction of a day is 6 hours? Same units, then 6/24 = ¼.", "So first turn both into the same unit, then simplify!", "It's the base of ratio and percentage problems.", "I've spent ⅔ of my life sleeping and ⅓ squawking."],
+  c: ["What fraction of a day is 6 hours? Same units, then 6/24 = ¼.", "So first turn both into the same unit, then simplify!", "It's the base of ratio and percentage problems.", "For example, ⅔ + ⅓ = 1: the fractions add up to the whole."],
   k: "Part over whole, same units, then simplify.",
   q: [["m", "What fraction of 1 hour is 20 minutes?", "1/3", "1/2", "1/5", "2/3", "20/60."],
       function () { var a = ri(1, 3), b = pick([4, 5, 8]); return ["m", "Write " + a * 5 + " as a fraction of " + b * 5 + " in its simplest form.", (a / gcd(a, b)) + "/" + (b / gcd(a, b)), (a + 1) + "/" + (b + 1), b + "/" + a, (a * 5) + "/" + b, "Divide top and bottom by the HCF."]; }] }
-], { blurb: "Share out the loot, spot the best deal, and make your money grow." });
+], { blurb: "Share quantities, find the best deal and work out growth and decay." });
 })();
