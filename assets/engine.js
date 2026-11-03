@@ -259,8 +259,10 @@
       { k: "video", t: "Watch videos on YouTube", d: "Search: " + q, u: "https://www.youtube.com/results?search_query=" + enc(q) },
       { k: "video", t: ch, d: "Popular free GCSE channel: " + l.t, u: "https://www.youtube.com/results?search_query=" + enc(ch + " " + l.t) },
       { k: "link", t: "BBC Bitesize", d: "Notes, videos and quizzes", u: "https://www.bbc.co.uk/bitesize/search?q=" + enc(q) },
+      { k: "link", t: "Oak National Academy", d: "Free lessons used in UK schools", u: "https://www.thenational.academy/search?term=" + enc(l.t + " " + sub) },
+      { k: "link", t: "Save My Exams", d: "Revision notes and exam questions", u: "https://www.savemyexams.com/search/?q=" + enc(q) },
       { k: "globe", t: "Seneca Learning", d: "Free GCSE courses and practice", u: "https://senecalearning.com/en-GB/" }
-    ];
+    ].concat((l.links || []).map(function (x) { return { k: x[2] || "video", t: x[0], d: "Recommended resource", u: x[1] }; }));
   }
   function linksHtml(l) { return `<div class="links">${linksFor(l).map(function (x) { return `<a class="linkcard" href="${x.u}" target="_blank" rel="noopener noreferrer"><span class="li">${ic(x.k)}</span><span><b>${x.t}</b><small>${x.d}</small></span><span class="ext">${ic("arrow")}</span></a>`; }).join("")}</div><p class="muted sm">These open in a new tab and need an internet connection. Pick a video or page that matches your exam board.</p>`; }
 
