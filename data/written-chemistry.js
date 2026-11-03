@@ -1,4 +1,19 @@
 (function () {
-  GAME.exam([]);
-  GAME.worked([]);
+  var E = function (t, m, q, ms, a, tip) { return { t: t, m: m, q: q, ms: ms, a: a, tip: tip }; };
+  var W = function (t, title, p, s, a) { return { t: t, title: title, p: p, s: s, a: a }; };
+  GAME.exam([
+    E("Atomic structure and bonding", 3, "Explain why sodium chloride has a high melting point.", ["Sodium chloride has a giant ionic lattice", "There are strong electrostatic forces between oppositely charged ions", "A lot of energy is needed to overcome these forces"], "Sodium chloride is a giant lattice of oppositely charged ions held together by strong electrostatic forces. A large amount of energy is needed to break these forces, so it has a high melting point.", "Talk about forces between ions, not 'breaking bonds' within molecules."),
+    E("Atomic structure and bonding", 2, "Describe how an ionic bond forms between sodium and chlorine.", ["Sodium loses an electron to form Na⁺", "Chlorine gains an electron to form Cl⁻ and the ions attract"], "Sodium transfers its outer electron to chlorine, forming Na⁺ and Cl⁻ ions which attract each other strongly.", "Use the idea of electron transfer."),
+    E("Quantitative chemistry", 3, "Calculate the relative formula mass of calcium carbonate, CaCO₃. (Ar: Ca = 40, C = 12, O = 16)", ["40 + 12", "+ 3 × 16 = 48", "100"], "Mr = 40 + 12 + (3 × 16) = 100.", "Multiply the Ar by the number of atoms of that element."),
+    E("Quantitative chemistry", 4, "Calculate the mass of magnesium oxide made when 12 g of magnesium burns completely. (Ar: Mg = 24, O = 16) 2Mg + O₂ → 2MgO", ["Moles Mg = 12 ÷ 24 = 0.5", "Ratio Mg : MgO is 1 : 1 so moles MgO = 0.5", "Mr of MgO = 40", "Mass = 0.5 × 40 = 20 g"], "0.5 mol of Mg gives 0.5 mol of MgO. Mr of MgO is 40, so the mass is 20 g.", "Moles = mass ÷ Mr, then use the equation ratio."),
+    E("Chemical changes", 3, "Describe how you would make pure dry crystals of copper sulfate from copper oxide and sulfuric acid.", ["Add copper oxide to warm acid until no more dissolves (excess)", "Filter to remove excess copper oxide", "Heat the filtrate to evaporate some water then leave to crystallise; dry the crystals"], "Add excess copper oxide to warm dilute sulfuric acid. Filter off the unreacted oxide. Heat the solution to evaporate some water and leave it to crystallise, then dry the crystals.", "Excess solid means all the acid reacts."),
+    E("Energy changes", 3, "The reaction in a hand warmer releases heat. State the type of reaction and explain using bond energies.", ["It is exothermic", "Energy released making new bonds", "is greater than the energy needed to break the old bonds"], "The reaction is exothermic. More energy is released when new bonds form than is taken in to break the existing bonds, so heat is given out to the surroundings.", "Break bonds absorbs energy; make bonds releases energy."),
+    E("Rates and equilibrium", 4, "Explain, using collision theory, why increasing the temperature increases the rate of reaction.", ["Particles move faster", "So they collide more frequently", "More collisions have energy greater than or equal to the activation energy", "So more successful collisions per second"], "At a higher temperature particles have more energy and move faster, so they collide more often. A greater proportion of collisions have at least the activation energy, so there are more successful collisions per second.", "Mention both frequency of collisions and energy of collisions.")
+  ]);
+  GAME.worked([
+    W("Quantitative chemistry", "Moles from mass", "How many moles are in 36 g of water, H₂O? (Ar: H = 1, O = 16)", ["Mr of water = 2 × 1 + 16 = 18.", "Moles = mass ÷ Mr.", "36 ÷ 18."], "2 mol"),
+    W("Quantitative chemistry", "Percentage yield", "A reaction should make 20 g of product but 15 g is collected. Find the percentage yield.", ["Percentage yield = actual yield ÷ theoretical yield × 100.", "15 ÷ 20 = 0.75."], "75%"),
+    W("Chemical changes", "Writing a balanced equation", "Balance: Mg + HCl → MgCl₂ + H₂", ["Count Cl: 2 on the right, so use 2HCl on the left.", "Now H: 2 on the left, 2 on the right.", "Mg is balanced: 1 each side."], "Mg + 2HCl → MgCl₂ + H₂"),
+    W("Rates", "Mean rate of reaction", "20 cm³ of gas is made in 40 s. Find the mean rate.", ["Mean rate = amount of product ÷ time.", "20 ÷ 40."], "0.5 cm³/s")
+  ]);
 })();
