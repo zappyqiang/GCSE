@@ -9,6 +9,16 @@
     maths: base('<path d="M4 7h16"/><path d="M8 7v11"/><path d="M16 7c0 4 0 8 2 11"/>'),
     physics: base('<circle cx="12" cy="12" r="1.6" fill="currentColor"/><ellipse cx="12" cy="12" rx="9" ry="3.8"/><ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(120 12 12)"/>'),
     chemistry: base('<path d="M9 3h6"/><path d="M10 3v6l-5.2 8.6A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-3.4L14 9V3"/><path d="M7.6 15h8.8"/>'),
+    english: base('<path d="M4 4.5h6.5a2 2 0 0 1 1.5 1v14a2 2 0 0 0-1.5-1H4z"/><path d="M20 4.5h-6.5a2 2 0 0 0-1.5 1v14a2 2 0 0 1 1.5-1H20z"/>'),
+    literature: base('<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 17h11M9 8h6"/>'),
+    history: base('<path d="M4 20h16M6 20V9M10 20V9M14 20V9M18 20V9M3 9l9-5 9 5z"/>'),
+    geography: base('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>'),
+    business: base('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 13h18"/>'),
+    sociology: base('<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6M14.5 14.5c3-.5 6 1.5 6 5.5"/>'),
+    re: base('<path d="M12 3v18M6 9h12"/><path d="M5 21h14"/>'),
+    computing: base('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M8 9l-2 2 2 2M16 9l2 2-2 2"/>'),
+    psychology: base('<path d="M9 4a4 4 0 0 0-4 4c-2 1-2 4 0 5-1 3 1 6 4 6h1V4z"/><path d="M15 4a4 4 0 0 1 4 4c2 1 2 4 0 5 1 3-1 6-4 6h-1V4z"/>'),
+    economics: base('<path d="M4 20V4M4 20h16"/><path d="M7 15l4-4 3 3 5-6"/>'),
     biology: base('<path d="M6 3c0 5 3 6 6 9s6 4 6 9"/><path d="M18 3c0 5-3 6-6 9s-6 4-6 9"/><path d="M8.2 7h7.6M8.2 17h7.6M10.4 12h3.2"/>')
   };
 

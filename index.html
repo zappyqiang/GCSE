@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0e1128">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-<title>GCSE Quest | Game-based revision for Maths, Physics, Chemistry and Biology</title>
+<title>GCSE Quest | Game-based revision for 14 GCSE subjects</title>
 <link rel="stylesheet" href="assets/game.css">
 </head>
 <body class="hub">
@@ -19,7 +19,7 @@
   <section class="hubhero">
     <div>
       <h1>Level up your <em>GCSE grades.</em></h1>
-      <p>Learn with animated explainers, beat boss challenges, build streaks and sit timed mock exams. Maths, Physics, Chemistry and Biology, all in one game.</p>
+      <p>Learn with animated explainers, beat boss challenges, build streaks and sit timed mock exams. Science, Maths, English and the humanities: 14 GCSE subjects, all in one game.</p>
       <div class="row"><a class="btn big" id="cta" href="maths.html">Start playing</a><a class="btn alt big" href="#subjects">Choose a subject</a></div>
     </div>
     <div class="hubmascot" id="hubmascot"></div>
@@ -32,7 +32,7 @@
     <div class="feat"><div id="f4"></div><b>Mock exams and review</b><span>Timed papers with a graded report, plus spaced repetition that brings mistakes back until they stick.</span></div>
   </section>
   <footer class="hubfoot">
-    <p>Content follows the AQA specifications: Mathematics 8300, Physics 8463, Chemistry 8462 and Biology 8461. Other exam boards (Edexcel, OCR, WJEC Eduqas) overlap heavily, but always check your own board's specification. GCSE Quest is revision practice and is not made or endorsed by any exam board or by the BBC. Links to videos and websites open external services in a new tab.</p>
+    <p>Content follows the AQA specifications, for example Mathematics 8300, Biology 8461, English Language 8700, History 8145 and Computer Science 8525. The ten newer subjects (English, humanities, business, social sciences and computing) are shorter starter courses that are still growing. Other exam boards (Edexcel, OCR, WJEC Eduqas) overlap heavily, but always check your own board's specification. GCSE Quest is revision practice and is not made or endorsed by any exam board or by the BBC. Links to videos and websites open external services in a new tab.</p>
   </footer>
 </div>
 <script src="assets/icons.js"></script>
@@ -44,7 +44,17 @@
     {key:'maths',file:'maths.html',name:'Maths',spec:'AQA 8300 · 3 papers',sub:'Number, algebra, ratio, geometry, probability and statistics, with Higher-tier extensions.'},
     {key:'physics',file:'physics.html',name:'Physics',spec:'AQA 8463 · 2 papers',sub:'Energy, electricity, particles, atoms, forces, waves, magnetism and space.'},
     {key:'chemistry',file:'chemistry.html',name:'Chemistry',spec:'AQA 8462 · 2 papers',sub:'Atomic structure, bonding, quantitative chemistry, rates, organic chemistry and the Earth.'},
-    {key:'biology',file:'biology.html',name:'Biology',spec:'AQA 8461 · 2 papers',sub:'Cells, organisation, infection, bioenergetics, homeostasis, inheritance and ecology.'}
+    {key:'biology',file:'biology.html',name:'Biology',spec:'AQA 8461 · 2 papers',sub:'Cells, organisation, infection, bioenergetics, homeostasis, inheritance and ecology.'},
+    {key:'english',file:'english.html',name:'English Language',spec:'AQA 8700 · 2 papers',sub:'Reading fiction and non-fiction, creative and transactional writing, and exam technique for both papers.'},
+    {key:'literature',file:'literature.html',name:'English Literature',spec:'AQA 8702 · 2 papers',sub:'Macbeth, A Christmas Carol, An Inspector Calls, poetry and essay skills.'},
+    {key:'history',file:'history.html',name:'History',spec:'AQA 8145 · 2 papers',sub:'Germany, conflict and tension, health and the people, Elizabethan England, with source and interpretation skills.'},
+    {key:'geography',file:'geography.html',name:'Geography',spec:'AQA 8035 · 3 papers',sub:'Natural hazards, ecosystems, rivers and coasts, cities, development, resources and fieldwork.'},
+    {key:'business',file:'business.html',name:'Business',spec:'AQA 8132 · 2 papers',sub:'Enterprise, ownership, marketing, operations, finance and people, with calculations.'},
+    {key:'sociology',file:'sociology.html',name:'Sociology',spec:'AQA 8192 · 2 papers',sub:'Families, education, crime and deviance, social stratification and research methods.'},
+    {key:'re',file:'re.html',name:'Religious Studies',spec:'AQA 8062 · 2 papers',sub:'Christianity, Islam, and ethical themes: relationships, life issues, crime and peace.'},
+    {key:'computing',file:'computing.html',name:'Computer Science',spec:'AQA 8525 · 2 papers',sub:'Algorithms, programming, binary and hex, hardware, networks and cyber security.'},
+    {key:'psychology',file:'psychology.html',name:'Psychology',spec:'AQA 8182 · 2 papers',sub:'Memory, perception, development, social influence and research methods.'},
+    {key:'economics',file:'economics.html',name:'Economics',spec:'AQA 8136 · 2 papers',sub:'Scarcity, supply and demand, market failure, the UK economy and trade.'}
   ];
   var st={subj:{},streak:{}};
   try{var s=localStorage.getItem('gcsequest.v1');if(s)st=JSON.parse(s)}catch(e){}

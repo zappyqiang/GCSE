@@ -1,6 +1,6 @@
 # GCSE Quest
 
-A game-based GCSE revision app for **Maths, Physics, Chemistry and Biology**. Learn with animated explainers, beat boss challenges, build streaks, level up your study buddy and sit timed mock exams. Content follows the AQA specifications (8300, 8463, 8462, 8461), covers Foundation and Higher tiers and Combined or Separate science, and runs entirely in the browser with no account.
+A game-based GCSE revision app for **14 subjects**: Maths, Physics, Chemistry, Biology, plus English Language, English Literature, History, Geography, Business, Sociology, Religious Studies, Computer Science, Psychology and Economics. Learn with animated explainers, beat boss challenges, build streaks, level up your study buddy and sit timed mock exams. Content follows the AQA specifications (8300, 8463, 8462, 8461), covers Foundation and Higher tiers and Combined or Separate science, and runs entirely in the browser with no account.
 
 ## What is in the game
 
@@ -12,6 +12,14 @@ A game-based GCSE revision app for **Maths, Physics, Chemistry and Biology**. Le
 - **Per-unit resources**: links to videos, BBC Bitesize and Seneca, plus AQA specification pages (see the note below).
 - **Toolkit**: formula and equation sheets, memory hooks, and interactive labs.
 - **Works offline** once opened (service worker), installable as an app on phones when served over HTTPS, dark and light themes, keyboard shortcuts (1 to 4), responsive layout.
+
+## Adding a subject
+
+1. Copy any subject page (for example `history.html`), set `data-world` and the data script.
+2. Write `data/<subject>.js`: `GAME.configure({... tiered: false})`, `GAME.sheet`, then `GAME.topic(name, icon, paper, [units])`. Units use the same question formats as the science subjects. Set `tiered: false` for subjects without Foundation and Higher tiers; omit labs if there are none.
+3. Add a colour theme in `assets/game.css`, an icon in `assets/icons.js`, an entry in `index.html` and `data/counts.js`, and list the files in `sw.js`.
+
+The newer subjects (English, humanities, business, social sciences, computing) are starter courses with fewer units and questions than the science and maths courses, and have no animations or labs yet.
 
 ## Running it
 

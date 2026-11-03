@@ -502,3 +502,33 @@ textarea{width:100%;height:90px;border:2px solid var(--border2);border-radius:12
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.bstar{transform:none!important;opacity:1!important}}
 @media print{.sidebar,.topbar,.lbar,.btn{display:none!important}.shell{display:block}body{background:#fff;color:#000}}
+body[data-world=english],.w-english{--accent:#f472b6;--accent-d:#c2358a;--c1:#ec4899;--c2:#f97316;--c3:#a855f7;--c4:#f43f5e;--accent-soft:rgba(244,114,182,.16)}
+:root[data-theme=light] body[data-world=english]{--accent:#c2358a;--accent-d:#8f1f66}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=english]{--accent:#c2358a;--accent-d:#8f1f66}}
+body[data-world=literature],.w-literature{--accent:#fb923c;--accent-d:#c2570c;--c1:#f97316;--c2:#eab308;--c3:#ef4444;--c4:#f43f5e;--accent-soft:rgba(251,146,60,.16)}
+:root[data-theme=light] body[data-world=literature]{--accent:#c2570c;--accent-d:#8f3d05}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=literature]{--accent:#c2570c;--accent-d:#8f3d05}}
+body[data-world=history],.w-history{--accent:#d6a85a;--accent-d:#a8741f;--c1:#d97706;--c2:#b45309;--c3:#eab308;--c4:#a16207;--accent-soft:rgba(214,168,90,.16)}
+:root[data-theme=light] body[data-world=history]{--accent:#8f5a10;--accent-d:#6b3f06}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=history]{--accent:#8f5a10;--accent-d:#6b3f06}}
+body[data-world=geography],.w-geography{--accent:#34d399;--accent-d:#0f9f6e;--c1:#10b981;--c2:#06b6d4;--c3:#84cc16;--c4:#14b8a6;--accent-soft:rgba(52,211,153,.16)}
+:root[data-theme=light] body[data-world=geography]{--accent:#0b8a5c;--accent-d:#066a46}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=geography]{--accent:#0b8a5c;--accent-d:#066a46}}
+body[data-world=business],.w-business{--accent:#38bdf8;--accent-d:#0b7bb5;--c1:#0ea5e9;--c2:#6366f1;--c3:#14b8a6;--c4:#3b82f6;--accent-soft:rgba(56,189,248,.16)}
+:root[data-theme=light] body[data-world=business]{--accent:#0b7bb5;--accent-d:#075a85}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=business]{--accent:#0b7bb5;--accent-d:#075a85}}
+body[data-world=sociology],.w-sociology{--accent:#c084fc;--accent-d:#8b3fd9;--c1:#a855f7;--c2:#ec4899;--c3:#6366f1;--c4:#d946ef;--accent-soft:rgba(192,132,252,.16)}
+:root[data-theme=light] body[data-world=sociology]{--accent:#8b3fd9;--accent-d:#6528a8}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=sociology]{--accent:#8b3fd9;--accent-d:#6528a8}}
+body[data-world=re],.w-re{--accent:#fbbf24;--accent-d:#c28a06;--c1:#f59e0b;--c2:#eab308;--c3:#f97316;--c4:#d97706;--accent-soft:rgba(251,191,36,.16)}
+:root[data-theme=light] body[data-world=re]{--accent:#a87500;--accent-d:#7a5500}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=re]{--accent:#a87500;--accent-d:#7a5500}}
+body[data-world=computing],.w-computing{--accent:#22d3ee;--accent-d:#0e98b2;--c1:#06b6d4;--c2:#3b82f6;--c3:#8b5cf6;--c4:#14b8a6;--accent-soft:rgba(34,211,238,.16)}
+:root[data-theme=light] body[data-world=computing]{--accent:#0e86a0;--accent-d:#09627a}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=computing]{--accent:#0e86a0;--accent-d:#09627a}}
+body[data-world=psychology],.w-psychology{--accent:#f0abfc;--accent-d:#b83fd0;--c1:#d946ef;--c2:#a855f7;--c3:#ec4899;--c4:#8b5cf6;--accent-soft:rgba(240,171,252,.16)}
+:root[data-theme=light] body[data-world=psychology]{--accent:#a22fbb;--accent-d:#78208c}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=psychology]{--accent:#a22fbb;--accent-d:#78208c}}
+body[data-world=economics],.w-economics{--accent:#a3e635;--accent-d:#6aa314;--c1:#84cc16;--c2:#22c55e;--c3:#eab308;--c4:#14b8a6;--accent-soft:rgba(163,230,53,.16)}
+:root[data-theme=light] body[data-world=economics]{--accent:#5a8c0d;--accent-d:#3f6709}
+@media (prefers-color-scheme: light){:root:not([data-theme=dark]) body[data-world=economics]{--accent:#5a8c0d;--accent-d:#3f6709}}

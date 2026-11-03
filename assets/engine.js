@@ -51,6 +51,8 @@
   function pad2(n) { return n < 10 ? "0" + n : "" + n; }
   function pct(a, b) { return b ? Math.round(a / b * 100) : 0; }
   function hashStr(s) { var h = 3; for (var i = 0; i < s.length; i++) h = (h * 33 + s.charCodeAt(i)) >>> 0; return h; }
+  function tiered() { return !G.cfg || G.cfg.tiered !== false; }
+  function sciCourse() { return !!G.cfg && ["physics", "chemistry", "biology"].indexOf(G.cfg.key) >= 0; }
   function visible(l) { return !(l.h && S.settings.tier === "F") && !(l.s && S.settings.course === "C"); }
   function vLevels(t) { return t.levels.filter(visible); }
   function vTopics() { return G.topics.filter(function (t) { return vLevels(t).length; }); }
@@ -106,10 +108,10 @@
     tot.coverage = tot.units ? tot.started / tot.units : 0; tot.acc = tot.a ? tot.c / tot.a : 0; return tot;
   }
   function band(p) {
-    var F = S.settings.tier === "F", T = F ? [[80, "5"], [65, "4"], [50, "3"], [35, "2"], [20, "1"]] : [[85, "9"], [76, "8"], [66, "7"], [56, "6"], [46, "5"], [36, "4"], [26, "3"], [16, "2"]];
+    var F = tiered() && S.settings.tier === "F", T = F ? [[80, "5"], [65, "4"], [50, "3"], [35, "2"], [20, "1"]] : [[85, "9"], [76, "8"], [66, "7"], [56, "6"], [46, "5"], [36, "4"], [26, "3"], [16, "2"]];
     for (var i = 0; i < T.length; i++) if (p >= T[i][0]) return T[i][1]; return "U";
   }
-  function bandText(g) { return g === "U" ? "Below grade " + (S.settings.tier === "F" ? "1" : "2") : "Around grade " + g; }
+  function bandText(g) { return g === "U" ? "Below grade " + (tiered() && S.settings.tier === "F" ? "1" : "2") : "Around grade " + g; }
 
   /* ---------- daily quests ---------- */
   var QDEF = [
@@ -187,7 +189,7 @@
   function shell(active) {
     var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/practice", "Practice", "mock", "target"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
     $("#bar").innerHTML = `<a class="brand" href="#/"><span class="mark">${SUBJECT_ICON[c.key]}</span><span><b>${c.subject}</b><small>GCSE Quest</small></span></a><nav aria-label="Sections">` +
-      nav.map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
+      nav.filter(function (n) { return n[2] !== "labs" || G.labs.length; }).map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
       `</nav><div class="sidefoot"><a class="sidelink" href="index.html">${ic("back")}All subjects</a></div>`;
     refreshTop(); window.scrollTo(0, 0);
   }
@@ -252,7 +254,7 @@
 
   /* ---------- resource links ---------- */
   function linksFor(l) {
-    var sub = G.cfg.subject, q = "GCSE " + sub + " " + l.t, enc = encodeURIComponent, ch = G.cfg.key === "maths" ? "Corbettmaths" : "Free Science Lessons";
+    var sub = G.cfg.subject, q = "GCSE " + sub + " " + l.t, enc = encodeURIComponent, ch = G.cfg.channel || (G.cfg.key === "maths" ? "Corbettmaths" : "Free Science Lessons");
     return [
       { k: "video", t: "Watch videos on YouTube", d: "Search: " + q, u: "https://www.youtube.com/results?search_query=" + enc(q) },
       { k: "video", t: ch, d: "Popular free GCSE channel: " + l.t, u: "https://www.youtube.com/results?search_query=" + enc(ch + " " + l.t) },
@@ -668,17 +670,17 @@
       var found = 0, tot = 0; body = vTopics().map(function (t) { return `<h2 class="sec">${t.name}</h2><div class="album">${vLevels(t).map(function (l) { tot++; var has = p.read[l.id]; if (has) found++; return has ? `<div class="sticker"><b>${l.t}</b><span>${l.k}</span></div>` : `<a class="sticker locked" href="#/l/${l.id}"><b>${l.t}</b><span>Complete the lesson to unlock</span></a>`; }).join("")}</div>`; }).join("");
       body = `<p class="muted" style="margin-bottom:6px">Unlocked: ${found} of ${tot}</p>` + body;
     } else {
-      var spec = c.key === "maths" ? "https://www.aqa.org.uk/subjects/mathematics/gcse/mathematics-8300" : "https://www.aqa.org.uk/subjects/science/gcse/" + c.key + "-" + { physics: "8463", chemistry: "8462", biology: "8461" }[c.key];
-      var L = [{ k: "globe", t: "AQA specification and past papers", d: "Official exam board pages", u: spec }, { k: "link", t: "BBC Bitesize: GCSE " + c.subject, d: "Revision notes, videos and quizzes", u: "https://www.bbc.co.uk/bitesize/search?q=" + encodeURIComponent("GCSE " + c.subject) }, { k: "video", t: "YouTube: " + (c.key === "maths" ? "Corbettmaths" : "Free Science Lessons"), d: "Popular free GCSE video channel", u: "https://www.youtube.com/results?search_query=" + encodeURIComponent((c.key === "maths" ? "Corbettmaths" : "Free Science Lessons") + " GCSE") }, { k: "globe", t: "Seneca Learning", d: "Free GCSE courses", u: "https://senecalearning.com/en-GB/" }, { k: "globe", t: "Physics and Maths Tutor", d: "Free past papers and topic questions", u: "https://www.physicsandmathstutor.com/" }];
+      var spec = c.specUrl ? c.specUrl : c.key === "maths" ? "https://www.aqa.org.uk/subjects/mathematics/gcse/mathematics-8300" : "https://www.aqa.org.uk/subjects/science/gcse/" + c.key + "-" + { physics: "8463", chemistry: "8462", biology: "8461" }[c.key];
+      var L = [{ k: "globe", t: "AQA specification and past papers", d: "Official exam board pages", u: spec }, { k: "link", t: "BBC Bitesize: GCSE " + c.subject, d: "Revision notes, videos and quizzes", u: "https://www.bbc.co.uk/bitesize/search?q=" + encodeURIComponent("GCSE " + c.subject) }, { k: "video", t: "YouTube: " + (c.channel || (c.key === "maths" ? "Corbettmaths" : "Free Science Lessons")), d: "Popular free GCSE video channel", u: "https://www.youtube.com/results?search_query=" + encodeURIComponent((c.channel || (c.key === "maths" ? "Corbettmaths" : "Free Science Lessons")) + " GCSE") }, { k: "globe", t: "Seneca Learning", d: "Free GCSE courses", u: "https://senecalearning.com/en-GB/" }, { k: "globe", t: "Physics and Maths Tutor", d: "Free past papers and topic questions", u: "https://www.physicsandmathstutor.com/" }];
       body = `<div class="links">${L.map(function (x) { return `<a class="linkcard" href="${x.u}" target="_blank" rel="noopener noreferrer"><span class="li">${ic(x.k)}</span><span><b>${x.t}</b><small>${x.d}</small></span><span class="ext">${ic("arrow")}</span></a>`; }).join("")}</div><p class="muted sm" style="margin-top:10px">Links open external sites in a new tab and need an internet connection. Check which exam board and tier you are sitting.</p>`;
     }
     app.innerHTML = pageHead(null, "Toolkit", "") + `<div class="tabs" role="tablist">${[["sheet", c.sheetName], ["hooks", "Memory hooks"], ["links", "Links and past papers"]].map(function (x) { return `<a role="tab" aria-selected="${tab === x[0]}" class="tab ${tab === x[0] ? "on" : ""}" href="#/toolkit/${x[0]}">${x[1]}</a>`; }).join("")}</div>` + body;
   }
   function viewSettings() {
     shell("settings");
-    var st = S.settings, sci = G.cfg.key !== "maths", radio = function (name, val, text) { return `<label class="radio"><input type="radio" name="${name}" value="${val}" ${String(st[name]) === String(val) ? "checked" : ""}> <span>${text}</span></label>`; };
+    var st = S.settings, sci = sciCourse(), radio = function (name, val, text) { return `<label class="radio"><input type="radio" name="${name}" value="${val}" ${String(st[name]) === String(val) ? "checked" : ""}> <span>${text}</span></label>`; };
     app.innerHTML = pageHead(null, "Settings", "Settings apply to every subject.") + `<div style="max-width:720px">
-      <fieldset><legend>Exam tier</legend>${radio("tier", "H", "Higher (grades 4 to 9): shows everything")}${radio("tier", "F", "Foundation (grades 1 to 5): hides Higher-only units")}</fieldset>
+      ${tiered() ? `<fieldset><legend>Exam tier</legend>${radio("tier", "H", "Higher (grades 4 to 9): shows everything")}${radio("tier", "F", "Foundation (grades 1 to 5): hides Higher-only units")}</fieldset>` : ""}
       ${sci ? `<fieldset><legend>Science course</legend>${radio("course", "S", "Separate science (Biology, Chemistry and Physics GCSEs)")}${radio("course", "C", "Combined Science: hides separate-only units")}</fieldset>` : ""}
       <fieldset><legend>Appearance</legend>${radio("theme", "auto", "Match my device")}${radio("theme", "dark", "Dark")}${radio("theme", "light", "Light")}</fieldset>
       <fieldset><legend>Study plan</legend><div class="row"><label for="goal" style="font-weight:700">Daily goal</label><select id="goal" class="field">${[50, 100, 200, 300, 500].map(function (g) { return `<option value="${g}"${st.goal === g ? " selected" : ""}>${g} ${UNIT}</option>`; }).join("")}</select><label for="exam" style="font-weight:700;margin-left:12px">First exam date</label><input type="date" id="exam" class="field" style="font-size:15px;width:auto" value="${st.examDate || ""}"></div></fieldset>
