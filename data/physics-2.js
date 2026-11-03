@@ -201,7 +201,7 @@ GAME.topic("Magnet Moon", "🧲", "Paper 2", [
       ["t", "A wire parallel to the field feels the biggest force.", false, "Force is greatest at right angles, and zero when parallel."]] },
 
 { t: "Electric motors", r: "4.7.2.3", h: 1, icon: "⚙️",
-  c: ["A coil in a magnetic field has forces on opposite sides, pushing in opposite directions. It rotates!", "A split-ring commutator swaps the current every half turn, so it keeps spinning the same way.", "Speed it up: more current, stronger magnet, more turns on the coil.", "Motors are everywhere: fans, washing machines, drills and toys."],
+  c: ["A coil in a magnetic field has forces on opposite sides, pushing in opposite directions. It rotates!", "A split-ring commutator swaps the current every half turn, so it keeps spinning the same way.", "Speed it up: more current, stronger magnet, more turns on the coil.", "I've got dozens. Lovely little whirrs."],
   k: "Split ring swaps the current to Keep it spinning.",
   q: [["m", "What does the split-ring commutator do?", "Reverses the current every half turn", "Stores energy", "Increases voltage", "Turns off the magnet", "This keeps the rotation in the same direction."],
       ["s", "What makes a motor spin faster?", { "Faster": ["More current", "Stronger magnet", "More turns"], "No change": ["Changing the colour", "Using a thicker casing"] }],

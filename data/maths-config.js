@@ -1,18 +1,21 @@
 (function () {
 var G = GAME;
 G.configure({
-  key: "maths", subject: "Maths", spec: "AQA 8300 · Papers 1 to 3", title: "Maths course",
-  intro: "Every topic on the AQA GCSE Maths specification, taught in short lessons and practised with exam-style questions. Work through the units, then test yourself under timed conditions.",
-  finalName: "Final assessment", sheetName: "Formula sheet", sheetNote: "In the summer 2027 exams a full formula sheet comes with every paper, and AQA says the arrangement carries on from 2028 for the life of this course. You still have to know how to use each one. Check your own board's latest notice.",
-  labsIntro: "Drag the sliders and watch the mathematics respond. Reach each target to earn XP.",
-  topics: {
-    "Number Sea": ["Number", "Negatives, BIDMAS, primes, powers, fractions, surds, standard form, rounding and bounds."],
-    "Algebra Archipelago": ["Algebra", "Expressions, equations, quadratics, simultaneous equations, inequalities, graphs and sequences."],
-    "Ratio Reef": ["Ratio, proportion and rates of change", "Ratio, percentages, compound measures, proportion, growth and decay."],
-    "Geometry Gulf": ["Geometry and measures", "Angles, shapes, circles, trigonometry, vectors, transformations and 3D problems."],
-    "Probability Point": ["Probability", "Single and combined events, Venn and tree diagrams, conditional probability."],
-    "Statistics Strait": ["Statistics", "Sampling, averages, charts, cumulative frequency, histograms and scatter graphs."]
-  }
+  key: "maths", subject: "Maths", title: "The Pi-rate Voyage", unit: "doubloons",
+  intro: "Captain Pi and Polly Nomial are sailing for the lost treasure of full marks. Beat each sea to chart your way through the whole AQA course.",
+  a: { char: "pi", name: "Captain Pi" }, b: { char: "polly", name: "Polly Nomial" },
+  decor: ["⛵", "🐙", "🏝️", "🦈", "🗺️", "⚓", "🐚"],
+  monsters: ["Salty Sum Crab", "Fraction Eel", "Bracket Barnacle", "Decimal Dolphin", "Sly Surd Squid", "Rounding Ray", "Negative Newtfish", "Graph Grouper"],
+  monsterColours: ["#ff6b4a", "#7b5cff", "#21b6a8", "#ffb02e", "#e8476a", "#3fa7ff"],
+  bossNames: ["The Kraken", "The Ghost Ship", "Blackbeard's Bones", "The Maelstrom"],
+  pows: ["Boom!", "Kaboom!", "Yarr!", "Bullseye!", "Splash!"],
+  cheers: ["Shiver me timbers!", "Aye, that's right!", "Treasure found!", "Spot on, sailor!", "Well navigated!"],
+  wins: ["Victory on the high seas!", "The crew cheers!", "Another chest of gold!"],
+  ranks: [["Deckhand", 0], ["Cabin Boffin", 800], ["Navigator", 2500], ["First Mate", 6000], ["Captain", 12000], ["Admiral of Algebra", 22000]],
+  arcade: { name: "Cannon Bay", sprite: "🚢", dir: "left", speed: 60, blurb: "Answer ships are sailing across the bay. Sink the one carrying the right answer." },
+  finalName: "Lost Treasure final battle", sheetName: "Formula sheet",
+  sheetNote: "In the summer 2027 exams a full formula sheet comes with every paper, and AQA says the arrangement carries on from 2028 for the life of this course. You still have to know how to use each one. Check your own board's latest notice.",
+  labsIntro: "Drag the sliders, watch the maths move, then hit the target to win doubloons."
 });
 
 G.sheet = [

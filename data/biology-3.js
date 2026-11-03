@@ -88,7 +88,7 @@ GAME.topic("Inheritance Isles", "🧬", "Paper 2", [
       ["t", "Cloning reduces genetic variation.", true, "So disease can more easily wipe out a population."]] },
 
 { t: "Darwin, Wallace, Mendel and speciation", r: "4.6.3.1 to 4.6.3.3", s: 1, icon: "🐦",
-  c: ["Charles Darwin saw variation on the Galápagos, and proposed natural selection. People were slow to accept it, for lack of evidence and religious reasons.", "Lamarck thought changes made during life were passed on. That's been rejected.", "Wallace also worked on it, and on speciation: populations separate, change differently, then can't interbreed.", "And Mendel crossed pea plants to find 'units' of inheritance. Decades later we knew them as genes!"],
+  c: ["Hi, it's my favourite. Charles Darwin saw variation on the Galápagos, and proposed natural selection. People were slow to accept it, for lack of evidence and religious reasons.", "Lamarck thought changes made during life were passed on. That's been rejected.", "Wallace also worked on it, and on speciation: populations separate, change differently, then can't interbreed.", "And Mendel crossed pea plants to find 'units' of inheritance. Decades later we knew them as genes!"],
   k: "Darwin: selection. Lamarck: wrong. Mendel: peas, ratios. Wallace: speciation.",
   q: [["p", "Match the scientist.", [["Darwin", "Natural selection"], ["Lamarck", "Inherited acquired traits"], ["Mendel", "Peas and inheritance"], ["Wallace", "Speciation and warning colours"]]],
       ["o", "Order speciation.", ["A population is separated", "Different conditions select different alleles", "Populations change", "They can no longer interbreed"]],

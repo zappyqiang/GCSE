@@ -1,19 +1,21 @@
 (function () {
 var G = GAME;
 G.configure({
-  key: "biology", subject: "Biology", spec: "AQA 8461 · Papers 1 and 2", title: "Biology course",
-  intro: "The full AQA GCSE Biology specification in short lessons, with exam-style questions, practical skills and interactive labs.",
-  finalName: "Final assessment", sheetName: "Biology toolkit", sheetNote: "Biology papers don't come with an equation sheet, so learn these calculations and test results.",
-  labsIntro: "Virtual practicals for the skills and ideas that are hard to picture. Complete each task to earn XP.",
-  topics: {
-    "Cell City": ["Cell biology", "Cell structure, microscopy, mitosis, stem cells, and transport in and out of cells."],
-    "Organ Outback": ["Organisation", "Digestion, the heart and blood, non-communicable disease, and plant tissues."],
-    "Infection Island": ["Infection and response", "Pathogens, defences, vaccination, antibiotics and drug development."],
-    "Energy Jungle": ["Bioenergetics", "Photosynthesis, respiration, metabolism and the response to exercise."],
-    "Control Canyon": ["Homeostasis and response", "The nervous and endocrine systems, hormones, and keeping the body stable."],
-    "Inheritance Isles": ["Inheritance, variation and evolution", "DNA, genetics, evolution, selective breeding, genetic engineering and classification."],
-    "Ecosystem Everglades": ["Ecology", "Communities, adaptations, cycles, biodiversity and human impact."]
-  }
+  key: "biology", subject: "Biology", title: "Cell City Safari", unit: "ATP",
+  intro: "Mitch the mitochondrion and explorer Dr Finch are on safari from the tiniest cell to the wildest ecosystem. Track down every creature of knowledge on the AQA course.",
+  a: { char: "finch", name: "Dr Finch" }, b: { char: "mitch", name: "Mitch" },
+  decor: ["🦋", "🌿", "🦎", "🍄", "🐝", "🌺", "🐸"],
+  monsters: ["Pathogen Pete", "Sneezy Virus", "Mould Monster", "Salmonella Sid", "Toxic Tick", "Malaria Mosquito", "Plaque Beast", "Greedy Weed"],
+  monsterColours: ["#e8476a", "#ffb627", "#7b5cff", "#21b6a8", "#ff7a3d", "#c4d82e"],
+  bossNames: ["The Super Bug", "The Jungle King", "The Mega Mutant", "The Great Plague"],
+  pows: ["Zapped!", "Splat!", "Chomp!", "Immune!", "Squish!"],
+  cheers: ["Evolving nicely!", "Natural talent!", "Full of energy!", "Nailed it!", "Top of the food chain!"],
+  wins: ["Expedition complete!", "New species discovered!", "Mitochondria fully charged!"],
+  ranks: [["Single Cell", 0], ["Tissue", 800], ["Organ", 2500], ["Organ System", 6000], ["Organism", 11000], ["Apex Predator", 20000]],
+  arcade: { name: "Germ Zapper", sprite: "🦠", dir: "down", speed: 40, blurb: "Germs are raining down with answers on them. Zap the one with the right answer before it lands." },
+  finalName: "Final expedition", sheetName: "Biology toolkit",
+  sheetNote: "Biology papers don't come with an equation sheet, so learn these calculations and test results.",
+  labsIntro: "Grab your microscope. Try each lab's mission to earn ATP."
 });
 G.sheet = [
   { h: "Calculations", rows: [

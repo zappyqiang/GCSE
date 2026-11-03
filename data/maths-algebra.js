@@ -3,7 +3,7 @@ var ri = GAME.ri, pick = GAME.pick, gcd = GAME.gcd;
 function sg(n) { return n < 0 ? "− " + (-n) : "+ " + n; }
 GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
 { t: "Algebra language", r: "A1, A3", icon: "🔤",
-  c: ["A letter is just a number we don't know yet, or one that can change. 3x means 3 lots of x.", "And I can only add matching terms?", "Yes: 2a + 3b + 4a = 6a + 3b. Apples stay with apples.", "An expression has no equals, an equation has an equals to solve, a formula links things, and an identity is always true (≡)!"],
+  c: ["A letter is just a hidden number, like treasure in a chest. 3x means 3 lots of x.", "And I can only add matching terms?", "Aye: 2a + 3b + 4a = 6a + 3b. Apples stay with apples.", "An expression has no equals, an equation has an equals to solve, a formula links things, and an identity is always true (≡)!"],
   k: "Like terms have matching letters AND powers. x and x² do not mix.",
   q: [function () { var a = ri(2, 7), b = ri(2, 7), c = ri(2, 5); return ["m", "Simplify " + a + "x + " + c + "y + " + b + "x.", (a + b) + "x + " + c + "y", (a + b + c) + "xy", (a * b) + "x + " + c + "y", (a + b) + "x² + " + c + "y", "Collect the x terms."]; },
       ["p", "Match each word to its example.", [["Expression", "3x + 2"], ["Equation", "3x + 2 = 11"], ["Formula", "A = lw"], ["Identity", "2(x + 1) ≡ 2x + 2"]]],
@@ -11,14 +11,14 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["m", "Simplify 3a × 4b.", "12ab", "7ab", "12a + b", "34ab", "Multiply numbers, write letters together."]] },
 
 { t: "Substitution", r: "A2", icon: "🧩",
-  c: ["Replace the letter with its number, then follow BIDMAS.", "What if x = −3 and it says x²?", "Brackets, always! (−3)² = 9. A positive!", "Good. Always use brackets when substituting negative numbers."],
+  c: ["Replace the letter with its number, then follow BIDMAS.", "What if x = −3 and it says x²?", "Brackets, always! (−3)² = 9. A positive!", "My beak hurts, but I'll use brackets."],
   k: "Put negatives in brackets when you substitute. It stops the sign walking the plank.",
   q: [function () { var a = ri(2, 7), x = ri(2, 6), b = ri(1, 9); return ["n", "Find " + a + "x + " + b + " when x = " + x + ".", a * x + b, "", "Multiply first, then add."]; },
       function () { var x = ri(-5, -2), b = ri(1, 9); return ["n", "Find x² + " + b + " when x = −" + (-x) + ".", x * x + b, "", "(−" + (-x) + ")² is positive."]; },
       function () { var u = ri(2, 9), a = ri(2, 5), t = ri(2, 6); return ["n", "v = u + at. Find v when u = " + u + ", a = " + a + ", t = " + t + ".", u + a * t, "", "Multiply a and t, then add u."]; }] },
 
 { t: "Expanding and factorising", r: "A4", icon: "🎁",
-  c: ["Expanding means multiplying out the bracket: 3(x + 4) = 3x + 12.", "And factorising puts it back in?", "Yes! Find the biggest thing that goes into every term: 6x + 9 = 3(2x + 3).", "Check by expanding it back. Pirates always double-check their maps."],
+  c: ["Expanding means multiplying out the bracket: 3(x + 4) = 3x + 12.", "And factorising puts it back in?", "Aye! Find the biggest thing that goes into every term: 6x + 9 = 3(2x + 3).", "Check by expanding it back. Pirates always double-check their maps."],
   k: "Factorising is the reverse of expanding. Take out the HCF, including letters.",
   q: [function () { var a = ri(2, 7), b = ri(2, 9); return ["m", "Expand " + a + "(x + " + b + ").", a + "x + " + a * b, a + "x + " + b, "x + " + a * b, (a + b) + "x", "Multiply both terms by " + a + "."]; },
       ["m", "Factorise fully 12x² + 8x.", "4x(3x + 2)", "4(3x² + 2x)", "2x(6x + 4)", "12x(x + 8)", "4x is the highest common factor."],
@@ -42,7 +42,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["m", "Factorise 4x² − 25.", "(2x + 5)(2x − 5)", "(4x + 5)(x − 5)", "(2x − 5)²", "4(x² − 25)", "Both are square terms."]] },
 
 { t: "Algebraic fractions", r: "A4, A5", h: 1, icon: "🍰",
-  c: ["Algebraic fractions work like normal ones. Factorise first, then cancel whole brackets.", "So x²−9 over x+3 becomes x−3!", "Yes. To add, use a common denominator, often multiply the two bottoms.", "Never cancel single terms from a sum. That's how ships sink."],
+  c: ["Algebraic fractions work like normal ones. Factorise first, then cancel whole brackets.", "So x²−9 over x+3 becomes x−3!", "Aye. To add, use a common denominator, often multiply the two bottoms.", "Never cancel single terms from a sum. That's how ships sink."],
   k: "Factorise before you cancel. You can only cancel what's multiplied, never what's added.",
   q: [["m", "Simplify (x² + 5x + 6) ÷ (x + 2).", "x + 3", "x + 2", "x² + 3", "5x + 3", "Factorise the top: (x + 2)(x + 3)."],
       ["m", "Write 1/x + 1/(x + 1) as one fraction.", "(2x + 1) / (x(x + 1))", "2 / (2x + 1)", "1 / (x(x + 1))", "2 / (x(x + 1))", "(x + 1 + x) over x(x + 1)."],
@@ -57,7 +57,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["m", "Solve x/4 + 1 = 6.", "x = 20", "x = 28", "x = 5", "x = 8", "x/4 = 5, so x = 20."]] },
 
 { t: "Rearranging formulae", r: "A5", icon: "🔄",
-  c: ["To change the subject, treat the formula like an equation. Peel layers off the letter you want.", "Make r the subject of A = πr²: A/π = r², so r = √(A/π).", "If the new subject appears twice, collect them on one side and factorise. That's a Higher move.", "Peel back the operations one at a time, like layers of an onion."],
+  c: ["To change the subject, treat the formula like an equation. Peel layers off the letter you want.", "Make r the subject of A = πr²: A/π = r², so r = √(A/π).", "If the new subject appears twice, collect them on one side and factorise. That's a Higher move.", "Peel, peel, peel, like an onion. Why am I crying?"],
   k: "Undo in reverse BIDMAS order. Adding goes first, powers go last.",
   q: [["m", "Make x the subject of y = 3x − 5.", "x = (y + 5)/3", "x = 3y + 5", "x = (y − 5)/3", "x = y/3 + 5", "Add 5, then divide by 3."],
       ["m", "Make h the subject of V = lwh.", "h = V/(lw)", "h = Vlw", "h = V − lw", "h = lw/V", "Divide by l and w."],
@@ -65,7 +65,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["m", "Make x the subject of ax + b = cx + d.", "x = (d − b)/(a − c)", "x = (d + b)/(a + c)", "x = (b − d)/(a − c)", "x = d − b − a + c", "Collect x terms, factorise, divide."]] },
 
 { t: "Forming equations", r: "A21", icon: "📝",
-  c: ["Worded puzzles become easy once you name the unknown x.", "So 'Think of a number, double it, add 3, get 17' is 2x + 3 = 17.", "Yes! Perimeters and ages are favourite traps. Write the equation, solve it, then answer the actual question.", "And use the units in the final answer."],
+  c: ["Worded puzzles become easy once you name the unknown x.", "So 'Think of a number, double it, add 3, get 17' is 2x + 3 = 17.", "Aye! Perimeters and ages are favourite traps. Write the equation, solve it, then answer the actual question.", "And use the units in the final answer. Squawk!"],
   k: "Words to algebra: 'is' becomes =, 'more than' becomes +, 'times' multiplies.",
   q: [function () { var x = ri(3, 12), a = ri(2, 5), b = ri(1, 9); return ["n", "I think of a number, multiply by " + a + " and add " + b + ". The answer is " + (a * x + b) + ". What was the number?", x, "", "Solve " + a + "x + " + b + " = " + (a * x + b) + "."]; },
       function () { var x = ri(3, 9); return ["n", "A rectangle is x cm wide and (x + 2) cm long. The perimeter is " + (4 * x + 4) + " cm. Find x.", x, "cm", "2x + 2(x + 2) = 4x + 4."]; },
@@ -88,7 +88,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["m", "The discriminant b² − 4ac of x² + 2x + 5 is −16. How many real solutions are there?", "None", "One", "Two", "Sixteen", "You can't square root a negative."]] },
 
 { t: "Simultaneous equations", r: "A19", icon: "🔀",
-  c: ["Two equations and two mysteries. Make one letter's numbers match, then eliminate it.", "Same Signs Subtract, Different signs Add!", "Find one letter, put it back to find the other. Graphically, it's where the two lines cross.", "Check in the other equation. Always do this to catch mistakes."],
+  c: ["Two equations and two mysteries. Make one letter's numbers match, then eliminate it.", "Same Signs Subtract, Different signs Add!", "Find one letter, put it back to find the other. Graphically, it's where the two lines cross.", "Check in the other equation. I always do. I'm a very careful parrot."],
   k: "SSS: Same Signs Subtract. Otherwise add.",
   q: [function () { var x = ri(1, 6), y = ri(1, 6); return ["n", "x + y = " + (x + y) + " and x − y = " + (x - y) + ". Find x.", x, "", "Add the equations: 2x = " + 2 * x + "."]; },
       function () { var x = ri(1, 5), y = ri(1, 5); return ["n", "2x + y = " + (2 * x + y) + " and x + y = " + (x + y) + ". Find x.", x, "", "Subtract the equations."]; },
@@ -103,7 +103,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["t", "A line and a circle can meet at 2 points, 1 point or not at all.", true, "One point means the line is a tangent."]] },
 
 { t: "Inequalities", r: "A22", icon: "⚔️",
-  c: ["Inequalities show ranges: > greater than, ≥ greater or equal. Solve them like equations.", "Any catch?", "Yes! Multiply or divide by a negative and you must flip the sign.", "On number lines, open circle for < or >, filled circle for ≤ or ≥. Filled means 'included'."],
+  c: ["Inequalities show ranges: > greater than, ≥ greater or equal. Solve them like equations.", "Any catch?", "Aye! Multiply or divide by a negative and you must flip the sign.", "On number lines, open circle for < or >, filled circle for ≤ or ≥. Filled means 'included'."],
   k: "Times by a negative? Flip the sign. Filled circle: fully included.",
   q: [function () { var x = ri(2, 9), a = ri(2, 5), b = ri(1, 9); return ["m", "Solve " + a + "x + " + b + " > " + (a * x + b) + ".", "x > " + x, "x < " + x, "x > " + (x + b), "x = " + x, "Subtract " + b + ", divide by " + a + "."]; },
       ["m", "Solve −2x ≤ 8.", "x ≥ −4", "x ≤ −4", "x ≥ 4", "x ≤ 4", "Dividing by −2 flips the sign."],
@@ -126,7 +126,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       function () { var a = pick([1, 2, 3]), r = pick([2, 3]); return ["n", "What's the next term? " + [a, a * r, a * r * r, a * r * r * r].join(", ") + ", ...", a * Math.pow(r, 4), "", "Keep multiplying by " + r + "."]; }] },
 
 { t: "nth term of linear sequences", r: "A25", icon: "🔮",
-  c: ["The nth term lets you jump to any term. Find the common difference: that's the number in front of n.", "So 5, 8, 11 has difference 3, so 3n. Then fix it: 3n + 2.", "To check if a number is in the sequence, set the rule equal to it. If n is a whole number, it's in!", "So I can find the 100th term without writing out 100 terms."],
+  c: ["The nth term lets you jump to any term. Find the common difference: that's the number in front of n.", "So 5, 8, 11 has difference 3, so 3n. Then fix it: 3n + 2.", "To check if a number is in the sequence, set the rule equal to it. If n is a whole number, it's in!", "So I can find the 100th term without flapping 100 times."],
   k: "The gap goes in front of n. Then ask what fixes the first term.",
   q: [function () { var d = ri(2, 9), c = pick([-3, -2, -1, 1, 2, 3, 4, 5, 6, 7]); var s = [1, 2, 3, 4].map(function (n) { return d * n + c; }); return ["m", "Find the nth term of " + s.join(", ") + ", ...", d + "n " + sg(c), (d + 1) + "n " + sg(c), "n " + sg(d + c), d + "n " + sg(c + 1), "The gap is " + d + "."]; },
       function () { var d = ri(2, 9), c = ri(1, 9), n = ri(20, 60); return ["n", "A sequence has nth term " + d + "n + " + c + ". What is term " + n + "?", d * n + c, "", "Substitute n = " + n + "."]; },
@@ -148,7 +148,7 @@ GAME.topic("Algebra Archipelago", "🏝️", "All three papers", [
       ["m", "A line has gradient 2. What is the gradient of a line perpendicular to it? (Higher)", "−½", "½", "−2", "2", "Flip and change the sign."]] },
 
 { t: "Quadratic, cubic and reciprocal graphs", r: "A11, A12", icon: "🎢",
-  c: ["Know each shape by sight. Quadratics make a U, or an upside-down U if x² is negative.", "Cubics make an S-bend. Reciprocals like y = 1/x make two curves that never touch the axes.", "Those untouched lines are called asymptotes.", "A fancy word, but easy to remember: a reciprocal is 1 divided by the number."],
+  c: ["Know each shape by sight. Quadratics make a U, or an upside-down U if x² is negative.", "Cubics make an S-bend. Reciprocals like y = 1/x make two curves that never touch the axes.", "Those untouched lines are called asymptotes.", "Fancy word! I'll use it at dinner."],
   k: "x²: smile. −x²: frown. x³: wiggle. 1/x: two swooshes that dodge the axes.",
   q: [["p", "Match equation to shape.", [["y = x²", "U-shaped"], ["y = −x²", "Upside-down U"], ["y = x³", "S-shaped curve"], ["y = 1/x", "Two separate curves"]]],
       ["t", "A quadratic graph has one line of symmetry.", true, "It runs vertically through the turning point."],

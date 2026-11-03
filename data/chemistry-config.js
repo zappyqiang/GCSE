@@ -1,22 +1,21 @@
 (function () {
 var G = GAME;
 G.configure({
-  key: "chemistry", subject: "Chemistry", spec: "AQA 8462 · Papers 1 and 2", title: "Chemistry course",
-  intro: "The full AQA GCSE Chemistry specification in short lessons, with exam-style questions, a toolkit of key calculations and interactive labs.",
-  finalName: "Final assessment", sheetName: "Chemistry toolkit", sheetNote: "Chemistry papers come with a periodic table. Unlike Physics, equations here are not on a sheet, so these are worth learning. Check your board's latest notice.",
-  labsIntro: "Safe virtual experiments for the practical skills and ideas that are hard to picture. Reach each target to earn XP.",
-  topics: {
-    "Atom Attic": ["Atomic structure and the periodic table", "Atoms, isotopes, electronic structure, and the properties of groups 0, 1 and 7."],
-    "Bonding Ballroom": ["Bonding, structure and properties", "Ionic, covalent and metallic bonding, states of matter, carbon and nanoparticles."],
-    "Quantity Quarters": ["Quantitative chemistry", "Mr, moles, reacting masses, concentration, yield and atom economy."],
-    "Reaction Rooftop": ["Chemical changes", "Reactivity, extraction, acids and salts, pH, titrations and electrolysis."],
-    "Heat Hall": ["Energy changes", "Exothermic and endothermic reactions, reaction profiles, bond energies, cells and fuel cells."],
-    "Speedy Science Lab": ["Rate and extent of change", "Rates, collision theory, catalysts, reversible reactions and equilibrium."],
-    "Organic Orchard": ["Organic chemistry", "Crude oil, alkanes, alkenes, alcohols, carboxylic acids and polymers."],
-    "Detective Dungeon": ["Chemical analysis", "Purity, chromatography, gas and ion tests, and instrumental methods."],
-    "Sky Tower": ["Chemistry of the atmosphere", "Evolution of the atmosphere, greenhouse gases, climate change and pollutants."],
-    "Resource Rooftop": ["Using resources", "Sustainability, water, life cycle assessment, corrosion, materials and the Haber process."]
-  }
+  key: "chemistry", subject: "Chemistry", title: "Potion Academy", unit: "crystals",
+  intro: "Professor Mole runs the strangest school in the kingdom, and Ion is his most positive pupil. Clear every classroom to graduate in AQA Chemistry.",
+  a: { char: "mole", name: "Prof. Mole" }, b: { char: "ion", name: "Ion" },
+  decor: ["🧪", "⚗️", "🔥", "🧫", "🧯", "🫧", "🕯️"],
+  monsters: ["Sludge Golem", "Rust Ghoul", "Acid Imp", "Fume Fiend", "Crude Oil Ogre", "Precipitate Pest", "Slag Slug", "Catalyst Cat"],
+  monsterColours: ["#b8f03c", "#ff5da2", "#ffb627", "#29e7cd", "#ff7a3d", "#9b5cff"],
+  bossNames: ["The Bubbling Cauldron", "The Headmaster", "The Philosopher's Stone", "The Great Reactor"],
+  pows: ["Fizz!", "Bang!", "Pop!", "Whoosh!", "Sizzle!"],
+  cheers: ["Top of the class!", "Perfectly balanced!", "Positive result!", "Brilliant bonding!", "Pure gold!"],
+  wins: ["Potion perfected!", "Class dismissed!", "A flask of crystals for you!"],
+  ranks: [["New Apprentice", 0], ["Beaker Washer", 800], ["Potion Brewer", 2500], ["Lab Prefect", 6000], ["Master Alchemist", 12000], ["Grand Chemist", 21000]],
+  arcade: { name: "Bubble Flask", sprite: "🫧", dir: "up", speed: 42, blurb: "Answer bubbles rise through the flask. Pop the right bubble before it floats away." },
+  finalName: "Final examination", sheetName: "Chemistry toolkit",
+  sheetNote: "Chemistry papers come with a periodic table. Unlike Physics, equations here are not on a sheet, so these are worth learning. Check your board's latest notice.",
+  labsIntro: "Safety goggles on. Investigate, identify and earn crystals. No real explosions."
 });
 G.sheet = [
   { h: "Calculations", rows: [
