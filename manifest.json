@@ -1,0 +1,10 @@
+{
+  "name": "GCSE Quest",
+  "short_name": "GCSE Quest",
+  "description": "Game-based GCSE revision for Maths, Physics, Chemistry and Biology.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0e1128",
+  "theme_color": "#0e1128",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
