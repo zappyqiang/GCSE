@@ -24,6 +24,7 @@
 
   /* interface icons */
   window.ICON = {
+    map: base('<circle cx="12" cy="12" r="2.6"/><circle cx="4.5" cy="5" r="1.8"/><circle cx="19.5" cy="5" r="1.8"/><circle cx="4.5" cy="19" r="1.8"/><circle cx="19.5" cy="19" r="1.8"/><path d="M10 10 5.8 6.3M14 10l4.2-3.7M10 14l-4.2 3.7M14 14l4.2 3.7"/>'),
     dash: base('<rect x="3.5" y="3.5" width="7" height="8" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="5" rx="1.5"/><rect x="13.5" y="11.5" width="7" height="9" rx="1.5"/><rect x="3.5" y="14.5" width="7" height="6" rx="1.5"/>'),
     mock: base('<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6M9 12h6M9 15.5h3"/>'),
     speed: base('<path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/>'),

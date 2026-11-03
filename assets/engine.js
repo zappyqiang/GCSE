@@ -187,7 +187,7 @@
       <a class="avatar" href="#/locker" aria-label="Level ${L.i + 1}, ${L.cur.n}. Customise your buddy">${M("idle", 46)}<span class="lvbadge">${L.i + 1}</span></a>`;
   }
   function shell(active) {
-    var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/practice", "Practice", "mock", "target"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
+    var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/map", "Mind map", "map", "map"], ["#/practice", "Practice", "mock", "target"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
     $("#bar").innerHTML = `<a class="brand" href="#/"><span class="mark">${SUBJECT_ICON[c.key]}</span><span><b>${c.subject}</b><small>GCSE Quest</small></span></a><nav aria-label="Sections">` +
       nav.filter(function (n) { return n[2] !== "labs" || G.labs.length; }).map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
       `</nav><div class="sidefoot"><a class="sidelink" href="index.html">${ic("back")}All subjects</a></div>`;
@@ -614,6 +614,20 @@
   }
 
   /* ---------- progress ---------- */
+  function viewMap() {
+    shell("map");
+    var p = P(), c = G.cfg, ts = vTopics(), showK = false;
+    var all = allV(), done = all.filter(function (l) { return p.stars[l.id] === 3; }).length;
+    var branches = ts.map(function (t, ti) {
+      var s = topicStats(t), ls = vLevels(t);
+      return `<section class="mm-br" style="--bc:var(--c${ti % 4 + 1})"><a class="mm-h" href="#/t/${t.id}"><span class="mm-ic">${t.icon}</span><span><b>${t.name}</b><small>${ls.length} units · ${Math.round(s.mastery)}% mastery${t.paper ? " · " + t.paper : ""}</small></span></a><ul>` +
+        ls.map(function (l) { var st = p.stars[l.id] || 0; return `<li><a class="mm-leaf m${st}" href="#/l/${l.id}" title="${esc(l.k || "")}"><i></i><span>${l.t}${G.explainers[slug(l.t)] ? ' <em>animated</em>' : ""}</span></a>${l.k ? `<p class="mm-k">${l.k}</p>` : ""}</li>`; }).join("") + "</ul></section>";
+    }).join("");
+    app.innerHTML = pageHead(null, "Mind map", "The whole " + c.subject + " course on one page: every topic and unit. Tap a unit to learn it. Colours show your mastery.") +
+      `<div class="row mm-tools"><button class="btn alt" id="mmk" aria-pressed="false">Show key ideas</button><span class="mm-leg"><i class="m0"></i>Not started <i class="m1"></i>Developing <i class="m2"></i>Secure <i class="m3"></i>Mastered</span></div>` +
+      `<div class="mm" id="mm"><div class="mm-root"><b>${c.subject}</b><small>${ts.length} topics · ${all.length} units · ${done} mastered</small></div><div class="mm-trunk"></div><div class="mm-branches">${branches}</div></div>`;
+    $("#mmk").onclick = function () { showK = !showK; $("#mm").classList.toggle("showk", showK); this.setAttribute("aria-pressed", showK); this.textContent = showK ? "Hide key ideas" : "Show key ideas"; };
+  }
   function viewProgress() {
     shell("progress");
     var p = P(), o = overall(), ts = vTopics(), ready = o.a >= 25 ? Math.round(o.acc * (.35 + .65 * o.coverage) * 100) : null;
@@ -704,6 +718,7 @@
     else if ((m = h.match(/^\/t\/(.+)/))) viewTopic(m[1]);
     else if ((m = h.match(/^\/l\/(.+)/))) viewLevel(m[1]);
     else if ((m = h.match(/^\/(?:test|boss)\/(.+)/))) viewTest(m[1]);
+    else if (h === "/map") viewMap();
     else if (h === "/final") viewFinal(); else if (h === "/daily") viewDaily();
     else if (h === "/review" || h === "/gym") viewGym();
     else if (h === "/speed" || h === "/arcade") viewSpeed();
