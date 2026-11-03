@@ -9,14 +9,21 @@ A game-based GCSE revision app for **14 subjects**: Maths, Physics, Chemistry, B
 - **Animated explainers**: 252 step-by-step animations (16 or more in every subject) and simulations for the ideas that are hard to picture (number lines, Pythagoras, circle theorems, circuits, half-life, waves, gas pressure, ionic bonding, electrolysis, osmosis, mitosis, the heart, natural selection and many more).
 - **Over 2,200 practice questions**, plus generated variants, in seven formats: multiple choice, true/false, calculations, typed answers, matching, sorting and ordering.
 - **Game features**: XP and levels, a study buddy (Nova) with colours and gear to unlock, daily quests, streaks, hearts, combos, boss battles, achievements and confetti.
+- **Written exams**: 101 exam-style written questions across all 14 subjects, each with a mark scheme to self-mark against, a model answer and an exam tip, plus timed written papers (about 1 minute per mark) that end with an indicative grade.
+- **Worked examples**: 48 step-by-step worked examples in each subject's Toolkit, revealed one step at a time.
 - **Exam skills**: timed mock exams with a graded report, coach mode, a speed round, spaced-repetition review of mistakes, a readiness estimate and a topic mastery table.
 - **Per-unit resources**: links to videos, BBC Bitesize and Seneca, plus AQA specification pages (see the note below).
 - **Toolkit**: formula and equation sheets, memory hooks, and interactive labs.
 - **Works offline** once opened (service worker), installable as an app on phones when served over HTTPS, dark and light themes, keyboard shortcuts (1 to 4), responsive layout.
 
+## Content still to do
+
+The written questions, model answers and notes were written without a subject-specialist review and must be checked against the current specifications before real use. Links in the Toolkit are top-level hub pages and could not be checked from the build environment. Only AQA specifications are mapped; other exam boards (Edexcel, OCR, WJEC and Eduqas) need their own content mapping.
+
 ## Adding a subject
 
 1. Copy any subject page (for example `history.html`), set `data-world` and the data script.
+2. Add `data/written-<subject>.js` (`GAME.exam` and `GAME.worked`) for written exam questions and worked examples.
 2. Write `data/<subject>.js` (and optionally `<subject>-2.js` for more units, `more-<subject>.js` for extra questions and `anim-<subject>.js` for animations; `GAME.more` accepts `"Topic::Unit"` keys when unit names repeat): `GAME.configure({... tiered: false})`, `GAME.sheet`, then `GAME.topic(name, icon, paper, [units])`. Units use the same question formats as the science subjects. Set `tiered: false` for subjects without Foundation and Higher tiers; omit labs if there are none.
 3. Add a colour theme in `assets/game.css`, an icon in `assets/icons.js`, an entry in `index.html` and `data/counts.js`, and list the files in `sw.js`.
 
