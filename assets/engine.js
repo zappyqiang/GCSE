@@ -718,7 +718,7 @@
   G.start = function () {
     /* merge the extra question banks into their units */
     var bySlug = {}; Object.keys(G.levels).forEach(function (k) { bySlug[slug(G.levels[k].t)] = G.levels[k]; });
-    G._more.forEach(function (o) { for (var title in o) { var l = bySlug[slug(title)]; if (!l) { console.warn("more(): no unit named", title); continue; } l.q = l.q.concat(o[title]); } });
+    G._more.forEach(function (o) { for (var title in o) { var l = title.indexOf("::") > -1 ? G.levels[slug(title.split("::")[0]) + "--" + slug(title.split("::")[1])] : bySlug[slug(title)]; if (!l) { console.warn("more(): no unit named", title); continue; } l.q = l.q.concat(o[title]); } });
     applyTheme(); document.body.dataset.world = G.cfg.key; document.title = G.cfg.subject + " | GCSE Quest";
     document.body.innerHTML = '<div class="shell"><aside class="sidebar" id="bar"></aside><main class="main"><div class="topbar" id="topbar"></div><div class="wrap" id="app"></div></main></div><div id="toasts" aria-live="polite"></div>';
     app = $("#app"); window.addEventListener("hashchange", route); route();
