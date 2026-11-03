@@ -18,12 +18,14 @@
   function save() { memStore = S; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   function applyTheme() { var r = document.documentElement; if (S.settings.theme === "light" || S.settings.theme === "dark") r.setAttribute("data-theme", S.settings.theme); else r.removeAttribute("data-theme"); }
 
-  var G = window.GAME = { topics: [], labs: [], diagrams: {}, sheet: [], cfg: null, levels: {}, explainers: {}, _more: [] };
+  var G = window.GAME = { topics: [], labs: [], diagrams: {}, sheet: [], cfg: null, levels: {}, explainers: {}, _more: [], exams: [], workedEx: [] };
   G.configure = function (c) { G.cfg = c; };
   G.diagram = function (o) { for (var k in o) G.diagrams[k] = o[k]; };
   G.lab = function (l) { G.labs.push(l); };
   G.explain = function (o) { for (var k in o) G.explainers[slug(k)] = o[k]; };
   G.more = function (o) { G._more.push(o); };
+  G.exam = function (a) { G.exams = G.exams.concat(a); };
+  G.worked = function (a) { G.workedEx = G.workedEx.concat(a); };
   function slug(s) { return s.toLowerCase().replace(/<[^>]+>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
   G.topic = function (name, icon, paper, levels, opts) {
     var id = slug(name), meta = (G.cfg && G.cfg.topics && G.cfg.topics[name]) || [];
@@ -40,7 +42,7 @@
   function P() {
     var k = G.cfg.key, p = S.subj[k] || (S.subj[k] = {});
     p.xp = p.xp || 0; p.stars = p.stars || {}; p.read = p.read || {}; p.missed = p.missed || {}; p.bossDone = p.bossDone || {};
-    p.arcade = p.arcade || 0; p.finalBest = p.finalBest || 0; p.stats = p.stats || {}; p.mocks = p.mocks || [];
+    p.arcade = p.arcade || 0; p.finalBest = p.finalBest || 0; p.stats = p.stats || {}; p.mocks = p.mocks || []; p.exam = p.exam || {};
     return p;
   }
   G.ri = function (a, b) { return a + Math.floor(Math.random() * (b - a + 1)); };
@@ -187,9 +189,9 @@
       <a class="avatar" href="#/locker" aria-label="Level ${L.i + 1}, ${L.cur.n}. Customise your buddy">${M("idle", 46)}<span class="lvbadge">${L.i + 1}</span></a>`;
   }
   function shell(active) {
-    var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/map", "Mind map", "map", "map"], ["#/practice", "Practice", "mock", "target"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
+    var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/map", "Mind map", "map", "map"], ["#/practice", "Practice", "mock", "target"], ["#/exam", "Written exams", "exam", "sheet"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
     $("#bar").innerHTML = `<a class="brand" href="#/"><span class="mark">${SUBJECT_ICON[c.key]}</span><span><b>${c.subject}</b><small>GCSE Quest</small></span></a><nav aria-label="Sections">` +
-      nav.filter(function (n) { return n[2] !== "labs" || G.labs.length; }).map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
+      nav.filter(function (n) { return (n[2] !== "labs" || G.labs.length) && (n[2] !== "exam" || G.exams.length); }).map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
       `</nav><div class="sidefoot"><a class="sidelink" href="index.html">${ic("back")}All subjects</a></div>`;
     refreshTop(); window.scrollTo(0, 0);
   }
@@ -656,6 +658,58 @@
     $("#vr").onclick = function () { $("#mm").hidden = true; $("#mmr").hidden = false; $("#mmk").hidden = true; $("#vr").classList.add("on"); $("#vt").classList.remove("on"); };
     $("#mmk").onclick = function () { showK = !showK; $("#mm").classList.toggle("showk", showK); this.setAttribute("aria-pressed", showK); this.textContent = showK ? "Hide key ideas" : "Show key ideas"; };
   }
+  function eh(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function msHtml(q, id) {
+    return `<h3>Mark scheme</h3><p class="muted sm">Tick each point you made. One mark per point, up to ${q.m}.</p><ul class="mslist">${q.ms.map(function (pt) { return `<li><label><input type="checkbox" class="msc ${id}"> <span>${eh(pt)}</span></label></li>`; }).join("")}</ul><div class="note"><b>Model answer</b><p>${eh(q.a)}</p>${q.tip ? `<p class="muted sm"><b>Exam tip:</b> ${eh(q.tip)}</p>` : ""}</div>`;
+  }
+  function viewExam(arg) {
+    shell("exam"); var p = P(), E = G.exams;
+    if (!E.length) { app.innerHTML = pageHead(null, "Written exams", "Written exam questions are coming soon for this subject."); return; }
+    if (arg && /^paper\d+$/.test(arg)) return examPaper(+arg.slice(5));
+    if (arg && /^q\d+$/.test(arg)) return examQuestion(+arg.slice(1));
+    var done = Object.keys(p.exam).length, got = 0, max = 0; Object.keys(p.exam).forEach(function (k) { got += p.exam[k].got; max += p.exam[k].max; });
+    var groups = {}; E.forEach(function (q, i) { (groups[q.t] = groups[q.t] || []).push(i); });
+    app.innerHTML = pageHead(null, "Written exams", "Exam-style questions with mark schemes and model answers. Write your answer first, then mark it yourself against the scheme. This is how you learn what examiners reward.") +
+      `<div class="statrow" style="max-width:640px"><div class="stat"><div class="ic">${ic("check")}</div><div><b>${done} / ${E.length}</b><span>Attempted</span></div></div><div class="stat"><div class="ic">${ic("target")}</div><div><b>${max ? Math.round(got / max * 100) + "%" : "–"}</b><span>Marks gained</span></div></div></div>` +
+      `<div class="card"><h3>Timed written paper</h3><p class="muted">A set of questions with a countdown (about one minute per mark). Mark yourself at the end for a score and an indicative grade.</p><div class="row"><a class="btn big" href="#/exam/paper20">Short paper · ~20 marks</a><a class="btn alt big" href="#/exam/paper40">Standard paper · ~40 marks</a></div></div>` +
+      Object.keys(groups).map(function (t) { return `<h2 class="sec">${eh(t)}</h2><div class="units">${groups[t].map(function (i) { var q = E[i], d = p.exam[i]; return `<a class="unit ${d ? "m" + (d.got >= d.max ? 3 : d.got / d.max >= .5 ? 2 : 1) : ""}" href="#/exam/q${i}"><span class="n">${d ? ic("check") : q.m}</span><div><b>${eh(q.q.length > 90 ? q.q.slice(0, 88) + "…" : q.q)}</b><div class="meta"><span class="tag">${q.m} marks</span></div></div><span class="state">${d ? d.got + "/" + d.max : "Try it"}</span></a>`; }).join("")}</div>`; }).join("");
+  }
+  function examQuestion(i) {
+    var q = G.exams[i], p = P(); if (!q) { location.hash = "#/exam"; return; }
+    app.innerHTML = pageHead([["Written exams", "#/exam"], ["Question " + (i + 1)]], eh(q.t), "") +
+      `<div class="card"><div class="row"><span class="tag">${q.m} marks</span><span class="muted sm">Aim for about ${q.m} minute${q.m > 1 ? "s" : ""}</span></div><p class="exq">${eh(q.q)}</p><textarea class="field" id="ans" rows="${Math.min(14, 3 + q.m)}" placeholder="Write your answer here, then check it against the mark scheme."></textarea><div class="row" style="margin-top:12px"><button class="btn big" id="chk">Check my answer</button></div><div id="ms" hidden></div></div>`;
+    $("#chk").onclick = function () {
+      $("#chk").hidden = true; var ms = $("#ms"); ms.hidden = false;
+      ms.innerHTML = msHtml(q, "q") + `<p class="exq"><b id="got">0</b> / ${q.m} marks</p><div class="row"><button class="btn big" id="sv">Save my score</button><a class="btn alt" href="#/exam/q${(i + 1) % G.exams.length}">Next question</a></div>`;
+      var upd = function () { var n = Math.min(q.m, $$(".msc:checked", ms).length); $("#got").textContent = n; return n; };
+      $$(".msc", ms).forEach(function (c) { c.onchange = upd; });
+      $("#sv").onclick = function () { var n = upd(), old = p.exam[i]; if (!old || n > old.got) { p.exam[i] = { got: n, max: q.m, d: Date.now() }; } addXP(n * 3); save(); toast("check", "Score saved", n + " / " + q.m + " marks"); location.hash = "#/exam"; };
+    };
+  }
+  function examPaper(total) {
+    var E = G.exams, idx = shuffle(E.map(function (q, i) { return i; })), pick = [], marks = 0;
+    for (var k = 0; k < idx.length && marks < total; k++) { if (marks + E[idx[k]].m <= total + 3) { pick.push(idx[k]); marks += E[idx[k]].m; } }
+    var secs = marks * 60, iv, over = false;
+    var fmt = function (s) { return Math.floor(s / 60) + ":" + pad2(s % 60); };
+    app.innerHTML = pageHead([["Written exams", "#/exam"], ["Timed paper"]], "Written paper · " + marks + " marks", "Answer every question. Time allowed: " + marks + " minutes. Self-marking follows.") +
+      `<div class="card"><div class="row" style="justify-content:space-between"><b>Time left: <span id="clk">${fmt(secs)}</span></b><button class="btn" id="fin">Finish and mark</button></div></div>` +
+      pick.map(function (i, n) { var q = E[i]; return `<div class="card"><div class="row"><span class="tag">Q${n + 1}</span><span class="tag">${q.m} marks</span><span class="muted sm">${eh(q.t)}</span></div><p class="exq">${eh(q.q)}</p><textarea class="field" rows="${Math.min(12, 3 + q.m)}" placeholder="Your answer"></textarea></div>`; }).join("");
+    var mark = function () {
+      if (over) return; over = true; clearInterval(iv); G._stop = null;
+      app.innerHTML = pageHead([["Written exams", "#/exam"], ["Mark your paper"]], "Mark your paper", "Be honest and strict. Tick a point only if your answer clearly made it.") +
+        pick.map(function (i, n) { var q = E[i]; return `<div class="card" data-q="${n}"><div class="row"><span class="tag">Q${n + 1}</span><span class="tag">${q.m} marks</span></div><p class="exq">${eh(q.q)}</p>${msHtml(q, "p" + n)}<p class="exq"><b class="gt">0</b> / ${q.m}</p></div>`; }).join("") + `<div class="card"><button class="btn big" id="sc">Get my score</button></div>`;
+      $$(".card[data-q]").forEach(function (c) { var q = E[pick[+c.dataset.q]]; $$(".msc", c).forEach(function (b) { b.onchange = function () { $(".gt", c).textContent = Math.min(q.m, $$(".msc:checked", c).length); }; }); });
+      $("#sc").onclick = function () {
+        var got = 0; $$(".card[data-q]").forEach(function (c) { var q = E[pick[+c.dataset.q]], n = Math.min(q.m, $$(".msc:checked", c).length); got += n; var old = p0.exam[pick[+c.dataset.q]]; if (!old || n > old.got) p0.exam[pick[+c.dataset.q]] = { got: n, max: q.m, d: Date.now() }; });
+        var pc = Math.round(got / marks * 100), g = band(pc); p0.mocks.push({ d: Date.now(), pct: pc, n: pick.length, scope: "Written paper", secs: marks * 60 - Math.max(0, secs) }); if (p0.mocks.length > 12) p0.mocks.shift(); addXP(got * 2 + 20); save();
+        app.innerHTML = `<div class="card result" style="max-width:700px"><div class="rm">${M(pc >= 60 ? "happy" : "think", 110)}</div>${ring(pc, 124, 11)}<h1>${got} / ${marks} marks</h1><p class="sub">${bandText(g)} (indicative only). Real grade boundaries change every year and differ by paper and tier, so use this to decide what to revise next.</p><div class="row" style="justify-content:center"><a class="btn big" href="#/exam">Back to written exams</a><a class="btn alt big" href="#/exam/paper${total}">Another paper</a></div></div>`;
+      };
+    };
+    var p0 = P();
+    iv = setInterval(function () { secs--; var c = $("#clk"); if (c) c.textContent = fmt(Math.max(0, secs)); if (secs <= 0) mark(); }, 1000);
+    G._stop = function () { over = true; clearInterval(iv); };
+    $("#fin").onclick = mark;
+  }
   function viewProgress() {
     shell("progress");
     var p = P(), o = overall(), ts = vTopics(), ready = o.a >= 25 ? Math.round(o.acc * (.35 + .65 * o.coverage) * 100) : null;
@@ -710,15 +764,19 @@
   function viewToolkit(tab) {
     shell("sheet"); tab = tab || "sheet"; var c = G.cfg, p = P(), body = "";
     if (tab === "sheet") body = '<div class="card">' + (c.sheetNote ? `<div class="note">${c.sheetNote}</div>` : "") + G.sheet.map(function (g) { return `<h2 class="sec2">${g.h}</h2><table class="eq"><tbody>${g.rows.map(function (r) { return `<tr><td style="width:38%">${r[0]}</td><td class="formula">${r[1]}</td>${r[2] ? `<td class="muted" style="font-size:14px">${r[2]}</td>` : "<td></td>"}</tr>`; }).join("")}</tbody></table>`; }).join("") + "</div>";
-    else if (tab === "hooks") {
+    else if (tab === "worked") {
+      body = G.workedEx.length ? '<p class="muted">Work through each example one step at a time. Try the next step yourself before you reveal it.</p>' + G.workedEx.map(function (w, wi) { return `<div class="card wk" data-n="${w.s.length}"><span class="tag">${eh(w.t)}</span><h3>${eh(w.title)}</h3><p class="exq">${eh(w.p)}</p><ol class="wsteps">${w.s.map(function (s) { return `<li hidden>${eh(s)}</li>`; }).join("")}</ol><div class="note wans" hidden><b>Answer:</b> ${eh(w.a)}</div><button class="btn alt wnext">Show first step</button></div>`; }).join("") : '<div class="card">Worked examples are coming soon for this subject.</div>';
+    } else if (tab === "hooks") {
       var found = 0, tot = 0; body = vTopics().map(function (t) { return `<h2 class="sec">${t.name}</h2><div class="album">${vLevels(t).map(function (l) { tot++; var has = p.read[l.id]; if (has) found++; return has ? `<div class="sticker"><b>${l.t}</b><span>${l.k}</span></div>` : `<a class="sticker locked" href="#/l/${l.id}"><b>${l.t}</b><span>Complete the lesson to unlock</span></a>`; }).join("")}</div>`; }).join("");
       body = `<p class="muted" style="margin-bottom:6px">Unlocked: ${found} of ${tot}</p>` + body;
     } else {
       var spec = c.specUrl ? c.specUrl : c.key === "maths" ? "https://www.aqa.org.uk/subjects/mathematics/gcse/mathematics-8300" : "https://www.aqa.org.uk/subjects/science/gcse/" + c.key + "-" + { physics: "8463", chemistry: "8462", biology: "8461" }[c.key];
       var L = [{ k: "globe", t: "AQA specification and past papers", d: "Official exam board pages", u: spec }, { k: "link", t: "BBC Bitesize: GCSE " + c.subject, d: "Revision notes, videos and quizzes", u: "https://www.bbc.co.uk/bitesize/search?q=" + encodeURIComponent("GCSE " + c.subject) }, { k: "video", t: "YouTube: " + (c.channel || (c.key === "maths" ? "Corbettmaths" : "Free Science Lessons")), d: "Popular free GCSE video channel", u: "https://www.youtube.com/results?search_query=" + encodeURIComponent((c.channel || (c.key === "maths" ? "Corbettmaths" : "Free Science Lessons")) + " GCSE") }, { k: "globe", t: "Seneca Learning", d: "Free GCSE courses", u: "https://senecalearning.com/en-GB/" }, { k: "globe", t: "Physics and Maths Tutor", d: "Free past papers and topic questions", u: "https://www.physicsandmathstutor.com/" }];
+      (window.LINKS && window.LINKS[c.key] || []).forEach(function (x) { L.unshift({ k: x[2] || "link", t: x[0], d: x[3] || "Checked link", u: x[1] }); });
       body = `<div class="links">${L.map(function (x) { return `<a class="linkcard" href="${x.u}" target="_blank" rel="noopener noreferrer"><span class="li">${ic(x.k)}</span><span><b>${x.t}</b><small>${x.d}</small></span><span class="ext">${ic("arrow")}</span></a>`; }).join("")}</div><p class="muted sm" style="margin-top:10px">Links open external sites in a new tab and need an internet connection. Check which exam board and tier you are sitting.</p>`;
     }
-    app.innerHTML = pageHead(null, "Toolkit", "") + `<div class="tabs" role="tablist">${[["sheet", c.sheetName], ["hooks", "Memory hooks"], ["links", "Links and past papers"]].map(function (x) { return `<a role="tab" aria-selected="${tab === x[0]}" class="tab ${tab === x[0] ? "on" : ""}" href="#/toolkit/${x[0]}">${x[1]}</a>`; }).join("")}</div>` + body;
+    window.setTimeout(function () { $$(".wk").forEach(function (card) { var n = 0, tot = +card.dataset.n, btn = $(".wnext", card); btn.onclick = function () { var li = $$("li", card)[n]; if (li) li.hidden = false; n++; if (n >= tot) { $(".wans", card).hidden = false; btn.hidden = true; } else btn.textContent = "Show next step (" + (n + 1) + " of " + tot + ")"; }; }); }, 0);
+    app.innerHTML = pageHead(null, "Toolkit", "") + `<div class="tabs" role="tablist">${[["sheet", c.sheetName], ["worked", "Worked examples"], ["hooks", "Memory hooks"], ["links", "Links and past papers"]].map(function (x) { return `<a role="tab" aria-selected="${tab === x[0]}" class="tab ${tab === x[0] ? "on" : ""}" href="#/toolkit/${x[0]}">${x[1]}</a>`; }).join("")}</div>` + body;
   }
   function viewSettings() {
     shell("settings");
@@ -746,6 +804,7 @@
     else if ((m = h.match(/^\/t\/(.+)/))) viewTopic(m[1]);
     else if ((m = h.match(/^\/l\/(.+)/))) viewLevel(m[1]);
     else if ((m = h.match(/^\/(?:test|boss)\/(.+)/))) viewTest(m[1]);
+    else if ((m = h.match(/^\/exam(?:\/(\w+))?/))) viewExam(m[1]);
     else if (h === "/map") viewMap();
     else if (h === "/final") viewFinal(); else if (h === "/daily") viewDaily();
     else if (h === "/review" || h === "/gym") viewGym();
