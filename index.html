@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark light">
-<title>GCSE Quest | Revision for Maths, Physics, Chemistry and Biology</title>
+<meta name="theme-color" content="#0e1128">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<title>GCSE Quest | Game-based revision for Maths, Physics, Chemistry and Biology</title>
 <link rel="stylesheet" href="assets/game.css">
 </head>
 <body class="hub">
@@ -14,21 +17,26 @@
     <div class="hubstats" id="hubstats"></div>
   </div>
   <section class="hubhero">
-    <h1>Revise smarter. <em>Score higher.</em></h1>
-    <p>Short lessons, memory hooks and exam-style questions for GCSE Maths, Physics, Chemistry and Biology. Practise daily, find your weak topics, and sit timed mock exams before the real thing.</p>
+    <div>
+      <h1>Level up your <em>GCSE grades.</em></h1>
+      <p>Learn with animated explainers, beat boss challenges, build streaks and sit timed mock exams. Maths, Physics, Chemistry and Biology, all in one game.</p>
+      <div class="row"><a class="btn big" id="cta" href="maths.html">Start playing</a><a class="btn alt big" href="#subjects">Choose a subject</a></div>
+    </div>
+    <div class="hubmascot" id="hubmascot"></div>
   </section>
-  <main class="subjects" id="spread"></main>
+  <main class="subjects" id="subjects"></main>
+  <section class="hubfeat">
+    <div class="feat"><div id="f1"></div><b>Animated explainers</b><span>Step-by-step animations and simulations show how things work, not just what they are.</span></div>
+    <div class="feat"><div id="f2"></div><b>Boss challenges</b><span>Beat an exam gremlin at the end of every topic. Wrong answers cost hearts, right answers land hits.</span></div>
+    <div class="feat"><div id="f3"></div><b>Daily quests and streaks</b><span>Short daily goals keep revision a habit. Earn XP, level up and unlock gear for your buddy.</span></div>
+    <div class="feat"><div id="f4"></div><b>Mock exams and review</b><span>Timed papers with a graded report, plus spaced repetition that brings mistakes back until they stick.</span></div>
+  </section>
   <footer class="hubfoot">
-    <h2>How it works</h2>
-    <ul>
-      <li>Work through each topic: read a short lesson with a memory hook, then answer questions to master the unit.</li>
-      <li>Questions you get wrong return on later days through spaced repetition, until they stick.</li>
-      <li>Use mock exams and the progress page to see which topics need work. Set your tier, science course and exam date in Settings.</li>
-    </ul>
-    <p>Content follows the AQA specifications: Mathematics 8300, Physics 8463, Chemistry 8462 and Biology 8461. Other exam boards overlap heavily, but check your own board's list too. These games are revision practice, and are not made or endorsed by AQA.</p>
+    <p>Content follows the AQA specifications: Mathematics 8300, Physics 8463, Chemistry 8462 and Biology 8461. Other exam boards (Edexcel, OCR, WJEC Eduqas) overlap heavily, but always check your own board's specification. GCSE Quest is revision practice and is not made or endorsed by any exam board or by the BBC. Links to videos and websites open external services in a new tab.</p>
   </footer>
 </div>
 <script src="assets/icons.js"></script>
+<script src="assets/mascot.js"></script>
 <script src="data/counts.js"></script>
 <script>
 (function(){
@@ -45,17 +53,25 @@
   function dkey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
   var now=new Date(),stk=st.streak||{},days=(stk.last===dkey(now)||stk.last===dkey(new Date(now-864e5)))?(stk.days||0):0;
   var today=st.daily&&st.daily.d===dkey(now)?st.daily.xp:0,goal=set.goal||100,chips='';
-  chips+='<span class="chip accent">'+ICON.flame+days+(days===1?' day':' days')+' streak</span>';
-  chips+='<span class="chip">'+ICON.target+Math.min(today,goal)+' / '+goal+' XP today</span>';
-  if(set.examDate){var d=new Date(set.examDate+'T09:00:00'),n=Math.ceil((d-now)/864e5);if(!isNaN(n)&&n>=0)chips+='<span class="chip">'+ICON.clock+n+(n===1?' day':' days')+' to exams</span>';}
+  chips+='<span class="tpill streak '+(days?'lit':'')+'">'+ICON.flame+'<b>'+days+'</b></span>';
+  chips+='<span class="tpill goal">'+ICON.target+'<b>'+Math.min(today,goal)+'</b><span>/ '+goal+' XP today</span></span>';
+  if(set.examDate){var d=new Date(set.examDate+'T09:00:00'),n=Math.ceil((d-now)/864e5);if(!isNaN(n)&&n>=0)chips+='<span class="tpill">'+ICON.clock+'<b>'+n+'</b><span>days to exams</span></span>';}
   document.getElementById('hubstats').innerHTML=chips;
-  function level(xp){var i=0;for(var k=0;k<RANKS.length;k++)if(xp>=RANKS[k][1])i=k;return RANKS[i][0]}
-  document.getElementById('spread').innerHTML=worlds.map(function(w){
+  var xp=0;for(var k in (st.subj||{}))xp+=(st.subj[k].xp||0);
+  var li=0;for(var i=0;i<LEVELS.length;i++)if(xp>=LEVELS[i].xp)li=i;
+  var look=st.look||{color:'blue',acc:'none'};
+  document.getElementById('hubmascot').innerHTML=mascot(look,'happy',260);
+  ['f1:video','f2:trophy','f3:flame','f4:mock'].forEach(function(x){var a=x.split(':');document.getElementById(a[0]).innerHTML=ICON[a[1]]});
+  /* send returning players to the subject they used most recently */
+  var best=null,bx=0;worlds.forEach(function(w){var p=(st.subj||{})[w.key];if(p&&p.xp>bx){bx=p.xp;best=w}});
+  if(best){var cta=document.getElementById('cta');cta.href=best.file;cta.textContent='Continue '+best.name}
+  document.getElementById('subjects').innerHTML=worlds.map(function(w){
     var c=(window.COUNTS||{})[w.key],p=(st.subj||{})[w.key]||{};
     var tot=c?c[set.tier+(w.key==='maths'?'S':set.course)]:0,done=Math.min(tot,Object.keys(p.stars||{}).length),pc=tot?done/tot*100:0;
     return '<a class="subj w-'+w.key+'" href="'+w.file+'"><div class="mark">'+SUBJECT_ICON[w.key]+'</div><div><div class="spec">'+w.spec+'</div><h2>'+w.name+'</h2></div><p>'+w.sub+'</p>'+
-      '<div class="foot"><div class="track"><i style="width:'+pc+'%"></i></div><span>'+done+'/'+tot+' units</span></div><div class="foot"><span>'+level(p.xp||0)+'</span><span style="margin-left:auto">'+(p.xp||0).toLocaleString()+' XP</span></div></a>';
+      '<div class="foot"><div class="track"><i style="width:'+pc+'%"></i></div><span>'+done+'/'+tot+' units</span></div><div class="foot"><span>'+(p.xp||0).toLocaleString()+' XP earned</span><span style="margin-left:auto">Play</span></div></a>';
   }).join('');
+  if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){try{navigator.serviceWorker.register('sw.js')}catch(e){}}
 })();
 </script>
 </body>
