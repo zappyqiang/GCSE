@@ -614,6 +614,30 @@
   }
 
   /* ---------- progress ---------- */
+  function radialSvg(ts, p) {
+    var W = 1500, Hh = 1250, cx = W / 2, cy = Hh / 2, r1 = 215, r2 = 420, N = 0, out = "", ang = -Math.PI / 2;
+    ts.forEach(function (t) { N += vLevels(t).length; });
+    var gap = 0.04, total = Math.PI * 2 - gap * ts.length, short = function (s) { return s.length > 34 ? s.slice(0, 33) + "…" : s; };
+    var pt = function (a, r) { return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
+    ts.forEach(function (t, ti) {
+      var ls = vLevels(t), span = total * ls.length / N, a0 = ang, mid = a0 + span / 2, col = "var(--c" + (ti % 4 + 1) + ")", tp = pt(mid, r1 + (ti % 2) * 60);
+      ls.forEach(function (l, i) {
+        var a = a0 + span * (i + .5) / ls.length, q = pt(a, r2), st = p.stars[l.id] || 0, right = Math.cos(a) >= 0, lp = pt(a, r2 + 12);
+        out += `<path d="M${tp[0].toFixed(1)} ${tp[1].toFixed(1)} Q${pt(a, (r1 + r2) / 2 + 30)[0].toFixed(1)} ${pt(a, (r1 + r2) / 2 + 20)[1].toFixed(1)} ${q[0].toFixed(1)} ${q[1].toFixed(1)}" fill="none" stroke="${col}" stroke-width="2.5" opacity=".7"/>`;
+        out += `<a href="#/l/${l.id}"><title>${esc(l.t)}</title><circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="8" fill="${st === 3 ? "var(--good)" : st ? "var(--accent-soft)" : "var(--surface)"}" stroke="${st === 1 ? "var(--gold)" : st === 2 ? "var(--accent)" : st === 3 ? "var(--good)" : col}" stroke-width="3"/>` +
+          `<text x="${lp[0].toFixed(1)}" y="${(lp[1] + 5).toFixed(1)}" text-anchor="${right ? "start" : "end"}" class="mm-t">${short(l.t)}</text></a>`;
+      });
+      out = `<path d="M${cx} ${cy} L${tp[0].toFixed(1)} ${tp[1].toFixed(1)}" stroke="${col}" stroke-width="6" stroke-linecap="round"/>` + out;
+      var words = t.name.split(" "), l1 = "", l2 = "";
+      words.forEach(function (wd) { if ((l1 + " " + wd).trim().length <= 17 && !l2) l1 = (l1 + " " + wd).trim(); else l2 = (l2 + " " + wd).trim(); });
+      if (l2.length > 18) l2 = l2.slice(0, 17) + "…";
+      var w = Math.max(l1.length, l2.length) * 8.6 + 22, hh = l2 ? 48 : 34;
+      out += `<a href="#/t/${t.id}"><title>${esc(t.name)}</title><rect x="${(tp[0] - w / 2).toFixed(1)}" y="${(tp[1] - hh / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${hh}" rx="14" fill="${col}"/><text text-anchor="middle" class="mm-tt"><tspan x="${tp[0].toFixed(1)}" y="${(tp[1] + (l2 ? -3 : 5)).toFixed(1)}">${l1}</tspan>${l2 ? `<tspan x="${tp[0].toFixed(1)}" y="${(tp[1] + 15).toFixed(1)}">${l2}</tspan>` : ""}</text></a>`;
+      ang += span + gap;
+    });
+    out += `<circle cx="${cx}" cy="${cy}" r="78" fill="var(--accent)"/><text x="${cx}" y="${cy - 2}" text-anchor="middle" class="mm-ct">${G.cfg.subject.length > 14 ? "GCSE" : G.cfg.subject}</text><text x="${cx}" y="${cy + 22}" text-anchor="middle" class="mm-cs">${N} units</text>`;
+    return `<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Radial mind map of ${G.cfg.subject}">${out}</svg>`;
+  }
   function viewMap() {
     shell("map");
     var p = P(), c = G.cfg, ts = vTopics(), showK = false;
@@ -625,7 +649,11 @@
     }).join("");
     app.innerHTML = pageHead(null, "Mind map", "The whole " + c.subject + " course on one page: every topic and unit. Tap a unit to learn it. Colours show your mastery.") +
       `<div class="row mm-tools"><button class="btn alt" id="mmk" aria-pressed="false">Show key ideas</button><span class="mm-leg"><i class="m0"></i>Not started <i class="m1"></i>Developing <i class="m2"></i>Secure <i class="m3"></i>Mastered</span></div>` +
+      `<div class="tabs mm-views" role="tablist"><button class="tab on" id="vt" role="tab">Tree</button><button class="tab" id="vr" role="tab">Radial map</button></div>` +
+      `<div class="mm-radial" id="mmr" hidden>${radialSvg(ts, p)}</div>` +
       `<div class="mm" id="mm"><div class="mm-root"><b>${c.subject}</b><small>${ts.length} topics · ${all.length} units · ${done} mastered</small></div><div class="mm-trunk"></div><div class="mm-branches">${branches}</div></div>`;
+    $("#vt").onclick = function () { $("#mm").hidden = false; $("#mmr").hidden = true; $("#mmk").hidden = false; $("#vt").classList.add("on"); $("#vr").classList.remove("on"); };
+    $("#vr").onclick = function () { $("#mm").hidden = true; $("#mmr").hidden = false; $("#mmk").hidden = true; $("#vr").classList.add("on"); $("#vt").classList.remove("on"); };
     $("#mmk").onclick = function () { showK = !showK; $("#mm").classList.toggle("showk", showK); this.setAttribute("aria-pressed", showK); this.textContent = showK ? "Hide key ideas" : "Show key ideas"; };
   }
   function viewProgress() {
