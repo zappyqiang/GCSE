@@ -5,6 +5,9 @@ A game-based GCSE revision app for **14 subjects**: Maths, Physics, Chemistry, B
 ## What is in the game
 
 - **Learn path**: every subject is a winding path of units (567 units in total) grouped into sections that match the specification, with a boss challenge at the end of each section.
+- **How to? cases**: every subject has its own "How to?" section of real-life questions (for example how fireworks get their colours, how GPS works, why vaccines protect us, how rockets reach space). Each case has an animation, step-by-step explanation, key equations or facts, real photographs, video links, "think like an expert" questions and links back to the lessons it recalls. Chemistry has 14 cases; the other subjects have 5 to 7.
+- **Reaction lab (Chemistry)**: 18 realistic virtual experiments with glassware, bubbles, precipitates, flames, a thermometer, prediction questions, an automatic atom-balance check and real photographs.
+- **Real-world pictures and videos**: unit lessons show photographs of the real thing (from Wikimedia Commons, each linked to its licence page) and curated video links.
 - **Mind map**: every subject has a one-page mind map of all its topics and units, coloured by your mastery, with optional key ideas.
 - **Animated explainers**: 252 step-by-step animations (16 or more in every subject) and simulations for the ideas that are hard to picture (number lines, Pythagoras, circle theorems, circuits, half-life, waves, gas pressure, ionic bonding, electrolysis, osmosis, mitosis, the heart, natural selection and many more).
 - **Over 2,200 practice questions**, plus generated variants, in seven formats: multiple choice, true/false, calculations, typed answers, matching, sorting and ordering.

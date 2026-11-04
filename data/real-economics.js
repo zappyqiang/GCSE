@@ -1,0 +1,61 @@
+/* Real-life photos, videos and "How to?" cases for Economics */
+(function () {
+  var K = ANIM.kit;
+  GAME.media({
+    "Scarcity and choice": { pics: [["Supermarket shelves.jpg", "Shelves full of choices, but limited money"]] },
+    "Specialisation and the division of labour": { pics: [["Ford assembly line - 1913 (restored).jpg", "Division of labour on Ford's assembly line"], ["Manufacturing line.jpg", "A modern manufacturing line"]] },
+    "Demand": { pics: [["Soulard Market stalls and stall keepers.jpg", "A market where prices respond to demand"]] },
+    "Supply": { pics: [["Manufacturing line.jpg", "Firms supply goods they can make profitably"]] },
+    "Government policy": { pics: [["Bank of England Threadneedle St. (12565194585).jpg", "The Bank of England sets interest rates"]] },
+    "Fiscal and monetary policy": { pics: [["Bank of England Threadneedle St. (12565194585).jpg", "The Bank of England"]] },
+    "Unemployment and inflation": { pics: [["Supermarket shelves.jpg", "Rising prices show up on supermarket shelves"], ["Crowds gathering outside New York Stock Exchange (3).jpg", "The 1929 crash led to mass unemployment"]], vids: [["Inflation - what it is", "https://www.youtube.com/watch?v=yZ2zkfJpdzk", "How inflation affects the economy"]] },
+    "Economic objectives and growth": { pics: [["Crowds gathering outside New York Stock Exchange (3).jpg", "Crowds outside the New York Stock Exchange during the Great Crash"]] },
+    "Trade and exchange rates": { pics: [["Ford assembly line - 1913 (restored).jpg", "Manufactured goods are traded worldwide"]] },
+    "Price and elasticity": { vids: [["Interest rates explained", "https://www.youtube.com/watch?v=ehzGEoHx4n8", "How the Bank of England uses interest rates"]] }
+  });
+
+  GAME.howto([
+    { id: "inflation", sector: "Everyday economy", icon: "🛍️", title: "Why does your pocket money buy less than it used to?", tags: "inflation prices cpi interest rate",
+      hook: "A bar of chocolate that cost 30p years ago costs much more now. Inflation is the steady rise in the general level of prices, and it shrinks what money can buy.",
+      scene: K.flow("What drives inflation", ["Demand rises|faster than supply", "Costs of firms|go up", "Prices rise", "Money buys|less", "Bank of England|raises interest rates"], ["Inflation has two main causes.", "Demand-pull: too much spending chasing too few goods.", "Cost-push: higher wages, oil or ingredients push prices up.", "Either way, the general price level rises.", "Each pound buys less than before.", "The Bank of England can raise interest rates to cool demand."]),
+      steps: ["Inflation is measured by the Consumer Prices Index (CPI), based on a basket of typical goods and services.", "The UK target is 2% a year.", "High inflation hurts savers and people on fixed incomes; low, steady inflation is normal.", "Raising interest rates makes borrowing dearer so people spend less, easing demand-pull inflation.", "Real value = nominal value adjusted for inflation."],
+      facts: ["Inflation rate = (change in CPI ÷ old CPI) × 100", "UK target: 2%", "Real wages = wages adjusted for inflation"],
+      photos: [["Supermarket shelves.jpg", "A supermarket 'basket' of goods"], ["Bank of England Threadneedle St. (12565194585).jpg", "The Bank of England sets interest rates"]],
+      vids: [["Inflation - What It Is and How It Affects the Economy", "https://www.youtube.com/watch?v=yZ2zkfJpdzk", "Explainer"]],
+      think: [["Prices rise 5% but your pay rises 3%. What happened to your real wage?", "It fell by about 2%: you can buy less than before."], ["Why might too little inflation (deflation) also be a problem?", "People delay spending, which can slow the economy."]],
+      units: ["Unemployment and inflation", "Calculating growth, inflation and unemployment", "Fiscal and monetary policy", "Government policy"] },
+    { id: "priceevents", sector: "Markets", icon: "🎟️", title: "Why do concert tickets and taxi fares surge in price?", tags: "supply demand price equilibrium surge",
+      hook: "When demand shoots up and supply cannot, prices climb. Understanding supply and demand explains surge pricing, sales and shortages.",
+      scene: K.flow("Price rises when demand rises", ["Event announced:|demand jumps", "Supply is fixed", "Shortage at|the old price", "Price rises until|the market clears", "Higher equilibrium|price"], ["Markets balance supply and demand.", "Suddenly many more people want tickets.", "Only a fixed number of seats exist.", "At the old price there are more buyers than tickets.", "Price rises, so some buyers drop out.", "A new equilibrium price is reached."]),
+      steps: ["The demand curve slopes down: higher price, lower quantity demanded.", "The supply curve slopes up: higher price, more supplied.", "Equilibrium is where they cross.", "If demand shifts right and supply cannot rise, price rises.", "Price elasticity of demand shows how sensitive buyers are to price changes."],
+      facts: ["Shift in demand: income, tastes, price of substitutes", "Shift in supply: costs, technology, taxes", "PED = % change in quantity ÷ % change in price"],
+      photos: [["Soulard Market stalls and stall keepers.jpg", "Market stalls show prices responding to demand"], ["Supermarket shelves.jpg", "Supermarkets cut prices when stock won't sell"]],
+      think: [["Why do shops hold sales at the end of a season?", "Supply exceeds demand, so cutting the price clears stock."], ["Why are petrol prices slow to affect how much people drive?", "Demand is inelastic: people need it for work and have few substitutes."]],
+      units: ["Demand", "Supply", "Price and elasticity", "Shifts in demand and supply"] },
+    { id: "interestrates", sector: "Money and banking", icon: "🏦", title: "How does the Bank of England control the economy?", tags: "bank of england interest rates monetary policy",
+      hook: "Eight times a year a committee of nine people decides one number: the Bank Rate. It affects mortgages, savings, prices and jobs across the UK.",
+      scene: K.flow("Raising the interest rate", ["Bank of England|raises the rate", "Loans cost more,|saving pays more", "Households and firms|spend less", "Demand falls", "Inflation slows"], ["Interest rates are the main tool for controlling inflation.", "The Monetary Policy Committee votes to raise the Bank Rate.", "Mortgages and loans cost more; saving is more attractive.", "People and firms cut spending and investment.", "Overall demand weakens.", "Price rises slow towards the 2% target."]),
+      steps: ["Lower rates do the opposite: they encourage borrowing and spending to boost a weak economy.", "Governments use fiscal policy (tax and spending) alongside this monetary policy.", "Changes take months to work through the economy.", "High rates can raise unemployment; low rates can fuel inflation."],
+      facts: ["Monetary policy: interest rates; fiscal policy: taxes and spending", "Target: 2% CPI inflation"],
+      photos: [["Bank of England Threadneedle St. (12565194585).jpg", "The Bank of England in Threadneedle Street"]],
+      vids: [["How do interest rates affect you?", "https://www.youtube.com/watch?v=NM-jPK7ODO8", "Interest rates explained"]],
+      think: [["Who gains and who loses when interest rates rise?", "Savers gain; borrowers and firms with loans lose."], ["Why does the Bank not just keep rates very low?", "That can cause high inflation."]],
+      units: ["Fiscal and monetary policy", "Government policy", "Unemployment and inflation"] },
+    { id: "recession", sector: "Economy", icon: "📉", title: "What happens to a country in a recession?", tags: "recession gdp unemployment crash depression",
+      hook: "When an economy shrinks for two quarters in a row it's called a recession. Jobs vanish, businesses close and governments step in.",
+      scene: K.cycle("The business cycle", ["Boom:|high growth", "Slowdown", "Recession:|GDP falls", "Recovery"], ["Economies move through repeating phases.", "In a boom output and employment grow quickly.", "Growth then slows.", "In a recession GDP falls and unemployment rises.", "Eventually recovery begins and the cycle repeats."]),
+      steps: ["GDP measures the value of everything produced in a country.", "Falling demand causes firms to cut jobs, which cuts demand further.", "Governments can cut taxes or spend more (fiscal stimulus); central banks cut interest rates.", "The 1929 Wall Street Crash and the Great Depression showed how severe downturns can be."],
+      facts: ["Recession: two consecutive quarters of falling GDP", "Economic growth = percentage change in real GDP"],
+      photos: [["Crowds gathering outside New York Stock Exchange (3).jpg", "The 1929 crash"]],
+      think: [["Why might the government spend more during a recession?", "Spending creates jobs and demand when private spending is weak."], ["Why is unemployment called a 'lagging' indicator?", "It keeps rising for a while after growth has returned."]],
+      units: ["Economic objectives and growth", "Unemployment and inflation", "Government policy", "Calculating growth, inflation and unemployment"] },
+    { id: "worldtrade", sector: "Global economy", icon: "🌍", title: "Why do we buy so many things made abroad?", tags: "trade globalisation exports imports tariffs exchange rate",
+      hook: "Your phone, clothes and fruit probably came from several countries. Specialisation and trade make goods cheaper, but also affect jobs.",
+      scene: K.compare("Free trade or protection?", ["Free trade", "Protectionism"], [["Specialise in what you do best", "Tariffs and quotas on imports"], ["Lower prices, more choice", "Protects home jobs"], ["Bigger markets for exporters", "Higher prices and fewer imports"], ["Some industries decline", "Risk of retaliation"]], ["Countries debate how open to be.", "Free trade lets nations specialise and share the gains.", "Protection shields local industries.", "Each has costs and benefits."]),
+      steps: ["Comparative advantage: countries gain by specialising in goods they make most efficiently.", "A tariff is a tax on imports; a quota limits the quantity.", "A stronger pound makes imports cheaper and exports dearer.", "Globalisation has lifted incomes in many countries but can leave some workers worse off."],
+      facts: ["Exports: goods sold abroad; imports: goods bought from abroad", "Trade deficit: imports exceed exports"],
+      photos: [["Ford assembly line - 1913 (restored).jpg", "Specialisation began in factories"], ["Manufacturing line.jpg", "Modern manufacturing for world markets"]],
+      think: [["Why might a country put a tariff on imported steel?", "To protect its own steel industry, though it raises prices for buyers."], ["How does a falling pound affect UK holidays abroad?", "They become more expensive."]],
+      units: ["Trade and exchange rates", "International trade and globalisation", "Specialisation and the division of labour"] }
+  ]);
+})();

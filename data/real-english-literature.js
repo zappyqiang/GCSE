@@ -1,0 +1,61 @@
+/* Real-life pictures, videos and "How to?" cases for English Literature */
+(function () {
+  var K = ANIM.kit;
+  GAME.media({
+    "Plot and key characters": { pics: [["MacbethAndBanquo-Witches.jpg", "Macbeth and Banquo meet the witches (painting)"], ["Albert Pinkham Ryder - Macbeth and the Witches.jpg", "Macbeth and the Witches, by Albert Pinkham Ryder"]], vids: [["'Macbeth' Top Set Analysis (part 1)", "https://www.youtube.com/watch?v=goET70zn57s", "Mr Bruff"]] },
+    "Themes: ambition, guilt and the supernatural": { pics: [["Albert Pinkham Ryder - Macbeth and the Witches.jpg", "Macbeth and the witches"]] },
+    "Macbeth: context and the Jacobean audience": { pics: [["Shakespeare's Globe Theatre, London.JPG", "Shakespeare's Globe, a reconstruction of the theatre where his plays were performed"], ["Inside Shakespeare's Globe Theatre, London.JPG", "Inside the Globe"]] },
+    "A Christmas Carol: Victorian context": { pics: [["Dickens-at-the-Blacking-Warehouse.jpg", "Dickens as a boy working in a blacking factory"], ["Charles Dickens by Daniel Maclise.jpg", "A portrait of Charles Dickens, 1839"]] },
+    "A Christmas Carol: Scrooge's transformation": { pics: [["Charles Dickens by Daniel Maclise.jpg", "Charles Dickens, author of A Christmas Carol"]] },
+    "Themes and context": { pics: [["Charles Dickens by Daniel Maclise.jpg", "Charles Dickens"]], vids: [["'An Inspector Calls': Top Set Analysis", "https://www.youtube.com/watch?v=M75yUsyNySY", "Mr Bruff"]] },
+    "Plot and characters": { vids: [["'An Inspector Calls': Mr Birling Character Analysis", "https://www.youtube.com/watch?v=KvhiaECGjTY", "Animated"], ["'An Inspector Calls': Mrs Birling Character Analysis", "https://www.youtube.com/watch?v=NRhvVIINlyM", "Animated"]] },
+    "Romeo and Juliet": { pics: [["Shakespeare's Globe Theatre, London.JPG", "The Globe: where Shakespeare's plays were staged"]] },
+    "Writing a literature essay": { vids: [["2026 Ultimate Guide to AQA English Literature Paper 1", "https://www.youtube.com/watch?v=__PRX71gDGA", "Mr Bruff"]] }
+  });
+
+  GAME.howto([
+    { id: "lit-essay", sector: "Skills", icon: "📝", title: "How do you write a top-grade literature essay?", tags: "essay peel quotation analysis context",
+      hook: "Examiners reward arguments, not summaries. A clear method turns your ideas into marks.",
+      scene: K.flow("PEEL paragraph", ["Point:|make an argument", "Evidence:|short quotation", "Explain:|zoom in on words", "Link:|to context and|the question"], ["Build each paragraph in four steps.", "Point: state your argument.", "Evidence: use a short quotation, a few words.", "Explain: analyse language, form and structure.", "Link: connect to context and back to the question."]),
+      steps: ["Read the question and underline the key words.", "Plan three or four points.", "Quote briefly and analyse single words.", "Name techniques only when they help your argument.", "Link to the writer's purpose and the historical context.", "Finish with a conclusion that answers the question."],
+      facts: ["AO1: argument and quotations; AO2: language, form and structure; AO3: context; AO4: spelling, punctuation and grammar"],
+      photos: [["Charles Dickens by Daniel Maclise.jpg", "Context: knowing about the writer helps your analysis"]],
+      vids: [["Ultimate Guide to AQA English Literature Paper 1", "https://www.youtube.com/watch?v=__PRX71gDGA", "Mr Bruff"]],
+      think: [["Why are short quotations better than long ones?", "They let you analyse specific words."], ["What does 'context' mean?", "The social, historical and cultural background of when and why a text was written."]],
+      units: ["Writing a literature essay", "Analysing poetry", "Unseen poetry"] },
+    { id: "macbeth-ambition", sector: "Drama", icon: "🗡️", title: "What does Macbeth teach us about ambition and power?", tags: "macbeth ambition guilt power shakespeare",
+      hook: "Macbeth is a decorated soldier who becomes a murderer. How does Shakespeare show ambition corrupting a good man?",
+      scene: K.flow("Macbeth's downfall", ["Brave soldier,|loyal to Duncan", "Witches' prophecy|plants ambition", "Lady Macbeth|pushes him", "Murders Duncan,|then more", "Guilt, tyranny|and death"], ["The play tracks a fall from hero to tyrant.", "Macbeth begins as a brave, honoured soldier.", "The witches' prophecy tempts him.", "Lady Macbeth questions his manhood to push him.", "Murder leads to more murders to protect his position.", "Guilt, paranoia and isolation end in his death."]),
+      steps: ["Look for imagery of blood, darkness and sleep.", "Notice soliloquies, where we hear Macbeth's private thoughts.", "Consider the Jacobean belief in the divine right of kings: killing a king is a crime against God.", "Compare Macbeth with Banquo, who resists temptation."],
+      facts: ["Soliloquy: a character speaks thoughts aloud, alone", "Hamartia: a tragic flaw (ambition)", "Regicide: killing a king"],
+      photos: [["MacbethAndBanquo-Witches.jpg", "Macbeth and Banquo meet the witches"], ["Albert Pinkham Ryder - Macbeth and the Witches.jpg", "Macbeth and the Witches"], ["Shakespeare's Globe Theatre, London.JPG", "The Globe Theatre"]],
+      vids: [["'Macbeth' Top Set Analysis", "https://www.youtube.com/watch?v=goET70zn57s", "Mr Bruff"]],
+      think: [["Is Macbeth a victim of fate or his own choices?", "The witches predict but do not force him; he chooses to act."], ["Why does Lady Macbeth break down?", "Her guilt overwhelms the ruthless image she tried to hold."]],
+      units: ["Plot and key characters", "Themes: ambition, guilt and the supernatural", "Macbeth: Lady Macbeth and key relationships", "Macbeth: context and the Jacobean audience"] },
+    { id: "carol-poverty", sector: "Novel", icon: "🎄", title: "How did one story help change attitudes to the poor?", tags: "christmas carol dickens victorian poverty social responsibility",
+      hook: "Dickens wrote A Christmas Carol in 1843 to shake the comfortable out of their complacency. His story helped make charity and compassion fashionable.",
+      scene: K.flow("Scrooge's journey", ["Miser:|cold and isolated", "Past: lost|childhood and Belle", "Present: Cratchits,|Ignorance and Want", "Yet to Come:|his lonely grave", "Redeemed:|generous and warm"], ["The story is a moral journey.", "Scrooge begins as a cold miser.", "The Ghost of Christmas Past reminds him of a lonelier childhood.", "The Ghost of Christmas Present shows poverty and the children Ignorance and Want.", "The Ghost of Christmas Yet to Come shows him dying unmourned.", "He changes and becomes generous."]),
+      steps: ["Dickens worked in a factory as a boy, which shaped his sympathy for the poor.", "Workhouses were deliberately grim; Scrooge's 'Are there no prisons?' echoes these attitudes.", "The Cratchits show love and happiness despite poverty; Tiny Tim shows the human cost of neglect.", "Dickens uses contrast: light and dark, warmth and cold, to present change."],
+      facts: ["Novella written in 1843", "Divided into five 'staves', like verses of a carol", "Theme: redemption and social responsibility"],
+      photos: [["Dickens-at-the-Blacking-Warehouse.jpg", "Dickens as a boy in a blacking warehouse"], ["Charles Dickens by Daniel Maclise.jpg", "Dickens in 1839"]],
+      think: [["Why does Dickens give Scrooge a chance to change?", "To show that anyone can change and that society can be improved."], ["How does Dickens use setting?", "Cold, dark streets show Scrooge's heart; warm homes show love."]],
+      units: ["A Christmas Carol::Plot and structure", "A Christmas Carol::Themes and context", "A Christmas Carol: Scrooge's transformation", "A Christmas Carol: Victorian context"] },
+    { id: "inspector-responsibility", sector: "Drama", icon: "🔍", title: "Are we responsible for how our actions affect others?", tags: "inspector calls priestley responsibility socialism",
+      hook: "A police inspector arrives at a dinner party and reveals that every family member played a part in a young woman's death. J. B. Priestley asks: are we all responsible?",
+      scene: K.layers("Responsibility in the play", ["Eva Smith: the victim", "The Birlings and Gerald: each helped to ruin her", "Inspector Goole: voice of conscience", "The audience: what will we do?"], ["The play widens from one family to society.", "Eva is a working-class girl treated unjustly.", "Each character played a part in her fate.", "The Inspector warns: we are members of one body.", "The audience is challenged to act differently."], false),
+      steps: ["The play is set in 1912 but written in 1945, so Priestley uses dramatic irony: Mr Birling is wrong about the Titanic and war.", "Sheila and Eric learn; their parents do not.", "The final telephone call leaves the audience unsure of the Inspector's identity and the message clear.", "Priestley was a socialist, and wanted a fairer society after the Second World War."],
+      facts: ["Dramatic irony: the audience knows more than the characters", "Collective responsibility: everyone shares responsibility for the community"],
+      photos: [["Martin Luther King - March on Washington.jpg", "Social responsibility and protest in real life"]],
+      vids: [["'An Inspector Calls': Top Set Analysis", "https://www.youtube.com/watch?v=M75yUsyNySY", "Mr Bruff"]],
+      think: [["Why does Priestley set the play in 1912?", "Hindsight lets the audience see the characters' blindness about the war and class."], ["Which generation does Priestley give hope to?", "The younger generation, Sheila and Eric."]],
+      units: ["An Inspector Calls::Plot and characters", "An Inspector Calls::Themes and context", "An Inspector Calls: the Birling family", "An Inspector Calls: the Inspector and socialism"] },
+    { id: "poetry-power", sector: "Poetry", icon: "🏛️", title: "How do poets show that power can crumble?", tags: "ozymandias poetry power conflict shelley",
+      hook: "A ruined statue in a desert: 'Look on my Works, ye Mighty, and despair!' Shelley's sonnet shows that even the greatest rulers are forgotten.",
+      scene: K.flow("Reading Ozymandias", ["A traveller describes|a broken statue", "Face shows|'sneer of cold command'", "Inscription boasts|of power", "Sand stretches|to the horizon", "Message:|power fades"], ["Shelley uses a story within a story.", "A traveller reports ruins in a desert.", "The sculptor captured the king's arrogance.", "The inscription is full of pride.", "But nothing remains, only sand.", "The irony: the ruler's boast contrasts with his decay."]),
+      steps: ["Annotate: language (sneer, colossal, decay), form (sonnet) and structure (the turn after the inscription).", "Compare with other power poems such as London and My Last Duchess.", "Use comparison words: 'whereas', 'similarly', 'in contrast'.", "Link to the poet's context: Shelley was a Romantic who disliked tyranny."],
+      facts: ["Irony: meaning that contrasts with the words", "Volta: a turn in thought in a sonnet"],
+      photos: [["Durdle Door Overview.jpg", "Nature outlasts empires: erosion shapes landscapes over time"]],
+      think: [["How does the setting reinforce the message?", "The empty desert shows the emptiness of human power."], ["How is 'Look on my Works' ironic?", "The works have vanished, so the command to despair is undermined."]],
+      units: ["Poems about power: Ozymandias, London, My Last Duchess", "Poems about war: Exposure, Bayonet Charge, Remains, Poppies", "Analysing poetry", "Unseen poetry"] }
+  ]);
+})();
