@@ -178,7 +178,7 @@
       var heldT = 0, liveAcc = 0;
       function frame(ts) {
         if (!cv.isConnected) { alive = false; return; }
-        var dt = Math.min(.05, (ts - last) / 1000 || .016); last = ts;
+        var dt = Math.max(0, Math.min(.05, (ts - last) / 1000 || .016)); last = ts;
         if (running) { S.t = (S.t || 0) + dt; if (D.step) D.step(S, p, dt, api); if (D.live) { liveAcc += dt; if (liveAcc > .05) { liveAcc = 0; live.push([S.t, D.live.v(S, p)]); var cut = S.t - (D.live.span || 10) - 1; while (live.length && live[0][0] < cut) live.shift(); } } }
         c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, W, H); D.draw(c, S, p, S.t || 0, W, H, X, dt);
         acc += dt; if (acc > .1) {
