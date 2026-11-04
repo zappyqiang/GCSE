@@ -18,7 +18,7 @@
   function save() { memStore = S; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   function applyTheme() { var r = document.documentElement; if (S.settings.theme === "light" || S.settings.theme === "dark") r.setAttribute("data-theme", S.settings.theme); else r.removeAttribute("data-theme"); }
 
-  var G = window.GAME = { topics: [], labs: [], diagrams: {}, sheet: [], cfg: null, levels: {}, explainers: {}, _more: [], exams: [], workedEx: [], _media: [], extraScenes: {} };
+  var G = window.GAME = { topics: [], labs: [], diagrams: {}, sheet: [], cfg: null, levels: {}, explainers: {}, _more: [], exams: [], workedEx: [], _media: [], extraScenes: {}, cases: [] };
   G.configure = function (c) { G.cfg = c; };
   G.diagram = function (o) { for (var k in o) G.diagrams[k] = o[k]; };
   G.lab = function (l) { G.labs.push(l); };
@@ -26,6 +26,7 @@
   G.more = function (o) { G._more.push(o); };
   G.media = function (o) { G._media.push(o); };
   G.explainMore = function (o) { for (var k in o) G.extraScenes[slug(k)] = (G.extraScenes[slug(k)] || []).concat(o[k]); };
+  G.howto = function (a) { G.cases = G.cases.concat(a); };
   G.exam = function (a) { G.exams = G.exams.concat(a); };
   G.worked = function (a) { G.workedEx = G.workedEx.concat(a); };
   function slug(s) { return s.toLowerCase().replace(/<[^>]+>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
@@ -44,7 +45,7 @@
   function P() {
     var k = G.cfg.key, p = S.subj[k] || (S.subj[k] = {});
     p.xp = p.xp || 0; p.stars = p.stars || {}; p.read = p.read || {}; p.missed = p.missed || {}; p.bossDone = p.bossDone || {};
-    p.arcade = p.arcade || 0; p.finalBest = p.finalBest || 0; p.stats = p.stats || {}; p.mocks = p.mocks || []; p.exam = p.exam || {};
+    p.arcade = p.arcade || 0; p.finalBest = p.finalBest || 0; p.stats = p.stats || {}; p.mocks = p.mocks || []; p.exam = p.exam || {}; p.cases = p.cases || {};
     return p;
   }
   G.ri = function (a, b) { return a + Math.floor(Math.random() * (b - a + 1)); };
@@ -191,9 +192,9 @@
       <a class="avatar" href="#/locker" aria-label="Level ${L.i + 1}, ${L.cur.n}. Customise your buddy">${M("idle", 46)}<span class="lvbadge">${L.i + 1}</span></a>`;
   }
   function shell(active) {
-    var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/map", "Mind map", "map", "map"], ["#/practice", "Practice", "mock", "target"], ["#/exam", "Written exams", "exam", "sheet"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
+    var c = G.cfg, nav = [["#/", "Learn", "dash", "home"], ["#/map", "Mind map", "map", "map"], ["#/practice", "Practice", "mock", "target"], ["#/exam", "Written exams", "exam", "sheet"], ["#/howto", "How to?", "howto", "hook"], ["#/speed", "Speed round", "speed", "speed"], ["#/review", "Review", "gym", "review"], ["#/labs", "Labs", "labs", "labs"], ["#/toolkit", "Toolkit", "sheet", "sheet"], ["#/progress", "Progress", "progress", "progress"], ["#/locker", "My buddy", "locker", "smile"], ["#/settings", "Settings", "settings", "settings"]];
     $("#bar").innerHTML = `<a class="brand" href="#/"><span class="mark">${SUBJECT_ICON[c.key]}</span><span><b>${c.subject}</b><small>GCSE Quest</small></span></a><nav aria-label="Sections">` +
-      nav.filter(function (n) { return (n[2] !== "labs" || G.labs.length) && (n[2] !== "exam" || G.exams.length); }).map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
+      nav.filter(function (n) { return (n[2] !== "labs" || G.labs.length) && (n[2] !== "exam" || G.exams.length) && (n[2] !== "howto" || G.cases.length); }).map(function (n) { var due = n[2] === "gym" ? gymDue() : 0; return `<a href="${n[0]}" class="navlink ${active === n[2] ? "on" : ""}" ${active === n[2] ? 'aria-current="page"' : ""}>${ic(n[3])}<span>${n[1]}</span>${due ? `<span class="count">${due}</span>` : ""}</a>`; }).join("") +
       `</nav><div class="sidefoot"><a class="sidelink" href="index.html">${ic("back")}All subjects</a></div>`;
     refreshTop(); window.scrollTo(0, 0);
   }
@@ -664,6 +665,8 @@
     $("#mmk").onclick = function () { showK = !showK; $("#mm").classList.toggle("showk", showK); this.setAttribute("aria-pressed", showK); this.textContent = showK ? "Hide key ideas" : "Show key ideas"; };
   }
   function eh(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function photoHtml(list) { return `<div class="photos">${list.map(function (x) { var f = x[0], u = "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f) + "?width=900"; return `<figure class="photo"><img loading="lazy" src="${u}" alt="${esc(x[1])}" onerror="this.parentNode.classList.add('nopic')"><div class="nopicmsg">Photo could not load (it needs an internet connection): ${eh(x[1])}</div><figcaption><b>${eh(x[1])}</b>${x[2] ? `<span>${eh(x[2])}</span>` : ""}<a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}" target="_blank" rel="noopener noreferrer">Photo: Wikimedia Commons (author and licence)</a></figcaption></figure>`; }).join("")}</div>`; }
+  G.photoHtml = photoHtml;
   function msHtml(q, id) {
     return `<h3>Mark scheme</h3><p class="muted sm">Tick each point you made. One mark per point, up to ${q.m}.</p><ul class="mslist">${q.ms.map(function (pt) { return `<li><label><input type="checkbox" class="msc ${id}"> <span>${eh(pt)}</span></label></li>`; }).join("")}</ul><div class="note"><b>Model answer</b><p>${eh(q.a)}</p>${q.tip ? `<p class="muted sm"><b>Exam tip:</b> ${eh(q.tip)}</p>` : ""}</div>`;
   }
@@ -714,6 +717,43 @@
     iv = setInterval(function () { secs--; var c = $("#clk"); if (c) c.textContent = fmt(Math.max(0, secs)); if (secs <= 0) mark(); }, 1000);
     G._stop = function () { over = true; clearInterval(iv); };
     $("#fin").onclick = mark;
+  }
+  function findUnit(title) {
+    var parts = title.split("::"), ids = Object.keys(G.levels), i, l;
+    for (i = 0; i < ids.length; i++) { l = G.levels[ids[i]]; if (parts.length > 1 ? (l.topic.name === parts[0] && l.t === parts[1]) : l.t === title) return l; }
+    return null;
+  }
+  function viewHowto(id) {
+    shell("howto"); var p = P(), C = G.cases;
+    if (!C.length) { app.innerHTML = pageHead(null, "How to?", "Real-life cases are coming soon for this subject."); return; }
+    var cs = id && C.filter(function (x) { return x.id === id; })[0];
+    if (!cs) {
+      var sectors = []; C.forEach(function (x) { if (sectors.indexOf(x.sector) < 0) sectors.push(x.sector); });
+      var done = Object.keys(p.cases).length, cur = "All", q = "";
+      app.innerHTML = pageHead(null, "How to?", "Real-life questions, answered with the knowledge you are learning. Open a case, watch it explained, then jump back to the lessons behind it.") +
+        `<div class="statrow" style="max-width:480px"><div class="stat"><div class="ic">${ic("check")}</div><div><b>${done} / ${C.length}</b><span>Cases explored</span></div></div></div>` +
+        `<div class="hubsearch"><input id="hq" type="search" class="field" placeholder="Search cases, e.g. fireworks, rockets, rust..." aria-label="Search cases"></div><div class="rx-var" id="hs"><button class="chip on" data-s="All">All</button>${sectors.map(function (s) { return `<button class="chip" data-s="${esc(s)}">${eh(s)}</button>`; }).join("")}</div><div class="grid g2" id="hg"></div>`;
+      var draw = function () {
+        $("#hg").innerHTML = C.filter(function (x) { return (cur === "All" || x.sector === cur) && (!q || (x.title + " " + x.hook + " " + (x.tags || "")).toLowerCase().indexOf(q) >= 0); }).map(function (x) {
+          return `<a class="tcard" href="#/howto/${x.id}"><div class="hd"><span class="num">${x.icon || "💡"}</span><div><h3>${eh(x.title)}</h3></div></div><p>${eh(x.hook)}</p><div class="ft"><span>${eh(x.sector)}${p.cases[x.id] ? " · explored" : ""}</span><span>${ic("play")}</span></div></a>`;
+        }).join("") || '<p class="muted">No cases match. Try another word.</p>';
+      };
+      $("#hq").oninput = function () { q = this.value.toLowerCase().trim(); draw(); };
+      $("#hs").onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cur = b.dataset.s; $$("#hs .chip").forEach(function (x) { x.classList.toggle("on", x === b); }); draw(); };
+      draw(); return;
+    }
+    var units = (cs.units || []).map(findUnit).filter(Boolean);
+    app.innerHTML = pageHead([["How to?", "#/howto"], [cs.sector]], cs.title, "") +
+      `<div class="card"><p class="lead" style="margin-top:0">${eh(cs.hook)}</p>${cs.scene ? '<div class="card scenecard" id="hscene"></div>' : ""}</div>` +
+      (cs.steps ? `<div class="card"><h3>How it works, step by step</h3><ol class="wsteps">${cs.steps.map(function (s) { return `<li>${eh(s)}</li>`; }).join("")}</ol></div>` : "") +
+      (cs.facts ? `<div class="card"><h3>Key facts and equations</h3><ul>${cs.facts.map(function (s) { return `<li>${G.fmtChem ? G.fmtChem(s) : eh(s)}</li>`; }).join("")}</ul></div>` : "") +
+      (cs.photos ? `<div class="card"><h3>See it in real life</h3>${photoHtml(cs.photos)}</div>` : "") +
+      (cs.vids ? `<div class="card"><h3>Watch</h3><div class="links">${cs.vids.map(function (v) { return `<a class="linkcard" href="${v[1]}" target="_blank" rel="noopener noreferrer"><span class="li">${ic("video")}</span><span><b>${eh(v[0])}</b><small>${eh(v[2] || "Video")}</small></span><span class="ext">${ic("arrow")}</span></a>`; }).join("")}</div></div>` : "") +
+      (cs.think ? `<div class="card"><h3>Think like an expert</h3>${cs.think.map(function (x) { return `<details class="think"><summary>${eh(x[0])}</summary><p>${eh(x[1])}</p></details>`; }).join("")}</div>` : "") +
+      (cs.safe ? `<p class="rx-safe"><b>Stay safe:</b> ${eh(cs.safe)}</p>` : "") +
+      `<div class="card"><h3>Recall the knowledge</h3><p class="muted">This case uses ideas from these lessons. Revisit them to lock it in.</p><div class="rx-units">${units.map(function (l) { return `<a class="chip" href="#/l/${l.id}">${eh(l.t)}</a>`; }).join("")}${cs.lab ? `<a class="chip on" href="#/lab/${cs.lab}">Try the virtual experiment</a>` : ""}</div></div>`;
+    if (cs.scene) A_.scene($("#hscene"), cs.scene);
+    if (!p.cases[cs.id]) { p.cases[cs.id] = 1; addXP(10); save(); toast("check", "Case explored", "+10 XP"); }
   }
   function viewProgress() {
     shell("progress");
@@ -810,6 +850,7 @@
     else if ((m = h.match(/^\/l\/(.+)/))) viewLevel(m[1]);
     else if ((m = h.match(/^\/(?:test|boss)\/(.+)/))) viewTest(m[1]);
     else if ((m = h.match(/^\/exam(?:\/(\w+))?/))) viewExam(m[1]);
+    else if ((m = h.match(/^\/howto(?:\/([\w-]+))?/))) viewHowto(m[1]);
     else if (h === "/map") viewMap();
     else if (h === "/final") viewFinal(); else if (h === "/daily") viewDaily();
     else if (h === "/review" || h === "/gym") viewGym();
