@@ -745,6 +745,7 @@
     var units = (cs.units || []).map(findUnit).filter(Boolean);
     app.innerHTML = pageHead([["How to?", "#/howto"], [cs.sector]], cs.title, "") +
       `<div class="card"><p class="lead" style="margin-top:0">${eh(cs.hook)}</p>${cs.scene ? '<div class="card scenecard" id="hscene"></div>' : ""}</div>` +
+      (cs.sim ? `<div class="card labbox"><h3>Try it yourself</h3><div id="hsim"></div></div>` : "") +
       (cs.steps ? `<div class="card"><h3>How it works, step by step</h3><ol class="wsteps">${cs.steps.map(function (s) { return `<li>${eh(s)}</li>`; }).join("")}</ol></div>` : "") +
       (cs.facts ? `<div class="card"><h3>Key facts and equations</h3><ul>${cs.facts.map(function (s) { return `<li>${G.fmtChem ? G.fmtChem(s) : eh(s)}</li>`; }).join("")}</ul></div>` : "") +
       (cs.photos ? `<div class="card"><h3>See it in real life</h3>${photoHtml(cs.photos)}</div>` : "") +
@@ -753,6 +754,7 @@
       (cs.safe ? `<p class="rx-safe"><b>Stay safe:</b> ${eh(cs.safe)}</p>` : "") +
       `<div class="card"><h3>Recall the knowledge</h3><p class="muted">This case uses ideas from these lessons. Revisit them to lock it in.</p><div class="rx-units">${units.map(function (l) { return `<a class="chip" href="#/l/${l.id}">${eh(l.t)}</a>`; }).join("")}${cs.lab ? `<a class="chip on" href="#/lab/${cs.lab}">Try the virtual experiment</a>` : ""}</div></div>`;
     if (cs.scene) A_.scene($("#hscene"), cs.scene);
+    if (cs.sim && G.simRun) G.simRun(cs.sim, $("#hsim"), labApi(), true);
     if (!p.cases[cs.id]) { p.cases[cs.id] = 1; addXP(10); save(); toast("check", "Case explored", "+10 XP"); }
   }
   function viewProgress() {
@@ -788,13 +790,17 @@
   /* ---------- reference pages ---------- */
   function viewLabs() {
     shell("labs");
-    app.innerHTML = pageHead(null, "Labs", G.cfg.labsIntro) + `<div class="grid g2">${G.labs.map(function (l, i) { return `<a class="tcard" href="#/lab/${l.id}"><div class="hd"><span class="num">${pad2(i + 1)}</span><div><h3>${l.name}</h3></div></div><p>${l.desc}</p><div class="ft"><span>Interactive</span><span>${ic("play")}</span></div></a>`; }).join("")}</div>`;
+    var L = G.labs.filter(function (l) { return l.pro; }).concat(G.labs.filter(function (l) { return !l.pro; })), tags = [], cur = "All";
+    L.forEach(function (l) { if (l.tag && tags.indexOf(l.tag) < 0) tags.push(l.tag); });
+    app.innerHTML = pageHead(null, "Labs", G.cfg.labsIntro || "Interactive labs and simulations. Predict, experiment, record results and check your understanding to earn XP.") +
+      `<div class="statrow" style="max-width:480px"><div class="stat"><div class="ic">${ic("labs")}</div><div><b>${L.length}</b><span>Interactive labs</span></div></div></div>` +
+      (tags.length > 1 ? `<div class="rx-var" id="lt"><button class="chip on" data-s="All">All</button>${tags.map(function (t) { return `<button class="chip" data-s="${esc(t)}">${eh(t)}</button>`; }).join("")}</div>` : "") + '<div class="grid g2" id="lg"></div>';
+    var draw = function () { $("#lg").innerHTML = L.filter(function (l) { return cur === "All" || l.tag === cur; }).map(function (l, i) { return `<a class="tcard" href="#/lab/${l.id}"><div class="hd"><span class="num">${l.icon && l.pro ? l.icon : pad2(i + 1)}</span><div><h3>${l.name}</h3></div></div><p>${l.desc}</p><div class="ft"><span>${l.tag ? eh(l.tag) : "Interactive"}</span><span>${ic("play")}</span></div></a>`; }).join(""); };
+    var lt = $("#lt"); if (lt) lt.onclick = function (e) { var b = e.target.closest("button"); if (!b) return; cur = b.dataset.s; $$("#lt .chip").forEach(function (x) { x.classList.toggle("on", x === b); }); draw(); };
+    draw();
   }
-  function viewLab(id) {
-    shell("labs");
-    var l = G.labs.filter(function (x) { return x.id === id; })[0]; if (!l) return go("#/labs");
-    app.innerHTML = pageHead([["Labs", "#/labs"], [l.name]], l.name, "") + '<div class="card labbox" id="lab"></div>';
-    var api = {
+  function labApi() {
+    return {
       award: function (n, msg) { addXP(n); sndGood(2); popXP("+" + n + " XP"); var g = $(".goal", app); if (g && msg) g.innerHTML = msg + " +" + n + " " + UNIT; },
       ri: G.ri, pick: G.pick, fmt: fmt,
       slider: function (host, label, min, max, step, val, unit, fn) {
@@ -804,7 +810,12 @@
         inp.oninput = f; sp.textContent = val + (unit ? " " + unit : ""); return { input: inp, set: function (v) { inp.value = v; f(); } };
       }
     };
-    l.run($("#lab"), api);
+  }
+  function viewLab(id) {
+    shell("labs");
+    var l = G.labs.filter(function (x) { return x.id === id; })[0]; if (!l) return go("#/labs");
+    app.innerHTML = pageHead([["Labs", "#/labs"], [l.name]], l.name, l.desc && l.pro ? l.desc : "") + '<div class="card labbox" id="lab"></div>';
+    l.run($("#lab"), labApi());
   }
   function viewToolkit(tab) {
     shell("sheet"); tab = tab || "sheet"; var c = G.cfg, p = P(), body = "";
