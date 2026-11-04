@@ -548,3 +548,6 @@ body[data-world=economics],.w-economics{--accent:#a3e635;--accent-d:#6aa314;--c1
 .exq{font-size:17px;font-weight:700;line-height:1.5;margin:10px 0}textarea.field{width:100%;resize:vertical;font:inherit;padding:12px;min-height:90px;box-sizing:border-box}.mslist{list-style:none;padding:0;margin:8px 0}.mslist li{margin:7px 0}.mslist label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.mslist input{margin-top:5px;width:18px;height:18px;flex:none}
 .wk{margin:14px 0}.wsteps{padding-left:22px}.wsteps li{margin:8px 0;font-size:16px}.wans{margin:10px 0}
 #ms{margin-top:22px}
+
+.hubsearch{display:flex;gap:14px;align-items:center;margin:8px 0 6px;flex-wrap:wrap}.hubsearch .field{flex:1;min-width:240px;max-width:520px;padding:12px 16px;font:inherit;border-radius:14px;border:2px solid var(--border);background:var(--surface);color:inherit}
+.hubcat{font-size:22px;margin:28px 0 12px}
