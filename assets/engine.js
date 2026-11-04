@@ -18,12 +18,14 @@
   function save() { memStore = S; try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
   function applyTheme() { var r = document.documentElement; if (S.settings.theme === "light" || S.settings.theme === "dark") r.setAttribute("data-theme", S.settings.theme); else r.removeAttribute("data-theme"); }
 
-  var G = window.GAME = { topics: [], labs: [], diagrams: {}, sheet: [], cfg: null, levels: {}, explainers: {}, _more: [], exams: [], workedEx: [] };
+  var G = window.GAME = { topics: [], labs: [], diagrams: {}, sheet: [], cfg: null, levels: {}, explainers: {}, _more: [], exams: [], workedEx: [], _media: [], extraScenes: {} };
   G.configure = function (c) { G.cfg = c; };
   G.diagram = function (o) { for (var k in o) G.diagrams[k] = o[k]; };
   G.lab = function (l) { G.labs.push(l); };
   G.explain = function (o) { for (var k in o) G.explainers[slug(k)] = o[k]; };
   G.more = function (o) { G._more.push(o); };
+  G.media = function (o) { G._media.push(o); };
+  G.explainMore = function (o) { for (var k in o) G.extraScenes[slug(k)] = (G.extraScenes[slug(k)] || []).concat(o[k]); };
   G.exam = function (a) { G.exams = G.exams.concat(a); };
   G.worked = function (a) { G.workedEx = G.workedEx.concat(a); };
   function slug(s) { return s.toLowerCase().replace(/<[^>]+>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
@@ -264,7 +266,7 @@
       { k: "link", t: "Oak National Academy", d: "Free lessons used in UK schools", u: "https://www.thenational.academy/search?term=" + enc(l.t + " " + sub) },
       { k: "link", t: "Save My Exams", d: "Revision notes and exam questions", u: "https://www.savemyexams.com/search/?q=" + enc(q) },
       { k: "globe", t: "Seneca Learning", d: "Free GCSE courses and practice", u: "https://senecalearning.com/en-GB/" }
-    ].concat((l.links || []).map(function (x) { return { k: x[2] || "video", t: x[0], d: "Recommended resource", u: x[1] }; }));
+    ].concat((l.links || []).map(function (x) { return { k: x[2] || "video", t: x[0], d: x[3] || "Recommended resource", u: x[1] }; }));
   }
   function linksHtml(l) { return `<div class="links">${linksFor(l).map(function (x) { return `<a class="linkcard" href="${x.u}" target="_blank" rel="noopener noreferrer"><span class="li">${ic(x.k)}</span><span><b>${x.t}</b><small>${x.d}</small></span><span class="ext">${ic("arrow")}</span></a>`; }).join("")}</div><p class="muted sm">These open in a new tab and need an internet connection. Pick a video or page that matches your exam board.</p>`; }
 
@@ -275,7 +277,9 @@
     var l = G.levels[id]; if (!l) return go("#/");
     var t = l.topic, ex = G.explainers[slug(l.t)], screens = [];
     if (ex) screens.push({ k: "watch", ex: ex });
+    (G.extraScenes[slug(l.t)] || []).forEach(function (s, i) { screens.push({ k: "watch", ex: s, more: i + 1 }); });
     l.c.forEach(function (line, n) { screens.push({ k: "point", n: n, line: line, fig: n === 0 && l.d && G.diagrams[l.d] ? G.diagrams[l.d] : null }); });
+    if (l.pics && l.pics.length) screens.push({ k: "pics" });
     screens.push({ k: "hook" }); screens.push({ k: "res" });
     var at = 0, dir = 1;
     app.innerHTML = `<div class="lesson2"><div class="lhead"><a class="xbtn" href="#/" aria-label="Close lesson">${ic("cross")}</a><div class="lprog" id="lprog"></div><button class="btn small alt" id="skip">Skip to questions</button></div>
@@ -284,7 +288,8 @@
     P().read[l.id] = 1; save(); checkBadges();
     function render() {
       var sc = screens[at], st = $("#lstage"); A_stop(); var h = "";
-      if (sc.k === "watch") h = `<div class="lscreen"><div class="say">${M("think", 84)}<div class="bubble">Watch this first. Press play, pause, or step through it.</div></div><div class="card scenecard" id="scenehost"></div></div>`;
+      if (sc.k === "pics") h = `<div class="lscreen"><div class="say">${M("wow", 84)}<div class="bubble">Now see the real thing. These are photographs of actual hardware, so you can match the ideas to what you would find inside a real computer.</div></div><div class="photos">${l.pics.map(function (x) { var f = x[0], u = "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f) + "?width=900"; return `<figure class="photo"><img loading="lazy" src="${u}" alt="${esc(x[1])}" onerror="this.parentNode.classList.add('nopic')"><div class="nopicmsg">Photo could not load (it needs an internet connection): ${eh(x[1])}</div><figcaption><b>${eh(x[1])}</b>${x[2] ? `<span>${eh(x[2])}</span>` : ""}<a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(f)}" target="_blank" rel="noopener noreferrer">Photo: Wikimedia Commons (author and licence)</a></figcaption></figure>`; }).join("")}</div></div>`;
+      else if (sc.k === "watch") h = `<div class="lscreen"><div class="say">${M("think", 84)}<div class="bubble">${sc.more ? "Here is another animation to explain the theory. Step through it at your own pace." : "Watch this first. Press play, pause, or step through it."}</div></div><div class="card scenecard" id="scenehost"></div></div>`;
       else if (sc.k === "point") h = `<div class="lscreen"><div class="say">${M(sc.n % 2 ? "think" : "happy", 84)}<div class="bubble"><span class="pnum">Key idea ${sc.n + 1} of ${l.c.length}</span>${sc.line}</div></div>${sc.fig ? `<figure class="figure"><figcaption>Diagram</figcaption>${sc.fig}</figure>` : ""}</div>`;
       else if (sc.k === "hook") h = `<div class="lscreen"><div class="say">${M("wow", 84)}<div class="bubble">Lock it in with a memory hook.</div></div><div class="hook flip"><h3>${ic("hook")}Memory hook</h3><p>${l.k}</p></div></div>`;
       else h = `<div class="lscreen"><div class="say">${M("happy", 84)}<div class="bubble">Want to go deeper? Try these free resources, then test yourself.</div></div>${linksHtml(l)}</div>`;
@@ -821,6 +826,7 @@
     /* merge the extra question banks into their units */
     var bySlug = {}; Object.keys(G.levels).forEach(function (k) { bySlug[slug(G.levels[k].t)] = G.levels[k]; });
     G._more.forEach(function (o) { for (var title in o) { var l = title.indexOf("::") > -1 ? G.levels[slug(title.split("::")[0]) + "--" + slug(title.split("::")[1])] : bySlug[slug(title)]; if (!l) { console.warn("more(): no unit named", title); continue; } l.q = l.q.concat(o[title]); } });
+    G._media.forEach(function (o) { for (var title in o) { var l = bySlug[slug(title)]; if (!l) { console.warn("media(): no unit named", title); continue; } var m = o[title]; if (m.pics) l.pics = (l.pics || []).concat(m.pics); if (m.vids) l.links = (l.links || []).concat(m.vids.map(function (v) { return [v[0], v[1], "video", v[2]]; })); } });
     applyTheme(); document.body.dataset.world = G.cfg.key; document.title = G.cfg.subject + " | GCSE Quest";
     document.body.innerHTML = '<div class="shell"><aside class="sidebar" id="bar"></aside><main class="main"><div class="topbar" id="topbar"></div><div class="wrap" id="app"></div></main></div><div id="toasts" aria-live="polite"></div>';
     app = $("#app"); window.addEventListener("hashchange", route); route();
